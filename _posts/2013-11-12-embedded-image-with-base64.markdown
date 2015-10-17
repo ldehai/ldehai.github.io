@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "用Base64嵌入图片"
 date:   2013-11-12 10:41:38
-categories:
+categories: blog
 ---
 <blockquote>一天冷似一天，阴冷的空气无声无息的悬在城市的上空，纷飞的落叶也在述说着岁月更替的故事。</blockquote>
 
