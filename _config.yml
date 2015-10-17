@@ -8,6 +8,6 @@ url: "http://ldehai.github.io" # the base hostname & protocol for your site
 twitter_username: ldehai
 github_username:  ldehai
 
-permalink: article/:title
+permalink: blog/:year/:month/:day/:title/
 # Build settings
 markdown: kramdown
