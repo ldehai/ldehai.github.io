@@ -2,7 +2,7 @@
 layout: post
 title:  "热心的加拿大设计师Andrew"
 date:   2013-07-15 10:41:38
-categories: 
+categories:
 ---
 今天收到Andrew的邮件：
 
@@ -12,8 +12,8 @@ categories:
 
 最新的设计图，还可以吧，比原来的提升不少。
 
-![](http://www.ldehai.com/images/tripcost_redesign.png)
+![]({{ site.url }}/assets/tripcost_redesign.png)
 
 loading page
 
-![](http://www.ldehai.com/images/tripcost_loadingpage.png)
+![]({{ site.url }}/assets/tripcost_loadingpage.png)
