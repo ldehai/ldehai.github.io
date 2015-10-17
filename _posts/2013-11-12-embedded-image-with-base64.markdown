@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "用Base64嵌入图片"
 date:   2013-11-12 10:41:38
 categories:
