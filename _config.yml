@@ -4,9 +4,10 @@ email: ldehai@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Just do it
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://ldehai.com" # the base hostname & protocol for your site
+url: "http://ldehai.github.io" # the base hostname & protocol for your site
 twitter_username: ldehai
 github_username:  ldehai
 
+permalink: article/:title
 # Build settings
 markdown: kramdown

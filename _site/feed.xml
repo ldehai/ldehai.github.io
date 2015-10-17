@@ -4,10 +4,10 @@
     <title>Andy Design</title>
     <description>Just do it
 </description>
-    <link>http://ldehai.com/</link>
-    <atom:link href="http://ldehai.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 17 Oct 2015 23:47:29 +0800</pubDate>
-    <lastBuildDate>Sat, 17 Oct 2015 23:47:29 +0800</lastBuildDate>
+    <link>http://ldehai.github.io/</link>
+    <atom:link href="http://ldehai.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 18 Oct 2015 00:02:03 +0800</pubDate>
+    <lastBuildDate>Sun, 18 Oct 2015 00:02:03 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -58,8 +58,8 @@
 
 </description>
         <pubDate>Tue, 12 Nov 2013 18:41:38 +0800</pubDate>
-        <link>http://ldehai.com/blog/2013/11/12/embedded-image-with-base64.html</link>
-        <guid isPermaLink="true">http://ldehai.com/blog/2013/11/12/embedded-image-with-base64.html</guid>
+        <link>http://ldehai.github.io/article/embedded-image-with-base64</link>
+        <guid isPermaLink="true">http://ldehai.github.io/article/embedded-image-with-base64</guid>
         
         
         <category>blog</category>
@@ -134,8 +134,8 @@ Mac下作者用Framer.app包装了脚本代码，windows下则直接提供了&lt
 Framer目前只侧重于前端展示，如果加上数据处理，那么一个完整的Html5的应用开发框架就成型了。&lt;/p&gt;
 </description>
         <pubDate>Fri, 08 Nov 2013 18:41:38 +0800</pubDate>
-        <link>http://ldehai.com/blog/2013/11/08/how-framer-works.html</link>
-        <guid isPermaLink="true">http://ldehai.com/blog/2013/11/08/how-framer-works.html</guid>
+        <link>http://ldehai.github.io/article/how-framer-works</link>
+        <guid isPermaLink="true">http://ldehai.github.io/article/how-framer-works</guid>
         
         
         <category>blog</category>
@@ -209,8 +209,8 @@ Framer目前只侧重于前端展示，如果加上数据处理，那么一个�
 &lt;p&gt;试试，warning没了吧&lt;/p&gt;
 </description>
         <pubDate>Sat, 02 Nov 2013 18:41:38 +0800</pubDate>
-        <link>http://ldehai.com/jekyll/update/2013/11/02/file-already-exists-but-should-not-pyconfig.html</link>
-        <guid isPermaLink="true">http://ldehai.com/jekyll/update/2013/11/02/file-already-exists-but-should-not-pyconfig.html</guid>
+        <link>http://ldehai.github.io/article/file-already-exists-but-should-not-pyconfig</link>
+        <guid isPermaLink="true">http://ldehai.github.io/article/file-already-exists-but-should-not-pyconfig</guid>
         
         
         <category>jekyll</category>
@@ -263,8 +263,8 @@ pyinstaller对第三方库的支持情况见这里：&lt;a href=&quot;http://www
 &lt;p&gt;再次运行，应该没问题了。&lt;/p&gt;
 </description>
         <pubDate>Sun, 22 Sep 2013 18:41:38 +0800</pubDate>
-        <link>http://ldehai.com/2013/09/22/pyinstaller-matplotlib.html</link>
-        <guid isPermaLink="true">http://ldehai.com/2013/09/22/pyinstaller-matplotlib.html</guid>
+        <link>http://ldehai.github.io/article/pyinstaller-matplotlib</link>
+        <guid isPermaLink="true">http://ldehai.github.io/article/pyinstaller-matplotlib</guid>
         
         
       </item>
@@ -286,8 +286,8 @@ pyinstaller对第三方库的支持情况见这里：&lt;a href=&quot;http://www
 &lt;p&gt;&lt;img src=&quot;http://www.ldehai.com/images/tripcost_loadingpage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 15 Jul 2013 18:41:38 +0800</pubDate>
-        <link>http://ldehai.com/2013/07/15/free-design.html</link>
-        <guid isPermaLink="true">http://ldehai.com/2013/07/15/free-design.html</guid>
+        <link>http://ldehai.github.io/article/free-design</link>
+        <guid isPermaLink="true">http://ldehai.github.io/article/free-design</guid>
         
         
       </item>
@@ -318,8 +318,8 @@ pyinstaller对第三方库的支持情况见这里：&lt;a href=&quot;http://www
 &lt;p&gt;当然自己还是要记录好每次升级的变动情况，备查。&lt;/p&gt;
 </description>
         <pubDate>Thu, 13 Jun 2013 18:41:38 +0800</pubDate>
-        <link>http://ldehai.com/2013/06/13/ios-app-database-version-control.html</link>
-        <guid isPermaLink="true">http://ldehai.com/2013/06/13/ios-app-database-version-control.html</guid>
+        <link>http://ldehai.github.io/article/ios-app-database-version-control</link>
+        <guid isPermaLink="true">http://ldehai.github.io/article/ios-app-database-version-control</guid>
         
         
       </item>
