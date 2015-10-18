@@ -4,7 +4,7 @@ title:  "File Already Exists but Should Not Pyconfig"
 date:   2013-11-02 10:41:38
 categories: jekyll update
 ---
-接[上一篇]({{ site.url }}/blog/2013/09/22/pyinstaller-matplotlib/)，python项目用到了scipy计算模块，之后用pyinstaller打包后，每次运行就会报警告file already exists but should not:&hellip;&hellip;./pyconfig.h。虽然不影响运行，还是觉得有必要解决这个问题，在搜索到stackoverflow[这个帖子](http://stackoverflow.com/questions/19055089/pyinstaller-onefile-warning-pyconfig-h-when-importing-scipy-or-scipy-signal)后，问题解决。
+接[上一篇](http://ldehai.com/blog/2013/09/22/pyinstaller-matplotlib/)，python项目用到了scipy计算模块，之后用pyinstaller打包后，每次运行就会报警告file already exists but should not:&hellip;&hellip;./pyconfig.h。虽然不影响运行，还是觉得有必要解决这个问题，在搜索到stackoverflow[这个帖子](http://stackoverflow.com/questions/19055089/pyinstaller-onefile-warning-pyconfig-h-when-importing-scipy-or-scipy-signal)后，问题解决。
 <!--more-->
 问题的原因是pyinstaller打包时pyconfig.h多打了一次，所以会报已经存在了。这个解决方案就是把多余的pyconfig.h去掉。
 
