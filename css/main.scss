@@ -56,6 +56,11 @@ $on-laptop:        800px;
     }
 }
 
+.site-header a {
+  &:hover {
+      text-decoration: none;
+  }
+}
 // Using media queries with like this:
 // @include media-query($on-palm) {
 //     .wrapper {

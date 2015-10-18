@@ -16,6 +16,9 @@
     color: #111111;
     text-decoration: none; }
 
+.site-header a:hover {
+  text-decoration: none; }
+
 /**
  * Reset some basic elements
  */
