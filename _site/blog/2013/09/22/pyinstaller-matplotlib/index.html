@@ -66,8 +66,8 @@
   <article class="post-content">
     <p>用python帮朋友写了个科学计算的程序，用到了matplotlib和scipy，以及wxpython。代码写完，发现不能直接拿给朋友用，windows系统默认是没有运行环境的，得装python,matplotlib,scipy以及其他的运行库。这对于程序小白来说实在强人所难。好在有pyinstaller，可以用它打包成一个exe文件，所有的库都在一起了。妈妈再也不用担心没有环境跑程序了。
 <!--more-->
-到pyinstaller<a href="http://www.pyinstaller.org/&quot;&gt;http://www.pyinstaller.org/">官网</a>下载安装包。
-详细安装说明见<a href="http://pythonhosted.org/PyInstaller/#installing-in-windows">官方文档</a>。</p>
+到pyinstaller<a href="http://www.pyinstaller.org/">官网</a>下载安装包。
+详细安装说明见<a href="http://pythonhosted.org/PyInstaller/">官方文档</a>。</p>
 
 <p>这里简要说明一下步骤：
 直接下载压缩包，现在的版本是2.1.解压后打开命令行，执行如下命令：</p>
@@ -93,7 +93,7 @@
 <p>icon:指定打包后的exe文件的图标（运行时窗口的图标是在程序里设定的）</p>
 
 <p>由于pyinstaller2.1正式版还不支持scipy库，直接运行会报找不到scipy module。而developer版本已经支持了，所以去下载开发版重新安装。pyinstaller的代码在[github上(https://github.com/pyinstaller/pyinstaller),选择develop分支下载。
-pyinstaller对第三方库的支持情况见这里：<a href="http://www.pyinstaller.org/wiki/SupportedPackages">SupportedPackages</a>。</p>
+pyinstaller对第三方库的支持情况见这里：<a href="https://github.com/pyinstaller/pyinstaller/wiki/Supported-Packages">SupportedPackages</a>。</p>
 
 <p>安装步骤同上，不再赘述。安装完运行打包脚本会发现还有错误</p>
 

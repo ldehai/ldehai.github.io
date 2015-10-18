@@ -39,7 +39,7 @@ onefile:顾名思义就是打包成一个文件，如果不加就是一个exe加
 icon:指定打包后的exe文件的图标（运行时窗口的图标是在程序里设定的）
 
 由于pyinstaller2.1正式版还不支持scipy库，直接运行会报找不到scipy module。而developer版本已经支持了，所以去下载开发版重新安装。pyinstaller的代码在[github上(https://github.com/pyinstaller/pyinstaller),选择develop分支下载。
-pyinstaller对第三方库的支持情况见这里：[SupportedPackages](http://www.pyinstaller.org/wiki/SupportedPackages)。
+pyinstaller对第三方库的支持情况见这里：[SupportedPackages](https://github.com/pyinstaller/pyinstaller/wiki/Supported-Packages)。
 
 安装步骤同上，不再赘述。安装完运行打包脚本会发现还有错误
 
