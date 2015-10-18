@@ -6,13 +6,14 @@
 </description>
     <link>http://ldehai.github.io/</link>
     <atom:link href="http://ldehai.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 18 Oct 2015 00:36:30 +0800</pubDate>
-    <lastBuildDate>Sun, 18 Oct 2015 00:36:30 +0800</lastBuildDate>
+    <pubDate>Sun, 18 Oct 2015 10:00:51 +0800</pubDate>
+    <lastBuildDate>Sun, 18 Oct 2015 10:00:51 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
         <title>iOS开发初学者指南</title>
-        <description>&lt;blockquote&gt;转眼间离梦想越来越遥远。。。&lt;/blockquote&gt;
+        <description>&lt;p&gt;挖个坑，准备写一系列iOS开发的入门教程
+&lt;!--more--&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 18 Oct 2015 08:21:38 +0800</pubDate>
         <link>http://ldehai.github.io/blog/2015/10/18/ios-beginner-guide/</link>
@@ -25,7 +26,8 @@
         <title>用Base64嵌入图片</title>
         <description>&lt;blockquote&gt;一天冷似一天，阴冷的空气无声无息的悬在城市的上空，纷飞的落叶也在述说着岁月更替的故事。&lt;/blockquote&gt;
 
-&lt;p&gt;在使用wxPython写程序时，如果用到了图标，而打包的时候又想嵌到程序里，就要使用base64对图片进行编码，然后把生成的字符串直接写到程序里就好了,废话不多说，上代码: &lt;!-- more --&gt;&amp;lt;/p&amp;gt;&lt;/p&gt;
+&lt;p&gt;在使用wxPython写程序时，如果用到了图标，而打包的时候又想嵌到程序里，就要使用base64对图片进行编码，然后把生成的字符串直接写到程序里就好了,废话不多说，上代码: &lt;!-- more --&gt;&amp;lt;/p&amp;gt;
+&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;# -*- coding:utf-8 -*-&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;#导入需要的库&lt;/span&gt;
@@ -79,9 +81,9 @@
     
       <item>
         <title>Framer简介</title>
-        <description>&lt;p&gt;Framer是一个开源项目，一个基于JavaScript的原型工具，专为设计师打造。现在的应用更注重交互设计，它可以让你效率更高。项目地址&lt;a href=&quot;http://www.framerjs.com&quot;&gt;http://www.framerjs.com&lt;/a&gt;，使用Framer包括4个步骤:&lt;/p&gt;
-
-&lt;p&gt;用Photoshop设计原型图
+        <description>&lt;p&gt;Framer是一个开源项目，一个基于JavaScript的原型工具，专为设计师打造。现在的应用更注重交互设计，它可以让你效率更高。项目地址&lt;a href=&quot;http://www.framerjs.com&quot;&gt;http://www.framerjs.com&lt;/a&gt;，使用Framer包括4个步骤:
+&lt;!--more--&gt;
+用Photoshop设计原型图
 用Framer.app从Photoshop中导出设计图
 在app.js里写视图展示及交互代码，可以加各种特效
 用浏览器打开index.html文件就可以查看和调试了&lt;/p&gt;
@@ -155,9 +157,9 @@ Framer目前只侧重于前端展示，如果加上数据处理，那么一个�
     
       <item>
         <title>File Already Exists but Should Not Pyconfig</title>
-        <description>&lt;p&gt;接&lt;a href=&quot;ldehai.com&quot;&gt;上一篇&lt;/a&gt;，python项目用到了scipy计算模块，之后用pyinstaller打包后，每次运行就会报警告file already exists but should not:……./pyconfig.h。虽然不影响运行，还是觉得有必要解决这个问题，在搜索到stackoverflow&lt;a href=&quot;http://stackoverflow.com/questions/19055089/pyinstaller-onefile-warning-pyconfig-h-when-importing-scipy-or-scipy-signal&quot;&gt;这个帖子&lt;/a&gt;后，问题解决。&lt;/p&gt;
-
-&lt;p&gt;问题的原因是pyinstaller打包时pyconfig.h多打了一次，所以会报已经存在了。这个解决方案就是把多余的pyconfig.h去掉。&lt;/p&gt;
+        <description>&lt;p&gt;接&lt;a href=&quot;ldehai.com&quot;&gt;上一篇&lt;/a&gt;，python项目用到了scipy计算模块，之后用pyinstaller打包后，每次运行就会报警告file already exists but should not:……./pyconfig.h。虽然不影响运行，还是觉得有必要解决这个问题，在搜索到stackoverflow&lt;a href=&quot;http://stackoverflow.com/questions/19055089/pyinstaller-onefile-warning-pyconfig-h-when-importing-scipy-or-scipy-signal&quot;&gt;这个帖子&lt;/a&gt;后，问题解决。
+&lt;!--more--&gt;
+问题的原因是pyinstaller打包时pyconfig.h多打了一次，所以会报已经存在了。这个解决方案就是把多余的pyconfig.h去掉。&lt;/p&gt;
 
 &lt;p&gt;下面开始详细说明如何修改：&lt;/p&gt;
 
@@ -232,9 +234,9 @@ Framer目前只侧重于前端展示，如果加上数据处理，那么一个�
     
       <item>
         <title>Python程序打包成EXE--使用pyinstaller打包matplotlib、scipy、wxpython</title>
-        <description>&lt;p&gt;用python帮朋友写了个科学计算的程序，用到了matplotlib和scipy，以及wxpython。代码写完，发现不能直接拿给朋友用，windows系统默认是没有运行环境的，得装python,matplotlib,scipy以及其他的运行库。这对于程序小白来说实在强人所难。好在有pyinstaller，可以用它打包成一个exe文件，所有的库都在一起了。妈妈再也不用担心没有环境跑程序了。&lt;/p&gt;
-
-&lt;p&gt;到pyinstaller&lt;a href=&quot;http://www.pyinstaller.org/&amp;quot;&amp;gt;http://www.pyinstaller.org/&quot;&gt;官网&lt;/a&gt;下载安装包。
+        <description>&lt;p&gt;用python帮朋友写了个科学计算的程序，用到了matplotlib和scipy，以及wxpython。代码写完，发现不能直接拿给朋友用，windows系统默认是没有运行环境的，得装python,matplotlib,scipy以及其他的运行库。这对于程序小白来说实在强人所难。好在有pyinstaller，可以用它打包成一个exe文件，所有的库都在一起了。妈妈再也不用担心没有环境跑程序了。
+&lt;!--more--&gt;
+到pyinstaller&lt;a href=&quot;http://www.pyinstaller.org/&amp;quot;&amp;gt;http://www.pyinstaller.org/&quot;&gt;官网&lt;/a&gt;下载安装包。
 详细安装说明见&lt;a href=&quot;http://pythonhosted.org/PyInstaller/#installing-in-windows&quot;&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
 
 &lt;p&gt;这里简要说明一下步骤：
@@ -285,16 +287,16 @@ pyinstaller对第三方库的支持情况见这里：&lt;a href=&quot;http://www
         <description>&lt;p&gt;今天收到Andrew的邮件：&lt;/p&gt;
 
 &lt;blockquote&gt;I&#39;m a graphic designer and I really like your app. Would you be interested in letting me update the icon for you? I&#39;ll do it for free.&lt;/blockquote&gt;
-
+&lt;!--more--&gt;
 &lt;p&gt;真的挺喜欢这些人，愿意为了自己喜欢的东西付出，不要回报。对我来说也是一种莫大的鼓舞。&lt;/p&gt;
 
 &lt;p&gt;最新的设计图，还可以吧，比原来的提升不少。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://www.ldehai.com/images/tripcost_redesign.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ldehai.github.io/assets/tripcost_redesign.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;loading page&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://www.ldehai.com/images/tripcost_loadingpage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ldehai.github.io/assets/tripcost_loadingpage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 15 Jul 2013 18:41:38 +0800</pubDate>
         <link>http://ldehai.github.io/blog/2013/07/15/free-design/</link>
@@ -307,7 +309,8 @@ pyinstaller对第三方库的支持情况见这里：&lt;a href=&quot;http://www
         <title>iOS APP Database Version Control</title>
         <description>&lt;p&gt;我喜欢在APP里用SQLite数据库，不过有个问题一直困扰着我，当我要加新功能，而原来的表结构已经不能满足要求时，需要修改表，或者新增表。那么老版本升级到新版本时就需要升级数据库，之前我都是判断新表有没有存在，不存在则创建。这样很容易搞乱掉，如果涉及到多个表，判断起来逻辑不清晰，把自己都搞晕了。&amp;lt;/p&amp;gt;&lt;/p&gt;
 
-&lt;p&gt;在经历过几次折腾后，我发现数据库也需要用版本来控制起来，就像代码有版本一样。这样我只需要判断当前的数据库版本是多少，就知道要不要升级数据库了。假设之前版本是1.0，现在版本是1.1,代码很简单：&lt;/p&gt;
+&lt;p&gt;在经历过几次折腾后，我发现数据库也需要用版本来控制起来，就像代码有版本一样。这样我只需要判断当前的数据库版本是多少，就知道要不要升级数据库了。假设之前版本是1.0，现在版本是1.1,代码很简单：
+&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objectivec&quot; data-lang=&quot;objectivec&quot;&gt;&lt;span class=&quot;bp&quot;&gt;NSUserDefaults&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pref&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSUserDefaults&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;standardUserDefaults&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
 &lt;span class=&quot;bp&quot;&gt;NSString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pref&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;stringForKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&amp;quot;dbver&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;

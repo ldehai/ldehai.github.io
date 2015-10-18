@@ -1,3 +1,21 @@
+.normal-link {
+  color: #00ab6b;
+  text-decoration: none; }
+  .normal-link:visited {
+    color: #005e3b; }
+  .normal-link:hover {
+    color: #00ab6b;
+    text-decoration: none; }
+
+.title-link {
+  color: #111111;
+  text-decoration: none; }
+  .title-link:visited {
+    color: black; }
+  .title-link:hover {
+    color: #111111;
+    text-decoration: none; }
+
 /**
  * Reset some basic elements
  */
@@ -11,13 +29,17 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  font-weight: 300;
-  color: #111111;
-  background-color: #fdfdfd;
-  -webkit-text-size-adjust: 100%; }
+  font-family: -apple-system,".SFNSText-Regular","Helvetica Neue","Roboto","Segoe UI",sans-serif;
+  letter-spacing: 0;
+  font-weight: 400;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-font-feature-settings: "liga" on;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 18px;
+  line-height: 1.4; }
 
 /**
  * Set `margin-bottom` to maintain vertical rhythm
@@ -64,10 +86,10 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-  color: #2a7ae2;
+  color: #00ab6b;
   text-decoration: none; }
   a:visited {
-    color: #1756a9; }
+    color: #005e3b; }
   a:hover {
     color: #111111;
     text-decoration: underline; }
@@ -268,6 +290,11 @@ pre {
   list-style: none; }
   .post-list > li {
     margin-bottom: 30px; }
+
+.post-list__divider {
+  width: 30%;
+  margin: 2.2em 0 2.1em 0;
+  border-top: 1px solid #DDDDDD; }
 
 .post-meta {
   font-size: 14px;

@@ -13,16 +13,28 @@ dl, dd, ol, ul, figure {
 /**
  * Basic styling
  */
+// body {
+//     font-family: $base-font-family;
+//     font-size: $base-font-size;
+//     line-height: $base-line-height;
+//     font-weight: 300;
+//     color: $text-color;
+//     background-color: $background-color;
+//     -webkit-text-size-adjust: 100%;
+// }
 body {
-    font-family: $base-font-family;
-    font-size: $base-font-size;
-    line-height: $base-line-height;
-    font-weight: 300;
-    color: $text-color;
-    background-color: $background-color;
-    -webkit-text-size-adjust: 100%;
+    font-family: -apple-system,".SFNSText-Regular","Helvetica Neue","Roboto","Segoe UI",sans-serif;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "liga" on;
+    color: rgba(0,0,0,0.8);
+    font-size: 18px;
+    line-height: 1.4;
 }
-
 
 
 /**

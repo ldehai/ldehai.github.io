@@ -35,7 +35,7 @@
       <div class="trigger">
         
           
-          <a class="page-link" href="/about/">About</a>
+          <a class="page-link" href="/about/">关于</a>
           
         
           
@@ -64,7 +64,8 @@
   <article class="post-content">
     <p>我喜欢在APP里用SQLite数据库，不过有个问题一直困扰着我，当我要加新功能，而原来的表结构已经不能满足要求时，需要修改表，或者新增表。那么老版本升级到新版本时就需要升级数据库，之前我都是判断新表有没有存在，不存在则创建。这样很容易搞乱掉，如果涉及到多个表，判断起来逻辑不清晰，把自己都搞晕了。&lt;/p&gt;</p>
 
-<p>在经历过几次折腾后，我发现数据库也需要用版本来控制起来，就像代码有版本一样。这样我只需要判断当前的数据库版本是多少，就知道要不要升级数据库了。假设之前版本是1.0，现在版本是1.1,代码很简单：</p>
+<p>在经历过几次折腾后，我发现数据库也需要用版本来控制起来，就像代码有版本一样。这样我只需要判断当前的数据库版本是多少，就知道要不要升级数据库了。假设之前版本是1.0，现在版本是1.1,代码很简单：
+<!--more--></p>
 
 <div class="highlight"><pre><code class="language-objectivec" data-lang="objectivec"><span class="bp">NSUserDefaults</span> <span class="o">*</span><span class="n">pref</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">];</span>
 <span class="bp">NSString</span><span class="o">*</span> <span class="n">ver</span> <span class="o">=</span> <span class="p">[</span><span class="n">pref</span> <span class="nl">stringForKey</span><span class="p">:</span><span class="s">@&quot;dbver&quot;</span><span class="p">];</span>

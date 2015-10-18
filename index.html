@@ -8,16 +8,17 @@ layout: default
     {% for post in site.posts %}
       <li>
         <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          <a class="title-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
-        <h3>
-          <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-        </h3>
         <article class="post-content">
           {{ post.content | split:'<!--more-->' |first }}
         </article>
       </li>
-      <br/><br/>
+      <div class="post-list__meta">
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+        <a class="btn-border-small normal-link" href={{ post.url }}/>继续阅读</a>
+      </div>
+      <hr class="post-list__divider" />
     {% endfor %}
   </ul>
 

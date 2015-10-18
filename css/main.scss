@@ -15,7 +15,8 @@ $spacing-unit:     30px;
 
 $text-color:       #111;
 $background-color: #fdfdfd;
-$brand-color:      #2a7ae2;
+$brand-color:      #00ab6b;
+$a-link-color:   #00ab6b;
 
 $grey-color:       #828282;
 $grey-color-light: lighten($grey-color, 40%);
@@ -27,7 +28,33 @@ $content-width:    800px;
 $on-palm:          600px;
 $on-laptop:        800px;
 
+.normal-link {
+    color: $a-link-color;
+    text-decoration: none;
 
+    &:visited {
+        color: darken($brand-color, 15%);
+    }
+
+    &:hover {
+        color: $a-link-color;
+        text-decoration: none;
+    }
+}
+
+.title-link {
+    color: $text-color;
+    text-decoration: none;
+
+    &:visited {
+        color: darken($text-color, 15%);
+    }
+
+    &:hover {
+        color: $text-color;
+        text-decoration: none;
+    }
+}
 
 // Using media queries with like this:
 // @include media-query($on-palm) {
