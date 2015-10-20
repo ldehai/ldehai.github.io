@@ -16,13 +16,13 @@ Android不一样,它是一个开放的生态系统，代码开源，只要是手
 就是从1.6到6.0，什么版本的都有，，也没有哪个版本比例特别高。
 当然随着时间的推移，最老的版本随着手机退役也会逐渐消失，比如最早的1.6、2.1版本的，现在已经很少了。
 
-那只有新手机能用上最新的特性，Google岂不是很烦，好不容易开发的，没几个人用。开发应用的开发者也不乐意，新有什么用，老手机又用不少，我的用户怎么办呀。
+那只有新手机能用上最新的特性，Google岂不是很烦，好不容易开发的，没几个人用。开发应用的开发者也不乐意，新有什么用，老手机又用不了，我的用户怎么办呀。
 怎么办呢？
 <!--more-->
-有办法，google想出了一个好办法。我在开发的SDK里加一个扩展包包，把新特性单独拎出来，这个包可以支持在老版本的系统上跑，开发app的时候直接用就行。
+有办法，google想出了一个好办法。我在开发的SDK里加一个扩展包(官方叫法是Android Support Library)，把新特性单独拎出来，这个包可以支持在老版本的系统上跑，开发app的时候直接用就行。
 那这是怎么做到的呢？很简单，这个包里的代码是调用老系统的api来实现新版本的特性。相当于在老系统上重新实现了一遍。想想工作量还是蛮大的。
 
 这下好了，你开发的app既使用最新的特性，又可以在老的系统上跑，用户一点都没少。
 
-关于Android系统的扩展包说明，请参见官方文档[Support Library Features](https://developer.android.com/tools/support-library/features.html)。
-关于Android版本和API的对应关系，参见[API Level](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html)
+关于Android系统的扩展包说明，请参见官方文档[Android Support Library Features](https://developer.android.com/tools/support-library/features.html)。
+关于Android版本和API Level的对应关系，参见[API Level](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html)
