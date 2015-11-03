@@ -20,9 +20,10 @@ mongodb没有新增数据库的命令，可以使用use "数据库名" 新建数
 存储，只有当在下面新增collection时才会实际创建。
 例如：
 
-   use aventlabs
+    use aventlabs
    db.createCollection('member')
    show dbs
+   
 使用show dbs命令可以查看当前已经建好的数据库。
 
 ####db->collection->document
