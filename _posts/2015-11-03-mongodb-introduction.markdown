@@ -76,6 +76,6 @@ mongodb没有新增数据库的命令，可以使用use "数据库名" 新建数
 
 使用tornado的同学，可以看[tornado+pymongo+mongodb](https://blog.openshift.com/day-25-tornado-combining-tornado-mongodb-and-angularjs-to-build-an-app/)
 
-motor是跟pymongo类似的一个mongodb驱动库，不过它支持异步操作，有兴趣的同学可以看这里[Motar and Pymongo](https://motor.readthedocs.org/en/latest/differences.html)
+motor是跟pymongo类似的一个mongodb驱动库，不过它支持异步操作，有兴趣的同学可以看这里[Motor and Pymongo](https://motor.readthedocs.org/en/latest/differences.html)
 
 关于更多mongodb的详细特性，请参见[官方文档](https://docs.mongodb.org/manual/)。
