@@ -66,6 +66,18 @@ mongodb没有新增数据库的命令，可以使用use "数据库名" 新建数
 
     db.member.findone({'name':'andy'})
 
+###排序
+
+    db.member.sort({name:1}})
+
+1和-1表示正序和倒序
+
+###限制返回的数据条数
+
+    db.member.sort({name:1}).limit(1)
+
+注意这里，命令可以串起来使用。
+
 更多查询命令，详见官网文档[db.collection.find](https://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find)
 
 ###删除记录
