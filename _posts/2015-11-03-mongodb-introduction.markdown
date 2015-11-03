@@ -18,6 +18,7 @@ mongodb的存储结构是数状结构的，可以建多个数据库，数据库�
 ###安装
 
 理解一件新东西的最好方法自然是动手试试，现在就来安装吧。
+<!--more-->
 mongodb安装方法参照官网.我用的阿里云服务器，使用的是centos6.5，64位系统。参照以下地址完成安装。 [https://docs.mongodb.org/manual/tutorial/install-mongodb-enterprise-on-red-hat/](https://docs.mongodb.org/manual/tutorial/install-mongodb-enterprise-on-red-hat/)
 
 ###mongod与mongo
