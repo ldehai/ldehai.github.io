@@ -68,13 +68,13 @@ mongodb没有新增数据库的命令，可以使用use "数据库名" 新建数
 
 ###排序
 
-    db.member.sort({name:1}})
+    db.member.find().sort({name:1}})
 
 1和-1表示正序和倒序
 
 ###限制返回的数据条数
 
-    db.member.sort({name:1}).limit(1)
+    db.member.find().sort({name:1}).limit(1)
 
 注意这里，命令可以串起来使用。
 
