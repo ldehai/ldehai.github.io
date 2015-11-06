@@ -76,7 +76,10 @@ mongodb没有新增数据库的命令，可以使用use "数据库名" 新建数
 
     db.member.find().sort({name:1}).limit(1)
 
-注意这里，命令可以串起来使用。
+注意这里，命令可以串起来使用。另外，如果使用pymongo做排序，sort参数的需要写成如下形式，不然会报错，详细讨论见
+这里[Using .sort with PyMongo](http://stackoverflow.com/questions/10242149/using-sort-with-pymongo)：
+
+    db.member.find().sort([("createdate", -1), ("name", 1)])
 
 更多查询命令，详见官网文档[db.collection.find](https://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find)
 
