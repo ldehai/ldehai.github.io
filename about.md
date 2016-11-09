@@ -4,7 +4,7 @@ title: 关于
 permalink: /about/
 ---
 
-![]({{ site.url }}/assets/avatar.png)
+![]({{ site.url }}/assets/avatar.jpg)
 
 我是Andy，一名专注于移动平台的独立开发者，在工作中我主要使用以下语言Objective-c,Swift,Python,Java,C++,Javascript,html5.
 
