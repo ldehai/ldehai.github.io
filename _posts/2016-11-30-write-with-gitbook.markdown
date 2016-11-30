@@ -69,3 +69,13 @@ gitbook生成其他格式的书是借助calibre的转换功能实现的，安装
 #### 生成mobi文件，支持kindle
 
     $ gitbook mobi ./ mybook.mobi
+
+### 放到github
+首先登录到github，新建repo，然后把本地的代码push到github就可以了。
+
+    echo "# mybook" >> README.md
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git remote add origin "你的repo路径"
+    git push -u origin master
