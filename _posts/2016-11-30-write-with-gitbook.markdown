@@ -29,12 +29,24 @@ Gitbook.com是一个写作和出版的平台，他们使用的系统是开源的
 
 npm是nodejs的包管理器，gitbook使用的nodejs，所以如果你还没有安装npm，请移步到[nodejs安装](https://nodejs.org/en/download/)。这里会安装nodejs，npm是包含在里面一起安装的。
 
-### 使用的基本步骤
+### 新建一本书
 ![]({{ site.url }}/assets/gitbook-cli.png)
 
 新建一本书的目录，在ternimal里面进入这个目录，执行以下命令初始化一本书：
 
     $gitbook init
+
+### 「可选」放到github
+首先登录到github，新建repo，然后把本地的代码push到github就可以了。放到github上还有一个好处是，github是支持编辑markdown文件的。只要有网络，你随时可以登上去写。当然，这一步并不是必须的。只保存在本地也是没问题的。
+
+    echo "# mybook" >> README.md
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git remote add origin "你的repo路径"
+    git push -u origin master
+
+接下来你可以选择自己喜欢的编辑器去写文章了，写完想看最终的排版效果，或者转成其他格式的电子书，就接着往下看。
 
 #### 在本地预览书,gitbook会启动一个本地的web服务器http://localhost:4000, 在浏览器里访问这个地址就可以查看了。
 
@@ -69,13 +81,3 @@ gitbook生成其他格式的书是借助calibre的转换功能实现的，安装
 #### 生成mobi文件，支持kindle
 
     $ gitbook mobi ./ mybook.mobi
-
-### 放到github
-首先登录到github，新建repo，然后把本地的代码push到github就可以了。
-
-    echo "# mybook" >> README.md
-    git init
-    git add README.md
-    git commit -m "first commit"
-    git remote add origin "你的repo路径"
-    git push -u origin master
