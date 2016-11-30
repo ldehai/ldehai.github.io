@@ -46,6 +46,7 @@ npm是nodejs的包管理器，gitbook使用的nodejs，所以如果你还没有�
 gitbook生成其他格式的书是借助calibre的转换功能实现的，安装完calibre后，修改系统$PATH定义，把转换程序的路径加到系统PATH里，要不然会找不到转换程序。打开Terminal（终端），按照下面的操作步骤修改PATH。
 
     vi ~/.bash_profile
+
 把下面这句附加到.bash_profile文件里，然后保存退出。
 
     export PATH=$PATH:/Applications/calibre.app/Contents/MacOS/
