@@ -1,23 +1,28 @@
 ---
 layout: post
-title:  "使用gitbook搭建写作环境"
+title:  "使用Gitbook搭建写作环境"
 date:   2016-11-30 08:21:00
 categories:
 ---
 ### gitbook简介
-gitbook.com是一个写作和出版的平台，他们使用的系统是开源的。支持Markdown和AsciiDoc格式，最后输出的是静态网页。还可以通过[calibre](https://calibre-ebook.com/download_osx)把书[转成](http://toolchain.gitbook.com/ebook.html)pdf、epub、mobi等常用格式，方便在各种设备上阅读。
+
+Gitbook.com是一个写作和出版的平台，他们使用的系统是开源的。支持Markdown和AsciiDoc格式，最后输出的是静态网页。还可以通过[calibre](https://calibre-ebook.com/download_osx)把书[转成](http://toolchain.gitbook.com/ebook.html)pdf、epub、mobi等常用格式，方便在各种设备上阅读。
 ![]({{ site.url }}/assets/gitbooksample.png)
 
 ### 要达成的目标
-由于gitbook和markdown的开放性，可以在本地搭建写作环境，对我来说很有吸引力。我使用如下的组合来搭建我的写作环境：gitbook+atom+github+calibre
+由于Gitbook和Markdown的开放性，可以在本地搭建写作环境，对我来说很有吸引力。我使用如下的组合来搭建我的写作环境：gitbook+atom+github+calibre
 <!--more-->
-[gitbook](https://github.com/GitbookIO/gitbook)：用来创建书，遵循它的文件组织形式，可以生成带目录的一本完整的书。
-[calibre](https://calibre-ebook.com)：用它把写好的书转换成其他格式，方便在不同设备上阅读，包括kindle。
-[atom](https://atom.io/)：Github出的编辑器，可以用来写markdown格式的文件。
-[github](https://github.com)：把书稿放到github，方便版本管理，多人协作。如果你开通了私有库，存放自己不想公开的书也很方便。
 
-### gitbook安装
-参照[gitbook官方安装说明](https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md)。
+[Gitbook](https://github.com/GitbookIO/gitbook)：用来创建书，遵循它的文件组织形式，可以生成带目录的一本完整的书。
+
+[Calibre](https://calibre-ebook.com)：用它把写好的书转换成其他格式，方便在不同设备上阅读，包括kindle。
+
+[Atom](https://atom.io/)：Github出的编辑器，可以用来写markdown格式的文件。当然你可以用自己喜欢的任何编辑器。
+
+[Github](https://github.com)：把书稿放到Github，方便版本管理，多人协作。如果你开通了私有库，存放自己不想公开的书也很方便。
+
+### Gitbook安装
+参照[Gitbook官方安装说明](https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md)。
 以macOS为例，安装步骤如下：
 
    $ npm install gitbook-cli -g
