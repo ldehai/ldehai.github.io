@@ -30,6 +30,8 @@ Gitbook.com是一个写作和出版的平台，他们使用的系统是开源的
 npm是nodejs的包管理器，gitbook使用的nodejs，所以如果你还没有安装npm，请移步到[nodejs安装](https://nodejs.org/en/download/)。这里会安装nodejs，npm是包含在里面一起安装的。
 
 ### 使用的基本步骤
+![]({{ site.url }}/assets/gitbook-cli.png)
+
 新建一本书的目录，在ternimal里面进入这个目录，执行以下命令初始化一本书：
 
     $gitbook init
