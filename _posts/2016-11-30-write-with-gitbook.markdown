@@ -43,14 +43,17 @@ npm是nodejs的包管理器，gitbook使用的nodejs，所以如果你还没有�
     $gitbook build
 
 ### 生成其他格式文件
-gitbook生成其他格式的书是借助calibre的转换功能实现的，安装完calibre后，修改系统$PATH定义，把转换程序的路径加到系统PATH里，要不然会找不到转换程序。
+gitbook生成其他格式的书是借助calibre的转换功能实现的，安装完calibre后，修改系统$PATH定义，把转换程序的路径加到系统PATH里，要不然会找不到转换程序。打开Terminal（终端），按照下面的操作步骤修改PATH。
 
-1、打开Terminal（终端）
-2、输入：vi ~/.bash_profile
-3、设置PATH：export PATH=$PATH:/Applications/calibre.app/Contents/MacOS/
-4、输入：:wq    //保存并退出vi
-5、修改立即生效：source ~/.bash_profile
-6、查看环境变量的值：echo $PATH
+    vi ~/.bash_profile
+把下面这句附加到.bash_profile文件里，然后保存退出。
+
+    export PATH=$PATH:/Applications/calibre.app/Contents/MacOS/
+
+使用source命令使文件立即生效
+
+    source ~/.bash_profile
+    echo $PATH
 
 #### 生成pdf文件
 
