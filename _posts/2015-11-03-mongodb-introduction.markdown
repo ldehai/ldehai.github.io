@@ -7,7 +7,7 @@ categories:
 ### 简介
 mongodb是久负盛名的非关系数据库。它以文档为存储单位，与严格的关系数据库形成泾渭分明的区别。
 
-###db->collection->document
+### db->collection->document
 
 mongodb的存储结构是数状结构的，可以建多个数据库，数据库底下建多个collection,collection下
 是最终的document,存放实际的数据。这个结构类似于硬盘上文件的组织方式。有分区、目录、文件。
@@ -83,7 +83,7 @@ mongodb没有新增数据库的命令，可以使用use "数据库名" 新建数
 
 更多查询命令，详见官网文档[db.collection.find](https://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find)
 
-###删除记录
+### 删除记录
 
     db.member.remove({'name':'andy'})
 
