@@ -6,6 +6,7 @@ date:   2013-11-08 10:41:38
 categories: blog
 ---
 Framer是一个开源项目，一个基于JavaScript的原型工具，专为设计师打造。现在的应用更注重交互设计，它可以让你效率更高。项目地址[http://www.framerjs.com](http://www.framerjs.com)，使用Framer包括4个步骤:
+
 1. 用Photoshop设计原型图
 2. 用Framer.app从Photoshop中导出设计图
 3. 在app.js里写视图展示及交互代码，可以加各种特效
