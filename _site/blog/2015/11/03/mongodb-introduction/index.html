@@ -170,8 +170,9 @@ mongodb安装方法参照官网.我用的阿里云服务器，使用的是centos
 
 <p>跟其他数据库系统类似，<a href="https://docs.mongodb.org/manual/">mongodb</a>也有自己的服务进程mongod,centos下以服务的形式开启的方式为：</p>
 
-<pre><code>sudo service mongod start
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo service mongod start
 </code></pre>
+</div>
 
 <!--more-->
 <p>这样终端窗口关了之后，程序还能继续运行。当然，你也可以在命令行下输入mongod启动，只是窗口关了程序也停了。
@@ -183,66 +184,76 @@ mongodb的交互程序是mongo（在mongod启动后，新开一个命令窗口�
 存储，只有当在下面新增collection时才会实际创建。
 例如：</p>
 
-<pre><code>use aventlabs
+<div class="highlighter-rouge"><pre class="highlight"><code>use aventlabs
 db.createCollection('member')
 show dbs
 </code></pre>
+</div>
 
 <h3 id="section-2">插入记录</h3>
 
 <p>使用show dbs命令可以查看当前已经建好的数据库。（注意命令中的大小写）
 先来插入一个记录看看：</p>
 
-<pre><code>db.member.insert({
+<div class="highlighter-rouge"><pre class="highlight"><code>db.member.insert({
    "name" : "andy",
    "email" : "ldehai@gmail.com",
 })
 </code></pre>
+</div>
 
 <p>在mongo命令行下输入以上命令，回车，就成功插入了一条记录，反馈如下：</p>
 
-<pre><code>WriteResult({ "nInserted" : 1 })
+<div class="highlighter-rouge"><pre class="highlight"><code>WriteResult({ "nInserted" : 1 })
 </code></pre>
+</div>
 
 <h3 id="member">查询member中的记录：</h3>
 
-<pre><code>db.memer.find()
+<div class="highlighter-rouge"><pre class="highlight"><code>db.memer.find()
 </code></pre>
+</div>
 
 <p>查询结果：</p>
 
-<pre><code>{ "_id" : ObjectId("5638735b01e6622e13ac34fb"), "name" : "andy", "email" : "ldehai@gmail.com" }
-</code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nt">"_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="err">ObjectId(</span><span class="s2">"5638735b01e6622e13ac34fb"</span><span class="err">)</span><span class="p">,</span><span class="w"> </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"andy"</span><span class="p">,</span><span class="w"> </span><span class="nt">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ldehai@gmail.com"</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
 
 <h3 id="nameandy">条件查询,只查name为andy的一条记录：</h3>
 
-<pre><code>db.member.findone({'name':'andy'})
+<div class="highlighter-rouge"><pre class="highlight"><code>db.member.findone({'name':'andy'})
 </code></pre>
+</div>
 
 <h3 id="section-3">排序</h3>
 
-<pre><code>db.member.find().sort({name:1}})
+<div class="highlighter-rouge"><pre class="highlight"><code>db.member.find().sort({name:1}})
 </code></pre>
+</div>
 
 <p>1和-1表示正序和倒序</p>
 
 <h3 id="section-4">限制返回的数据条数</h3>
 
-<pre><code>db.member.find().sort({name:1}).limit(1)
+<div class="highlighter-rouge"><pre class="highlight"><code>db.member.find().sort({name:1}).limit(1)
 </code></pre>
+</div>
 
 <p>注意这里，命令可以串起来使用。另外，如果使用pymongo做排序，sort参数的需要写成如下形式，不然会报错，详细讨论见
 这里<a href="http://stackoverflow.com/questions/10242149/using-sort-with-pymongo">Using .sort with PyMongo</a>：</p>
 
-<pre><code>db.member.find().sort([("createdate", -1), ("name", 1)])
+<div class="highlighter-rouge"><pre class="highlight"><code>db.member.find().sort([("createdate", -1), ("name", 1)])
 </code></pre>
+</div>
 
 <p>更多查询命令，详见官网文档<a href="https://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">db.collection.find</a></p>
 
 <h3 id="section-5">删除记录</h3>
 
-<pre><code>db.member.remove({'name':'andy'})
+<div class="highlighter-rouge"><pre class="highlight"><code>db.member.remove({'name':'andy'})
 </code></pre>
+</div>
 
 <p>进一步的操作方法，参照官网教程<a href="https://docs.mongodb.org/getting-started/shell/client/">使用mongo命令行工具操作mongodb</a></p>
 

@@ -158,59 +158,61 @@
 
 <p>上一篇讲到使用如下命令打包exe：</p>
 
-<pre><code>c:/python27/python.exe c:/pyinstaller/pyinstaller.py --noconfirm --noconsole --onefile --icon=Icon.ico myapp.py
+<div class="highlighter-rouge"><pre class="highlight"><code>c:/python27/python.exe c:/pyinstaller/pyinstaller.py --noconfirm --noconsole --onefile --icon=Icon.ico myapp.py
 </code></pre>
+</div>
 
 <p>请仔细观察myapp.py所在目录，会自动生成myapp.spec文件，注意是每次都会重新生成，内容如下：</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python">a = Analysis([&#39;myapp.py&#39;],
-         pathex=[&#39;c:\\src&#39;],
-         hiddenimports=[],
-         hookspath=None,
-         runtime_hooks=None)
-pyz = PYZ(a.pure)
-exe = EXE(pyz,
-      a.scripts,
-      a.binaries,
-      a.zipfiles,
-      a.datas,
-      name=&#39;myapp.exe&#39;,
-      debug=False,
-      strip=None,
-      upx=True,
-      console=False , icon=&#39;Icon.ico&#39;)</code></pre></figure>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="n">Analysis</span><span class="p">([</span><span class="s">'myapp.py'</span><span class="p">],</span>
+         <span class="n">pathex</span><span class="o">=</span><span class="p">[</span><span class="s">'c:</span><span class="se">\\</span><span class="s">src'</span><span class="p">],</span>
+         <span class="n">hiddenimports</span><span class="o">=</span><span class="p">[],</span>
+         <span class="n">hookspath</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+         <span class="n">runtime_hooks</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">pyz</span> <span class="o">=</span> <span class="n">PYZ</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">pure</span><span class="p">)</span>
+<span class="n">exe</span> <span class="o">=</span> <span class="n">EXE</span><span class="p">(</span><span class="n">pyz</span><span class="p">,</span>
+      <span class="n">a</span><span class="o">.</span><span class="n">scripts</span><span class="p">,</span>
+      <span class="n">a</span><span class="o">.</span><span class="n">binaries</span><span class="p">,</span>
+      <span class="n">a</span><span class="o">.</span><span class="n">zipfiles</span><span class="p">,</span>
+      <span class="n">a</span><span class="o">.</span><span class="n">datas</span><span class="p">,</span>
+      <span class="n">name</span><span class="o">=</span><span class="s">'myapp.exe'</span><span class="p">,</span>
+      <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+      <span class="n">strip</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+      <span class="n">upx</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+      <span class="n">console</span><span class="o">=</span><span class="bp">False</span> <span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s">'Icon.ico'</span><span class="p">)</span></code></pre></figure>
 
 <p>大概解释下文件的内容：</p>
 
 <p>第一行a = Anaylysis(…)是用来分析程序用到的库，下面就是打包成exe的一些参数。所以我们在第一行代码之后加代码把多余的pyconfig.h去掉，新的spec文件如下：</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python">a = Analysis([&#39;myapp.py&#39;],
-         pathex=[&#39;c:\\src&#39;],
-         hiddenimports=[],
-         hookspath=None,
-         runtime_hooks=None)
-#add_begin
-for d in a.datas:
-    if &#39;pyconfig&#39; in d[0]:
-        a.datas.remove(d)
-        break
-#add_end
-pyz = PYZ(a.pure)
-exe = EXE(pyz,
-      a.scripts,
-      a.binaries,
-      a.zipfiles,
-      a.datas,
-      name=&#39;myapp.exe&#39;,
-      debug=False,
-      strip=None,
-      upx=True,
-      console=False , icon=&#39;Icon.ico&#39;)</code></pre></figure>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="n">Analysis</span><span class="p">([</span><span class="s">'myapp.py'</span><span class="p">],</span>
+         <span class="n">pathex</span><span class="o">=</span><span class="p">[</span><span class="s">'c:</span><span class="se">\\</span><span class="s">src'</span><span class="p">],</span>
+         <span class="n">hiddenimports</span><span class="o">=</span><span class="p">[],</span>
+         <span class="n">hookspath</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+         <span class="n">runtime_hooks</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="c">#add_begin</span>
+<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">datas</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s">'pyconfig'</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">datas</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">break</span>
+<span class="c">#add_end</span>
+<span class="n">pyz</span> <span class="o">=</span> <span class="n">PYZ</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">pure</span><span class="p">)</span>
+<span class="n">exe</span> <span class="o">=</span> <span class="n">EXE</span><span class="p">(</span><span class="n">pyz</span><span class="p">,</span>
+      <span class="n">a</span><span class="o">.</span><span class="n">scripts</span><span class="p">,</span>
+      <span class="n">a</span><span class="o">.</span><span class="n">binaries</span><span class="p">,</span>
+      <span class="n">a</span><span class="o">.</span><span class="n">zipfiles</span><span class="p">,</span>
+      <span class="n">a</span><span class="o">.</span><span class="n">datas</span><span class="p">,</span>
+      <span class="n">name</span><span class="o">=</span><span class="s">'myapp.exe'</span><span class="p">,</span>
+      <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+      <span class="n">strip</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+      <span class="n">upx</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+      <span class="n">console</span><span class="o">=</span><span class="bp">False</span> <span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s">'Icon.ico'</span><span class="p">)</span></code></pre></figure>
 
 <p>为了使用修改后的spec文件来打包，需要使用新的命令：</p>
 
-<pre><code>c:/python27/python.exe c:/pyinstaller/pyinstaller.py myapp.spec
+<div class="highlighter-rouge"><pre class="highlight"><code>c:/python27/python.exe c:/pyinstaller/pyinstaller.py myapp.spec
 </code></pre>
+</div>
 
 <p>试试，warning没了吧</p>
 

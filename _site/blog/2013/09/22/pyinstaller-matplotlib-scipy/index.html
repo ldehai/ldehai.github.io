@@ -158,15 +158,15 @@
 <p>这里简要说明一下步骤：
 直接下载压缩包，现在的版本是2.1.解压后打开命令行，执行如下命令：</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python">c:\python setup.py install</code></pre></figure>
+<figure class="highlight"><pre><code class="language-python" data-lang="python">    <span class="n">c</span><span class="p">:</span>\<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span></code></pre></figure>
 
 <p>可以用如下命令检查是不是已经装好了</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python">c:\pyintaller --version</code></pre></figure>
+<figure class="highlight"><pre><code class="language-python" data-lang="python">    <span class="n">c</span><span class="p">:</span>\<span class="n">pyintaller</span> <span class="o">--</span><span class="n">version</span></code></pre></figure>
 
 <p>ok，pyinstaller 装好了，开始打包</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python">c:\c:/python27/python.exe c:/pyinstaller/pyinstaller.py --noconfirm --noconsole --onefile --icon=Icon.ico myapp.py</code></pre></figure>
+<figure class="highlight"><pre><code class="language-python" data-lang="python">    <span class="n">c</span><span class="p">:</span>\<span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">python27</span><span class="o">/</span><span class="n">python</span><span class="o">.</span><span class="n">exe</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">pyinstaller</span><span class="o">/</span><span class="n">pyinstaller</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">noconfirm</span> <span class="o">--</span><span class="n">noconsole</span> <span class="o">--</span><span class="n">onefile</span> <span class="o">--</span><span class="n">icon</span><span class="o">=</span><span class="n">Icon</span><span class="o">.</span><span class="n">ico</span> <span class="n">myapp</span><span class="o">.</span><span class="n">py</span></code></pre></figure>
 
 <p>解释一下几个参数：</p>
 
@@ -183,11 +183,11 @@ pyinstaller对第三方库的支持情况见这里：<a href="https://github.com
 
 <p>安装步骤同上，不再赘述。安装完运行打包脚本会发现还有错误</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python">ImportError: No module named scipy.sparse.csgraph._validation</code></pre></figure>
+<figure class="highlight"><pre><code class="language-python" data-lang="python">    <span class="nb">ImportError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csgraph</span><span class="o">.</span><span class="n">_validation</span></code></pre></figure>
 
 <p>这是因为pyinstaller没能自动把_validation库加进来，我们就在代码里手动加上吧。</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python">from scipy.sparse.csgraph import _validation</code></pre></figure>
+<figure class="highlight"><pre><code class="language-python" data-lang="python">    <span class="kn">from</span> <span class="nn">scipy.sparse.csgraph</span> <span class="kn">import</span> <span class="n">_validation</span></code></pre></figure>
 
 <p>再次运行，应该没问题了。</p>
 

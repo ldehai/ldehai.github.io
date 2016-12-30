@@ -155,30 +155,30 @@
 <p>在使用wxPython写程序时，如果用到了图标，而打包的时候又想嵌到程序里，就要使用base64对图片进行编码，然后把生成的字符串直接写到程序里就好了,废话不多说，上代码:
 <!--more--></p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"># -*- coding:utf-8 -*-
-#导入需要的库
-import wx
-from wx.lib.embeddedimage import PyEmbeddedImage #用于嵌入经过base64编码的图片
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># -*- coding:utf-8 -*-</span>
+<span class="c">#导入需要的库</span>
+<span class="kn">import</span> <span class="nn">wx</span>
+<span class="kn">from</span> <span class="nn">wx.lib.embeddedimage</span> <span class="kn">import</span> <span class="n">PyEmbeddedImage</span> <span class="c">#用于嵌入经过base64编码的图片</span>
 
-#用经过Base64处理的字符串构造图片，用图片生成的base64字符串替换下面括号里的内容即可
-imgBase64 = PyEmbeddedImage(&quot;iVBORw0KGgoAAAANSUhEUgAAWCAYAAAAinad/.......+KElFTkSuQmCC&quot;)
+<span class="c">#用经过Base64处理的字符串构造图片，用图片生成的base64字符串替换下面括号里的内容即可</span>
+<span class="n">imgBase64</span> <span class="o">=</span> <span class="n">PyEmbeddedImage</span><span class="p">(</span><span class="s">"iVBORw0KGgoAAAANSUhEUgAAWCAYAAAAinad/.......+KElFTkSuQmCC"</span><span class="p">)</span>
 
-#生成空位图
-self.ESImage = imgBase64.GetImage()#.Scale(22,24)
+<span class="c">#生成空位图</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">ESImage</span> <span class="o">=</span> <span class="n">imgBase64</span><span class="o">.</span><span class="n">GetImage</span><span class="p">()</span><span class="c">#.Scale(22,24)</span>
 
-#把上一步生成的图片加到控件上去
-self.imageCtrl =    wx.StaticBitmap(self.RightPanel,wx.ID_ANY,wx.BitmapFromImage(self.ESImage))
-&lt;/code&gt;&lt;/pre&gt;</code></pre></figure>
+<span class="c">#把上一步生成的图片加到控件上去</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">imageCtrl</span> <span class="o">=</span>    <span class="n">wx</span><span class="o">.</span><span class="n">StaticBitmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RightPanel</span><span class="p">,</span><span class="n">wx</span><span class="o">.</span><span class="n">ID_ANY</span><span class="p">,</span><span class="n">wx</span><span class="o">.</span><span class="n">BitmapFromImage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESImage</span><span class="p">))</span>
+<span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span></code></pre></figure>
 
 <p>那么怎么把一个图片用Base64编码呢，请看:</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"># -*- coding:utf-8 -*-
-import base64
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># -*- coding:utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">base64</span>
 
-file = open(&#39;x1.png&#39;, &#39;rb&#39;)
-pic = file.read()
-b64 = base64.b64encode(pic)
-print b64</code></pre></figure>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'x1.png'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span>
+<span class="n">pic</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">b64</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">pic</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">b64</span></code></pre></figure>
 
 <p>在iOS中，如果我们发Html格式邮件的时候需要带上一个本地图片文件，应该怎么办呢，用附件不合适，这时候也要用Base64处理，注意html代码中base64的标记，
 这样浏览器才能正确的解码。</p>
@@ -186,10 +186,10 @@ print b64</code></pre></figure>
 <figure class="highlight"><pre><code class="language-objectivec" data-lang="objectivec">MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
 
 //构造发送的邮件内容，注意base64的标记
-NSString *strMessage = @&quot;img src=&#39;data:image/png;base64,%@&#39;&lt;a href=https://itunes.apple.com/us/app/shoebox-find-your-shoes-quickly/id640885172?ls=1&amp;mt=8&gt;View in App Store&lt;/a&gt;&quot;;
+NSString *strMessage = @"img src='data:image/png;base64,%@'&lt;a href=https://itunes.apple.com/us/app/shoebox-find-your-shoes-quickly/id640885172?ls=1&amp;mt=8&gt;View in App Store&lt;/a&gt;";
 
 //把图片用base64编码，加到邮件的内容里
-UIImage *appicon = [UIImage imageNamed:@&quot;Icon.png&quot;];
+UIImage *appicon = [UIImage imageNamed:@"Icon.png"];
 NSData *imageData = UIImagePNGRepresentation(appicon);
 strMessage = [NSString stringWithFormat:strMessage,[imageData base64EncodedString]];
 

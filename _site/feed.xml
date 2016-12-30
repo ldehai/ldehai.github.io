@@ -5,8 +5,8 @@
     <description>嗨，我是刘德海 (@ldehai)，iOS / Mac 独立开发者，现居南京。我创建了AventLabs，一个在线学习编程和设计的平台，主要面向初学者。</description>
     <link>http://ldehai.com/</link>
     <atom:link href="http://ldehai.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 30 Dec 2016 10:14:34 +0800</pubDate>
-    <lastBuildDate>Fri, 30 Dec 2016 10:14:34 +0800</lastBuildDate>
+    <pubDate>Fri, 30 Dec 2016 10:29:39 +0800</pubDate>
+    <lastBuildDate>Fri, 30 Dec 2016 10:29:39 +0800</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -32,8 +32,9 @@
 &lt;p&gt;参照&lt;a href=&quot;https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md&quot;&gt;Gitbook官方安装说明&lt;/a&gt;。
 以macOS为例，安装步骤如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ npm install gitbook-cli -g
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ npm install gitbook-cli -g
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;npm是nodejs的包管理器，gitbook使用的nodejs，所以如果你还没有安装npm，请移步到&lt;a href=&quot;https://nodejs.org/en/download/&quot;&gt;nodejs安装&lt;/a&gt;。这里会安装nodejs，npm是包含在里面一起安装的。&lt;/p&gt;
 
@@ -42,64 +43,74 @@
 
 &lt;p&gt;新建一本书的目录，在ternimal里面进入这个目录，执行以下命令初始化一本书：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$gitbook init
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$gitbook init
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;github&quot;&gt;「可选」放到github&lt;/h3&gt;
 &lt;p&gt;首先登录到github，新建repo，然后把本地的代码push到github就可以了。放到github上还有一个好处是，github是支持编辑markdown文件的。只要有网络，你随时可以登上去写。当然，这一步并不是必须的。只保存在本地也是没问题的。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;echo &quot;# mybook&quot; &amp;gt;&amp;gt; README.md
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;echo &quot;# mybook&quot; &amp;gt;&amp;gt; README.md
 git init
 git add README.md
 git commit -m &quot;first commit&quot;
 git remote add origin &quot;你的repo路径&quot;
 git push -u origin master
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;接下来你可以选择自己喜欢的编辑器去写文章了，写完想看最终的排版效果，或者转成其他格式的电子书，就接着往下看。&lt;/p&gt;
 
 &lt;h3 id=&quot;section-2&quot;&gt;在本地预览书&lt;/h3&gt;
 &lt;p&gt;gitbook会启动一个本地的web服务器&lt;a href=&quot;http://localhost:4000&quot;&gt;http://localhost:4000&lt;/a&gt;, 在浏览器里访问这个地址就可以查看了。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ gitbook serve
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gitbook serve
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;md&quot;&gt;把md文件编译成静态页面，注意查看当前目录底下生成的文件&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;$gitbook build
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$gitbook build
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;section-3&quot;&gt;生成其他格式文件&lt;/h3&gt;
 &lt;p&gt;gitbook生成其他格式的书是借助calibre的转换功能实现的(ebook-convert)，安装完calibre后，修改系统$PATH定义，把转换程序的路径加到系统PATH里，要不然会找不到转换程序。打开Terminal（终端），按照下面的操作步骤修改PATH。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;vi ~/.bash_profile
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vi ~/.bash_profile
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;把下面这句附加到.bash_profile文件里，然后保存退出。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;export PATH=$PATH:/Applications/calibre.app/Contents/MacOS/
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export PATH=$PATH:/Applications/calibre.app/Contents/MacOS/
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;使用source命令使文件立即生效&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;source ~/.bash_profile
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;source ~/.bash_profile
 echo $PATH
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h4 id=&quot;pdf&quot;&gt;生成pdf文件&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;$ gitbook pdf ./ mybook.pdf
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gitbook pdf ./ mybook.pdf
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h4 id=&quot;epub&quot;&gt;生成epub文件&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;$ gitbook epub ./ mybook.epub
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gitbook epub ./ mybook.epub
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h4 id=&quot;mobikindle&quot;&gt;生成mobi文件，支持kindle&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;$ gitbook mobi ./ mybook.mobi
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gitbook mobi ./ mybook.mobi
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Wed, 30 Nov 2016 16:21:00 +0800</pubDate>
         <link>http://ldehai.com/blog/2016/11/30/write-with-gitbook/</link>
@@ -130,8 +141,9 @@ mongodb安装方法参照官网.我用的阿里云服务器，使用的是centos
 
 &lt;p&gt;跟其他数据库系统类似，&lt;a href=&quot;https://docs.mongodb.org/manual/&quot;&gt;mongodb&lt;/a&gt;也有自己的服务进程mongod,centos下以服务的形式开启的方式为：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;sudo service mongod start
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo service mongod start
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;!--more--&gt;
 &lt;p&gt;这样终端窗口关了之后，程序还能继续运行。当然，你也可以在命令行下输入mongod启动，只是窗口关了程序也停了。
@@ -143,66 +155,76 @@ mongodb的交互程序是mongo（在mongod启动后，新开一个命令窗口�
 存储，只有当在下面新增collection时才会实际创建。
 例如：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;use aventlabs
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;use aventlabs
 db.createCollection('member')
 show dbs
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;section-2&quot;&gt;插入记录&lt;/h3&gt;
 
 &lt;p&gt;使用show dbs命令可以查看当前已经建好的数据库。（注意命令中的大小写）
 先来插入一个记录看看：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;db.member.insert({
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.member.insert({
    &quot;name&quot; : &quot;andy&quot;,
    &quot;email&quot; : &quot;ldehai@gmail.com&quot;,
 })
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;在mongo命令行下输入以上命令，回车，就成功插入了一条记录，反馈如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;WriteResult({ &quot;nInserted&quot; : 1 })
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;WriteResult({ &quot;nInserted&quot; : 1 })
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;member&quot;&gt;查询member中的记录：&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;db.memer.find()
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.memer.find()
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;查询结果：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{ &quot;_id&quot; : ObjectId(&quot;5638735b01e6622e13ac34fb&quot;), &quot;name&quot; : &quot;andy&quot;, &quot;email&quot; : &quot;ldehai@gmail.com&quot; }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;_id&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ObjectId(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;5638735b01e6622e13ac34fb&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;andy&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;email&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ldehai@gmail.com&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;nameandy&quot;&gt;条件查询,只查name为andy的一条记录：&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;db.member.findone({'name':'andy'})
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.member.findone({'name':'andy'})
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;section-3&quot;&gt;排序&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;db.member.find().sort({name:1}})
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.member.find().sort({name:1}})
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;1和-1表示正序和倒序&lt;/p&gt;
 
 &lt;h3 id=&quot;section-4&quot;&gt;限制返回的数据条数&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;db.member.find().sort({name:1}).limit(1)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.member.find().sort({name:1}).limit(1)
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;注意这里，命令可以串起来使用。另外，如果使用pymongo做排序，sort参数的需要写成如下形式，不然会报错，详细讨论见
 这里&lt;a href=&quot;http://stackoverflow.com/questions/10242149/using-sort-with-pymongo&quot;&gt;Using .sort with PyMongo&lt;/a&gt;：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;db.member.find().sort([(&quot;createdate&quot;, -1), (&quot;name&quot;, 1)])
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.member.find().sort([(&quot;createdate&quot;, -1), (&quot;name&quot;, 1)])
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;更多查询命令，详见官网文档&lt;a href=&quot;https://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find&quot;&gt;db.collection.find&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;section-5&quot;&gt;删除记录&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;db.member.remove({'name':'andy'})
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.member.remove({'name':'andy'})
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;进一步的操作方法，参照官网教程&lt;a href=&quot;https://docs.mongodb.org/getting-started/shell/client/&quot;&gt;使用mongo命令行工具操作mongodb&lt;/a&gt;&lt;/p&gt;
 
@@ -274,30 +296,30 @@ Android不一样,它是一个开放的生态系统，代码开源，只要是手
 &lt;p&gt;在使用wxPython写程序时，如果用到了图标，而打包的时候又想嵌到程序里，就要使用base64对图片进行编码，然后把生成的字符串直接写到程序里就好了,废话不多说，上代码:
 &lt;!--more--&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;# -*- coding:utf-8 -*-
-#导入需要的库
-import wx
-from wx.lib.embeddedimage import PyEmbeddedImage #用于嵌入经过base64编码的图片
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;# -*- coding:utf-8 -*-&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#导入需要的库&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;wx&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;wx.lib.embeddedimage&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PyEmbeddedImage&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#用于嵌入经过base64编码的图片&lt;/span&gt;
 
-#用经过Base64处理的字符串构造图片，用图片生成的base64字符串替换下面括号里的内容即可
-imgBase64 = PyEmbeddedImage(&amp;quot;iVBORw0KGgoAAAANSUhEUgAAWCAYAAAAinad/.......+KElFTkSuQmCC&amp;quot;)
+&lt;span class=&quot;c&quot;&gt;#用经过Base64处理的字符串构造图片，用图片生成的base64字符串替换下面括号里的内容即可&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;imgBase64&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PyEmbeddedImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;iVBORw0KGgoAAAANSUhEUgAAWCAYAAAAinad/.......+KElFTkSuQmCC&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-#生成空位图
-self.ESImage = imgBase64.GetImage()#.Scale(22,24)
+&lt;span class=&quot;c&quot;&gt;#生成空位图&lt;/span&gt;
+&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ESImage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imgBase64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#.Scale(22,24)&lt;/span&gt;
 
-#把上一步生成的图片加到控件上去
-self.imageCtrl =    wx.StaticBitmap(self.RightPanel,wx.ID_ANY,wx.BitmapFromImage(self.ESImage))
-&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;c&quot;&gt;#把上一步生成的图片加到控件上去&lt;/span&gt;
+&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imageCtrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;wx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StaticBitmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RightPanel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_ANY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BitmapFromImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ESImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;那么怎么把一个图片用Base64编码呢，请看:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;# -*- coding:utf-8 -*-
-import base64
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;# -*- coding:utf-8 -*-&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;base64&lt;/span&gt;
 
-file = open(&amp;#39;x1.png&amp;#39;, &amp;#39;rb&amp;#39;)
-pic = file.read()
-b64 = base64.b64encode(pic)
-print b64&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;nb&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'x1.png'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'rb'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;pic&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;b64&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b64encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b64&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;在iOS中，如果我们发Html格式邮件的时候需要带上一个本地图片文件，应该怎么办呢，用附件不合适，这时候也要用Base64处理，注意html代码中base64的标记，
 这样浏览器才能正确的解码。&lt;/p&gt;
@@ -305,10 +327,10 @@ print b64&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objectivec&quot; data-lang=&quot;objectivec&quot;&gt;MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
 
 //构造发送的邮件内容，注意base64的标记
-NSString *strMessage = @&amp;quot;img src=&amp;#39;data:image/png;base64,%@&amp;#39;&amp;lt;a href=https://itunes.apple.com/us/app/shoebox-find-your-shoes-quickly/id640885172?ls=1&amp;amp;mt=8&amp;gt;View in App Store&amp;lt;/a&amp;gt;&amp;quot;;
+NSString *strMessage = @&quot;img src='data:image/png;base64,%@'&amp;lt;a href=https://itunes.apple.com/us/app/shoebox-find-your-shoes-quickly/id640885172?ls=1&amp;amp;mt=8&amp;gt;View in App Store&amp;lt;/a&amp;gt;&quot;;
 
 //把图片用base64编码，加到邮件的内容里
-UIImage *appicon = [UIImage imageNamed:@&amp;quot;Icon.png&amp;quot;];
+UIImage *appicon = [UIImage imageNamed:@&quot;Icon.png&quot;];
 NSData *imageData = UIImagePNGRepresentation(appicon);
 strMessage = [NSString stringWithFormat:strMessage,[imageData base64EncodedString]];
 
@@ -338,7 +360,7 @@ strMessage = [NSString stringWithFormat:strMessage,[imageData base64EncodedStrin
 
 &lt;p&gt;Framer项目的代码结构是这样的：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;app.js          //【重要】用来写视图和交互代码
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;app.js          //【重要】用来写视图和交互代码
 framer/         //Framerjs的框架，app.js里用到的功能都是它提供的
   framer.js     //framer核心文件
   framerps.js   //根据views.app.js生成frame对象
@@ -346,6 +368,7 @@ framer/         //Framerjs的框架，app.js里用到的功能都是它提供的
 images/         //从photoshop导出的图片都在这里
 index.html      //预览时的首页
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;framer&quot;&gt;Framer可以说是由三部分组成：&lt;/h2&gt;
 
@@ -413,59 +436,61 @@ Framer目前只侧重于前端展示，如果加上数据处理，那么一个�
 
 &lt;p&gt;上一篇讲到使用如下命令打包exe：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;c:/python27/python.exe c:/pyinstaller/pyinstaller.py --noconfirm --noconsole --onefile --icon=Icon.ico myapp.py
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;c:/python27/python.exe c:/pyinstaller/pyinstaller.py --noconfirm --noconsole --onefile --icon=Icon.ico myapp.py
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;请仔细观察myapp.py所在目录，会自动生成myapp.spec文件，注意是每次都会重新生成，内容如下：&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;a = Analysis([&amp;#39;myapp.py&amp;#39;],
-         pathex=[&amp;#39;c:\\src&amp;#39;],
-         hiddenimports=[],
-         hookspath=None,
-         runtime_hooks=None)
-pyz = PYZ(a.pure)
-exe = EXE(pyz,
-      a.scripts,
-      a.binaries,
-      a.zipfiles,
-      a.datas,
-      name=&amp;#39;myapp.exe&amp;#39;,
-      debug=False,
-      strip=None,
-      upx=True,
-      console=False , icon=&amp;#39;Icon.ico&amp;#39;)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Analysis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'myapp.py'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+         &lt;span class=&quot;n&quot;&gt;pathex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'c:&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;src'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+         &lt;span class=&quot;n&quot;&gt;hiddenimports&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+         &lt;span class=&quot;n&quot;&gt;hookspath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+         &lt;span class=&quot;n&quot;&gt;runtime_hooks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;pyz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PYZ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;exe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EXE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pyz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scripts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binaries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zipfiles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'myapp.exe'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;upx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;icon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Icon.ico'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;大概解释下文件的内容：&lt;/p&gt;
 
 &lt;p&gt;第一行a = Anaylysis(…)是用来分析程序用到的库，下面就是打包成exe的一些参数。所以我们在第一行代码之后加代码把多余的pyconfig.h去掉，新的spec文件如下：&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;a = Analysis([&amp;#39;myapp.py&amp;#39;],
-         pathex=[&amp;#39;c:\\src&amp;#39;],
-         hiddenimports=[],
-         hookspath=None,
-         runtime_hooks=None)
-#add_begin
-for d in a.datas:
-    if &amp;#39;pyconfig&amp;#39; in d[0]:
-        a.datas.remove(d)
-        break
-#add_end
-pyz = PYZ(a.pure)
-exe = EXE(pyz,
-      a.scripts,
-      a.binaries,
-      a.zipfiles,
-      a.datas,
-      name=&amp;#39;myapp.exe&amp;#39;,
-      debug=False,
-      strip=None,
-      upx=True,
-      console=False , icon=&amp;#39;Icon.ico&amp;#39;)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Analysis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'myapp.py'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+         &lt;span class=&quot;n&quot;&gt;pathex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'c:&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;src'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+         &lt;span class=&quot;n&quot;&gt;hiddenimports&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+         &lt;span class=&quot;n&quot;&gt;hookspath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+         &lt;span class=&quot;n&quot;&gt;runtime_hooks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#add_begin&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'pyconfig'&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#add_end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;pyz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PYZ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;exe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EXE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pyz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scripts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binaries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zipfiles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'myapp.exe'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;upx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;icon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Icon.ico'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;为了使用修改后的spec文件来打包，需要使用新的命令：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;c:/python27/python.exe c:/pyinstaller/pyinstaller.py myapp.spec
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;c:/python27/python.exe c:/pyinstaller/pyinstaller.py myapp.spec
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;试试，warning没了吧&lt;/p&gt;
 </description>
@@ -490,15 +515,15 @@ exe = EXE(pyz,
 &lt;p&gt;这里简要说明一下步骤：
 直接下载压缩包，现在的版本是2.1.解压后打开命令行，执行如下命令：&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;c:\python setup.py install&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;    &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;可以用如下命令检查是不是已经装好了&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;c:\pyintaller --version&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;    &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;pyintaller&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;ok，pyinstaller 装好了，开始打包&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;c:\c:/python27/python.exe c:/pyinstaller/pyinstaller.py --noconfirm --noconsole --onefile --icon=Icon.ico myapp.py&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;    &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python27&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exe&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pyinstaller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pyinstaller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;noconfirm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;noconsole&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;onefile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;icon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Icon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ico&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myapp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;解释一下几个参数：&lt;/p&gt;
 
@@ -515,11 +540,11 @@ pyinstaller对第三方库的支持情况见这里：&lt;a href=&quot;https://gi
 
 &lt;p&gt;安装步骤同上，不再赘述。安装完运行打包脚本会发现还有错误&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;ImportError: No module named scipy.sparse.csgraph._validation&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;    &lt;span class=&quot;nb&quot;&gt;ImportError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;named&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scipy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sparse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;csgraph&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_validation&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;这是因为pyinstaller没能自动把_validation库加进来，我们就在代码里手动加上吧。&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;from scipy.sparse.csgraph import _validation&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;    &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scipy.sparse.csgraph&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_validation&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;再次运行，应该没问题了。&lt;/p&gt;
 </description>
@@ -561,20 +586,20 @@ pyinstaller对第三方库的支持情况见这里：&lt;a href=&quot;https://gi
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objectivec&quot; data-lang=&quot;objectivec&quot;&gt;NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-NSString* ver = [pref stringForKey:@&amp;quot;dbver&amp;quot;];
-if ([ver isEqualToString:@&amp;quot;1.0&amp;quot;])
+NSString* ver = [pref stringForKey:@&quot;dbver&quot;];
+if ([ver isEqualToString:@&quot;1.0&quot;])
 {
-    NSString *dbPath  = [NSHomeDirectory() stringByAppendingPathComponent:@&amp;quot;Documents/database.db&amp;quot;];
+    NSString *dbPath  = [NSHomeDirectory() stringByAppendingPathComponent:@&quot;Documents/database.db&quot;];
 
     EGODatabase* database = [EGODatabase databaseWithPath:dbPath];
 
-    NSString *strSql = @&amp;quot;create table newtable(id integer primary key asc, main text);&amp;quot;;
+    NSString *strSql = @&quot;create table newtable(id integer primary key asc, main text);&quot;;
     [database executeQuery:strSql];
 
     [database close];
 
     NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-    [pref setValue:@&amp;quot;1.1&amp;quot; forKey:@&amp;quot;dbver&amp;quot;];
+    [pref setValue:@&quot;1.1&quot; forKey:@&quot;dbver&quot;];
 }&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;当然自己还是要记录好每次升级的变动情况，备查。&lt;/p&gt;

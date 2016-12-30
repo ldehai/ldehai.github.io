@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>iOS APP Database Version Control</title>
-  <meta name="description" content="APP里一直使用SQLite数据库保存数据，不过有个问题觉得挺麻烦，当我要加新功能，而原来的表结构已经不能满足要求时，需要修改表，或者新增表。那么老版本升级到新版本时就需要升级数据库，之前我都是判断新表有没有存在，不存在则创建。这样很容易搞乱掉，如果涉及到多个表，判断起来逻辑不清晰，把自己都搞晕了。&lt;/p&gt;">
+  <title>hao123</title>
+  <meta name="description" content="嗨，我是刘德海 (@ldehai)，iOS / Mac 独立开发者，现居南京。我创建了AventLabs，一个在线学习编程和设计的平台，主要面向初学者。">
   <meta name="author" content="Wei Wang">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="iOS APP Database Version Control">
-  <meta name="twitter:description" content="APP里一直使用SQLite数据库保存数据，不过有个问题觉得挺麻烦，当我要加新功能，而原来的表结构已经不能满足要求时，需要修改表，或者新增表。那么老版本升级到新版本时就需要升级数据库，之前我都是判断新表有没有存在，不存在则创建。这样很容易搞乱掉，如果涉及到多个表，判断起来逻辑不清晰，把自己都搞晕了。&lt;/p&gt;">
+  <meta name="twitter:title" content="hao123">
+  <meta name="twitter:description" content="嗨，我是刘德海 (@ldehai)，iOS / Mac 独立开发者，现居南京。我创建了AventLabs，一个在线学习编程和设计的平台，主要面向初学者。">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="iOS APP Database Version Control">
-  <meta property="og:description" content="APP里一直使用SQLite数据库保存数据，不过有个问题觉得挺麻烦，当我要加新功能，而原来的表结构已经不能满足要求时，需要修改表，或者新增表。那么老版本升级到新版本时就需要升级数据库，之前我都是判断新表有没有存在，不存在则创建。这样很容易搞乱掉，如果涉及到多个表，判断起来逻辑不清晰，把自己都搞晕了。&lt;/p&gt;">
+  <meta property="og:title" content="hao123">
+  <meta property="og:description" content="嗨，我是刘德海 (@ldehai)，iOS / Mac 独立开发者，现居南京。我创建了AventLabs，一个在线学习编程和设计的平台，主要面向初学者。">
   
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
   <link href="/assets/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://ldehai.com/blog/2013/06/13/ios-app-database-version-control/">
+  <link rel="canonical" href="http://ldehai.com/hao123/">
   <link rel="alternate" type="application/rss+xml" title="ldehai" href="http://ldehai.com/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -144,80 +144,58 @@
             <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
     <div class="post-meta">
-      <time datetime="2013-06-13 18:41:38 +0800" itemprop="datePublished" class="post-meta__date date">2013-06-13</time> &#8226; <span class="post-meta__tags tags"></span>
+      <time datetime="" itemprop="datePublished" class="post-meta__date date"></time> &#8226; <span class="post-meta__tags tags"></span>
     </div>
-    <h1 class="post-title">iOS APP Database Version Control</h1>
+    <h1 class="post-title">hao123</h1>
   </header>
 
   <section class="post">
-    <p>APP里一直使用SQLite数据库保存数据，不过有个问题觉得挺麻烦，当我要加新功能，而原来的表结构已经不能满足要求时，需要修改表，或者新增表。那么老版本升级到新版本时就需要升级数据库，之前我都是判断新表有没有存在，不存在则创建。这样很容易搞乱掉，如果涉及到多个表，判断起来逻辑不清晰，把自己都搞晕了。&lt;/p&gt;</p>
+    <h4 id="section">重点关注</h4>
 
-<p>在经历过几次折腾后，我发现数据库也需要用版本来控制起来，就像代码有版本一样。这样我只需要判断当前的数据库版本是多少，就知道要不要升级数据库了。假设之前版本是1.0，现在版本是1.1,代码很简单：
-<!--more--></p>
+<p><a href="http://www.html5rocks.com/"><img src="http://ldehai.com/assets/hao/html5.png" alt="Html5" /></a></p>
 
-<figure class="highlight"><pre><code class="language-objectivec" data-lang="objectivec">NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-NSString* ver = [pref stringForKey:@"dbver"];
-if ([ver isEqualToString:@"1.0"])
-{
-    NSString *dbPath  = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/database.db"];
+<h4 id="section-1">网上课堂</h4>
+<p><a href="http://open.163.com"><img src="http://ldehai.com/assets/hao/open163.png" alt="网易公开课" /></a>
+<a href="http://study.163.com"><img src="http://ldehai.com/assets/hao/yun163.png" alt="网易云课堂" /></a>
+<a href="http://www.cursera.com"><img src="http://ldehai.com/assets/hao/cursera.png" alt="cursera" /></a>
+<a href="https://www.udemy.com"><img src="http://ldehai.com/assets/hao/udemy.png" alt="Udemy" /></a>
+<a href="http://www.hackdesign.org"><img src="http://ldehai.com/assets/hao/hackdesign.png" alt="hackdesign" /></a></p>
 
-    EGODatabase* database = [EGODatabase databaseWithPath:dbPath];
+<h4 id="section-2">设计社区</h4>
+<p><a href="http://dribbble.com"><img src="http://ldehai.com/assets/hao/dribbble.png" alt="dribbble" /></a>
+<a href="http://www.behance.net"><img src="http://ldehai.com/assets/hao/behance.png" alt="behance" /></a>
+<a href="http://www.zcool.com.cn"><img src="http://ldehai.com/assets/hao/zcool.png" alt="站酷" /></a></p>
 
-    NSString *strSql = @"create table newtable(id integer primary key asc, main text);";
-    [database executeQuery:strSql];
+<h4 id="section-3">问答</h4>
+<p><a href="http://stackoverflow.com"><img src="http://ldehai.com/assets/hao/stackoverflow.png" alt="stackoverflow" /></a>
+<a href="http://www.quora.com"><img src="http://ldehai.com/assets/hao/quora.png" alt="Quora" /></a>
+<a href="http://www.zhihu.com"><img src="http://ldehai.com/assets/hao/zhihu.png" alt="知乎" /></a></p>
 
-    [database close];
+<h4 id="section-4">开发资源</h4>
+<p><a href="http://developer.apple.com"><img src="http://ldehai.com/assets/hao/appledev.png" alt="Apple Developer" /></a>
+<a href="http://developer.google.com"><img src="http://ldehai.com/assets/hao/googledev.png" alt="Google Developer" /></a>
+<a href="http://msdn.microsoft.com/dn338268"><img src="http://ldehai.com/assets/hao/microsoftdev.png" alt="Microsoft Developer" /></a>
+<a href="https://developer.blackberry.com"><img src="http://ldehai.com/assets/hao/blackberrydev.png" alt="BlackBerry Developer" /></a>
+<a href="https://developer.mozilla.org"><img src="http://ldehai.com/assets/hao/mozilladev.png" alt="Mozilla Developer" /></a></p>
 
-    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-    [pref setValue:@"1.1" forKey:@"dbver"];
-}</code></pre></figure>
+<h4 id="section-5">开放接口</h4>
+<p><a href="https://developers.facebook.com"><img src="http://ldehai.com/assets/hao/facebookdev.png" alt="Facebook" /></a>
+<a href="https://dev.twitter.com"><img src="http://ldehai.com/assets/hao/twitterdev.png" alt="twitter" /></a>
+<a href="http://open.taobao.com"><img src="http://ldehai.com/assets/hao/taobaodev.png" alt="淘宝" /></a>
+<a href="http://open.qq.com"><img src="http://ldehai.com/assets/hao/qqdev.png" alt="腾讯" /></a></p>
 
-<p>当然自己还是要记录好每次升级的变动情况，备查。</p>
+<h4 id="job-board">Job board</h4>
+<p><a href="https://www.odesk.com"><img src="http://ldehai.com/assets/hao/odesk.png" alt="ODesk" /></a>
+<a href="http://gun.io"><img src="http://ldehai.com/assets/hao/gunio.png" alt="gun.io" /></a>
+<a href="http://jobs.37signals.com"><img src="http://ldehai.com/assets/hao/37signals.png" alt="37signals" /></a>
+<a href="https://jobs.github.com"><img src="http://ldehai.com/assets/hao/githubjob.png" alt="github" /></a>
+<a href="http://www.freelancer.com"><img src="http://ldehai.com/assets/hao/freelancer.png" alt="freelancer" /></a>
+<a href="https://www.upwork.com"><img src="http://ldehai.com/assets/hao/elance.png" alt="upwork" /></a>
+<a href="https://news.ycombinator.com/jobs"><img src="http://ldehai.com/assets/hao/hackernews.png" alt="HackerNews" /></a>
+<a href="http://careers.stackoverflow.com"><img src="http://ldehai.com/assets/hao/careers.png" alt="careers" /></a></p>
 
   </section>
 </article>
-
-<section class="read-more">
-   
-   
-   <div class="read-more-item">
-       <span class="read-more-item-dim">最近的文章</span>
-       <h2 class="post-list__post-title post-title"><a href="/blog/2013/07/15/free-design/" title="link to 热心的加拿大设计师Andrew">热心的加拿大设计师Andrew</a></h2>
-       <p class="excerpt">今天收到Andrew的邮件：I'm a graphic designer and I really like your app. Would you be interested in letting me update the icon for you? I'll do it for free.真的挺喜欢这些人，愿意为了自己喜欢的东西付出，不要回报。对我来说也是一种莫大的鼓舞。最新的设计图，还可以吧，比原来的提升不少。loading page&hellip;</p>
-       <div class="post-list__meta"><time datetime="2013-07-15 18:41:38 +0800" class="post-list__meta--date date">2013-07-15</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/blog/2013/07/15/free-design/>继续阅读</a></div>
-   </div>
-   
-   
-   
-</section>
-
-<section class="post-comments">
-  
-    <div id="disqus_thread"></div>
-    <script>
-    
-    var disqus_config = function () {
-        this.page.url = "http://ldehai.com/blog/2013/06/13/ios-app-database-version-control/";
-        this.page.identifier = "/blog/2013/06/13/ios-app-database-version-control/";
-    };
-
-    var disqus_shortname = 'ldehai';
-    
-    (function() { // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
-        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
-    
-  
-  
-  
-  
-</section>
-
 
             <section class="footer">
     <footer>
