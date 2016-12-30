@@ -13,28 +13,18 @@ dl, dd, ol, ul, figure {
 /**
  * Basic styling
  */
-// body {
-//     font-family: $base-font-family;
-//     font-size: $base-font-size;
-//     line-height: $base-line-height;
-//     font-weight: 300;
-//     color: $text-color;
-//     background-color: $background-color;
-//     -webkit-text-size-adjust: 100%;
-// }
 body {
-    font-family: -apple-system,".SFNSText-Regular","Helvetica Neue","Roboto","Segoe UI",sans-serif;
-    letter-spacing: 0;
-    font-weight: 400;
-    font-style: normal;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -moz-font-feature-settings: "liga" on;
-    color: rgba(0,0,0,0.8);
-    font-size: 18px;
-    line-height: 1.4;
+    font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
+    color: $text-color;
+    background-color: $background-color;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-feature-settings: "kern" 1;
+    -moz-font-feature-settings: "kern" 1;
+    -o-font-feature-settings: "kern" 1;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
 }
+
 
 
 /**
@@ -92,7 +82,7 @@ li {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 300;
+    font-weight: $base-font-weight;
 }
 
 
@@ -151,7 +141,7 @@ code {
 
 pre {
     padding: 8px 12px;
-    overflow-x: scroll;
+    overflow-x: auto;
 
     > code {
         border: 0;
