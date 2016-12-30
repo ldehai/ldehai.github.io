@@ -2,7 +2,7 @@
 layout: post
 title:  "File Already Exists but Should Not Pyconfig"
 date:   2013-11-02 10:41:38
-categories: pyinstaller
+tags: pyinstaller
 ---
 接[上一篇](http://ldehai.com/blog/2013/09/22/pyinstaller-matplotlib/)，python项目用到了scipy计算模块，之后用pyinstaller打包后，每次运行就会报警告file already exists but should not:&hellip;&hellip;./pyconfig.h。虽然不影响运行，还是觉得有必要解决这个问题，在搜索到stackoverflow[这个帖子](http://stackoverflow.com/questions/19055089/pyinstaller-onefile-warning-pyconfig-h-when-importing-scipy-or-scipy-signal)后，问题解决。
 <!--more-->

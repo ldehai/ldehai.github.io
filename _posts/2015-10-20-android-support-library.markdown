@@ -2,7 +2,7 @@
 layout: post
 title:  "Android Support Library简介"
 date:   2015-10-20 09:21:38
-categories: Android
+tags: Android
 ---
 Android系统每年都会有版本更新，新版本必然带来新的特性。但是，要想使用这些新特性，手机的系统就要更新到最新的版本。
 

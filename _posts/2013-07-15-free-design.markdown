@@ -2,7 +2,7 @@
 layout: post
 title:  "热心的加拿大设计师Andrew"
 date:   2013-07-15 10:41:38
-categories: 杂谈
+tags: 杂谈
 ---
 今天收到Andrew的邮件：
 

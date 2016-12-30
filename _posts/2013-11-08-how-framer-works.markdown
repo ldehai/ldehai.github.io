@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Framer简介"
 date:   2013-11-08 10:41:38
-categories: framer
+tags: framer
 ---
 Framer是一个开源项目，一个基于JavaScript的原型工具，专为设计师打造。现在的应用更注重交互设计，它可以让你效率更高。项目地址[http://www.framerjs.com](http://www.framerjs.com)，使用Framer包括4个步骤:
 

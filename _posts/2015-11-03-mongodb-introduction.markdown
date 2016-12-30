@@ -2,7 +2,7 @@
 layout: post
 title:  "mongodb简介"
 date:   2015-11-03 15:38:00
-categories:mongodb
+tags:mongodb
 ---
 ### 简介
 mongodb是久负盛名的非关系数据库。它以文档为存储单位，与严格的关系数据库形成泾渭分明的区别。
