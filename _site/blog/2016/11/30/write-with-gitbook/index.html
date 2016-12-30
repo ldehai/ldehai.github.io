@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>使用Gitbook搭建写作环境</title>
+  <meta name="description" content="gitbook简介">
+  <meta name="author" content="Wei Wang">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="使用Gitbook搭建写作环境">
+  <meta name="twitter:description" content="gitbook简介">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="使用Gitbook搭建写作环境">
+  <meta property="og:description" content="gitbook简介">
+  
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+  <link href="/assets/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://ldehai.com/blog/2016/11/30/write-with-gitbook/">
+  <link rel="alternate" type="application/rss+xml" title="ldehai" href="http://ldehai.com/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+  
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/assets/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/#blog" title="前往 ldehai 的主页" class="blog-button"><img src="/assets/images/avatar.jpg" width="80" alt="ldehai logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for ldehai" class="blog-button">ldehai</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">让每个人都能接受平等的教育</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">嗨，我是刘德海 (@ldehai)，iOS / Mac 独立开发者，现居南京。我创建了AventLabs，一个在线学习编程和设计的平台，主要面向初学者。</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        <p class="panel-cover__description">我正在写一本书《每个人都会编程》</p>
+        
+        
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="访问我的博客" class="blog-button">博客</a></li>
+                
+                  <li class="navigation__item"><a href="https://itunes.apple.com/cn/developer/andy-liu/id521680917?l=en" target="_blank" title="我目前的iOS作品">作品</a></li>
+                
+                  <li class="navigation__item"><a href="https://www.aventlabs.com" target="_blank" title="一个面向初学者在线学习编程和设计的平台">AventLabs</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+          
+          <div><nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  
+  <!-- Weibo -->
+  <li class="navigation__item">
+    <a href="http://weibo.com/ldehai" title="@ldehai 的微博" target="_blank">
+      <i class='social fa fa-weibo'></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li>
+  
+
+  
+  <!-- Github -->
+  <li class="navigation__item">
+    <a href="https://github.com/ldehai" title="@ldehai 的 Github" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+  
+  
+  
+  <!-- Twitter -->
+  <li class="navigation__item">
+    <a href="http://twitter.com/ldehai" title="@ldehai" target="_blank">
+      <i class='social fa fa-twitter'></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+  
+
+  
+
+  <!-- RSS -->
+  <li class="navigation__item">
+    <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+  
+  <!-- Email -->
+  <li class="navigation__item">
+    <a href="mailto:ldehai@gmail.com" title="Contact me">
+      <i class='social fa fa-envelope'></i>
+      <span class="label">Email</span>
+    </a>
+  </li>
+  
+
+  </ul>
+</nav>
+</div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-slate"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2016-11-30 16:21:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-30</time> &#8226; <span class="post-meta__tags tags"></span>
+    </div>
+    <h1 class="post-title">使用Gitbook搭建写作环境</h1>
+  </header>
+
+  <section class="post">
+    <h3 id="gitbook">gitbook简介</h3>
+
+<p>Gitbook.com是一个写作和出版的平台，他们使用的系统是开源的。支持Markdown和AsciiDoc格式，最后输出的是静态网页。还可以通过<a href="https://calibre-ebook.com/download_osx">calibre</a>把书<a href="http://toolchain.gitbook.com/ebook.html">转成</a>pdf、epub、mobi等常用格式，方便在各种设备上阅读。
+<img src="http://ldehai.com/assets/gitbooksample.png" alt="" /></p>
+
+<h3 id="section">要达成的目标</h3>
+<p>由于Gitbook和Markdown的开放性，可以在本地搭建写作环境，对我来说很有吸引力。我使用如下的组合来搭建我的写作环境：gitbook+atom+github+calibre
+<!--more--></p>
+
+<p><a href="https://github.com/GitbookIO/gitbook">Gitbook</a>：用来创建书，遵循它的文件组织形式，可以生成带目录的一本完整的书。</p>
+
+<p><a href="https://calibre-ebook.com">Calibre</a>：用它把写好的书转换成其他格式，方便在不同设备上阅读，包括kindle。</p>
+
+<p><a href="https://atom.io/">Atom</a>：Github出的编辑器，可以用来写markdown格式的文件。当然你可以用自己喜欢的任何编辑器。</p>
+
+<p><a href="https://github.com">Github</a>：把书稿放到Github，方便版本管理，多人协作。如果你开通了私有库，存放自己不想公开的书也很方便。</p>
+
+<h3 id="gitbook-1">Gitbook安装</h3>
+<p>参照<a href="https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md">Gitbook官方安装说明</a>。
+以macOS为例，安装步骤如下：</p>
+
+<pre><code>$ npm install gitbook-cli -g
+</code></pre>
+
+<p>npm是nodejs的包管理器，gitbook使用的nodejs，所以如果你还没有安装npm，请移步到<a href="https://nodejs.org/en/download/">nodejs安装</a>。这里会安装nodejs，npm是包含在里面一起安装的。</p>
+
+<h3 id="section-1">新建一本书</h3>
+<p><img src="http://ldehai.com/assets/gitbook-cli.png" alt="" /></p>
+
+<p>新建一本书的目录，在ternimal里面进入这个目录，执行以下命令初始化一本书：</p>
+
+<pre><code>$gitbook init
+</code></pre>
+
+<h3 id="github">「可选」放到github</h3>
+<p>首先登录到github，新建repo，然后把本地的代码push到github就可以了。放到github上还有一个好处是，github是支持编辑markdown文件的。只要有网络，你随时可以登上去写。当然，这一步并不是必须的。只保存在本地也是没问题的。</p>
+
+<pre><code>echo "# mybook" &gt;&gt; README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin "你的repo路径"
+git push -u origin master
+</code></pre>
+
+<p>接下来你可以选择自己喜欢的编辑器去写文章了，写完想看最终的排版效果，或者转成其他格式的电子书，就接着往下看。</p>
+
+<h3 id="section-2">在本地预览书</h3>
+<p>gitbook会启动一个本地的web服务器<a href="http://localhost:4000">http://localhost:4000</a>, 在浏览器里访问这个地址就可以查看了。</p>
+
+<pre><code>$ gitbook serve
+</code></pre>
+
+<h3 id="md">把md文件编译成静态页面，注意查看当前目录底下生成的文件</h3>
+
+<pre><code>$gitbook build
+</code></pre>
+
+<h3 id="section-3">生成其他格式文件</h3>
+<p>gitbook生成其他格式的书是借助calibre的转换功能实现的(ebook-convert)，安装完calibre后，修改系统$PATH定义，把转换程序的路径加到系统PATH里，要不然会找不到转换程序。打开Terminal（终端），按照下面的操作步骤修改PATH。</p>
+
+<pre><code>vi ~/.bash_profile
+</code></pre>
+
+<p>把下面这句附加到.bash_profile文件里，然后保存退出。</p>
+
+<pre><code>export PATH=$PATH:/Applications/calibre.app/Contents/MacOS/
+</code></pre>
+
+<p>使用source命令使文件立即生效</p>
+
+<pre><code>source ~/.bash_profile
+echo $PATH
+</code></pre>
+
+<h4 id="pdf">生成pdf文件</h4>
+
+<pre><code>$ gitbook pdf ./ mybook.pdf
+</code></pre>
+
+<h4 id="epub">生成epub文件</h4>
+
+<pre><code>$ gitbook epub ./ mybook.epub
+</code></pre>
+
+<h4 id="mobikindle">生成mobi文件，支持kindle</h4>
+
+<pre><code>$ gitbook mobi ./ mybook.mobi
+</code></pre>
+
+  </section>
+</article>
+
+<section class="read-more">
+   
+   
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">更早的文章</span>
+       <h2 class="post-list__post-title post-title"><a href="/blog/2015/11/03/mongodb-introduction/" title="link to mongodb简介">mongodb简介</a></h2>
+       <p class="excerpt">简介mongodb是久负盛名的非关系数据库。它以文档为存储单位，与严格的关系数据库形成泾渭分明的区别。db-&gt;collection-&gt;documentmongodb的存储结构是数状结构的，可以建多个数据库，数据库底下建多个collection,collection下是最终的document,存放实际的数据。这个结构类似于硬盘上文件的组织方式。有分区、目录、文件。如果非要跟关系数据库做类比，那么这里的collection就相当于表，document相当于表中的一行数据。最大的区别...&hellip;</p>
+       <div class="post-list__meta"><time datetime="2015-11-03 23:38:00 +0800" class="post-list__meta--date date">2015-11-03</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/blog/2015/11/03/mongodb-introduction/>继续阅读</a></div>
+   </div>
+   
+</section>
+
+<section class="post-comments">
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "http://ldehai.com/blog/2016/11/30/write-with-gitbook/";
+        this.page.identifier = "/blog/2016/11/30/write-with-gitbook/";
+    };
+
+    var disqus_shortname = 'ldehai';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+  
+  
+  
+  
+</section>
+
+
+            <section class="footer">
+    <footer>
+    	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
+      <span class="footer__copyright">本站由 <a href="http://stackoverflow.com/story/ldehai">@ldehai</a> 创建，采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/ldehai/ldehai.github.io">本站源码</a> - &copy; 2016</span>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript" src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-44047356-1', 'ldehai.com');
+    ga('send', 'pageview');
+</script>
+
+
+    
+  </body>
+
+</html>

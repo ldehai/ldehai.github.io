@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ldehai</title>
+    <description>嗨，我是刘德海 (@ldehai)，iOS / Mac 独立开发者，现居南京。我创建了AventLabs，一个在线学习编程和设计的平台，主要面向初学者。</description>
+    <link>http://ldehai.com/</link>
+    <atom:link href="http://ldehai.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 30 Dec 2016 10:14:34 +0800</pubDate>
+    <lastBuildDate>Fri, 30 Dec 2016 10:14:34 +0800</lastBuildDate>
+    <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>使用Gitbook搭建写作环境</title>
+        <description>&lt;h3 id=&quot;gitbook&quot;&gt;gitbook简介&lt;/h3&gt;
+
+&lt;p&gt;Gitbook.com是一个写作和出版的平台，他们使用的系统是开源的。支持Markdown和AsciiDoc格式，最后输出的是静态网页。还可以通过&lt;a href=&quot;https://calibre-ebook.com/download_osx&quot;&gt;calibre&lt;/a&gt;把书&lt;a href=&quot;http://toolchain.gitbook.com/ebook.html&quot;&gt;转成&lt;/a&gt;pdf、epub、mobi等常用格式，方便在各种设备上阅读。
+&lt;img src=&quot;http://ldehai.com/assets/gitbooksample.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;要达成的目标&lt;/h3&gt;
+&lt;p&gt;由于Gitbook和Markdown的开放性，可以在本地搭建写作环境，对我来说很有吸引力。我使用如下的组合来搭建我的写作环境：gitbook+atom+github+calibre
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/GitbookIO/gitbook&quot;&gt;Gitbook&lt;/a&gt;：用来创建书，遵循它的文件组织形式，可以生成带目录的一本完整的书。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://calibre-ebook.com&quot;&gt;Calibre&lt;/a&gt;：用它把写好的书转换成其他格式，方便在不同设备上阅读，包括kindle。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://atom.io/&quot;&gt;Atom&lt;/a&gt;：Github出的编辑器，可以用来写markdown格式的文件。当然你可以用自己喜欢的任何编辑器。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com&quot;&gt;Github&lt;/a&gt;：把书稿放到Github，方便版本管理，多人协作。如果你开通了私有库，存放自己不想公开的书也很方便。&lt;/p&gt;
+
+&lt;h3 id=&quot;gitbook-1&quot;&gt;Gitbook安装&lt;/h3&gt;
+&lt;p&gt;参照&lt;a href=&quot;https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md&quot;&gt;Gitbook官方安装说明&lt;/a&gt;。
+以macOS为例，安装步骤如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ npm install gitbook-cli -g
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;npm是nodejs的包管理器，gitbook使用的nodejs，所以如果你还没有安装npm，请移步到&lt;a href=&quot;https://nodejs.org/en/download/&quot;&gt;nodejs安装&lt;/a&gt;。这里会安装nodejs，npm是包含在里面一起安装的。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;新建一本书&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;http://ldehai.com/assets/gitbook-cli.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;新建一本书的目录，在ternimal里面进入这个目录，执行以下命令初始化一本书：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$gitbook init
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;github&quot;&gt;「可选」放到github&lt;/h3&gt;
+&lt;p&gt;首先登录到github，新建repo，然后把本地的代码push到github就可以了。放到github上还有一个好处是，github是支持编辑markdown文件的。只要有网络，你随时可以登上去写。当然，这一步并不是必须的。只保存在本地也是没问题的。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo &quot;# mybook&quot; &amp;gt;&amp;gt; README.md
+git init
+git add README.md
+git commit -m &quot;first commit&quot;
+git remote add origin &quot;你的repo路径&quot;
+git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接下来你可以选择自己喜欢的编辑器去写文章了，写完想看最终的排版效果，或者转成其他格式的电子书，就接着往下看。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;在本地预览书&lt;/h3&gt;
+&lt;p&gt;gitbook会启动一个本地的web服务器&lt;a href=&quot;http://localhost:4000&quot;&gt;http://localhost:4000&lt;/a&gt;, 在浏览器里访问这个地址就可以查看了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gitbook serve
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;md&quot;&gt;把md文件编译成静态页面，注意查看当前目录底下生成的文件&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$gitbook build
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;生成其他格式文件&lt;/h3&gt;
+&lt;p&gt;gitbook生成其他格式的书是借助calibre的转换功能实现的(ebook-convert)，安装完calibre后，修改系统$PATH定义，把转换程序的路径加到系统PATH里，要不然会找不到转换程序。打开Terminal（终端），按照下面的操作步骤修改PATH。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vi ~/.bash_profile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;把下面这句附加到.bash_profile文件里，然后保存退出。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export PATH=$PATH:/Applications/calibre.app/Contents/MacOS/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用source命令使文件立即生效&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;source ~/.bash_profile
+echo $PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;pdf&quot;&gt;生成pdf文件&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gitbook pdf ./ mybook.pdf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;epub&quot;&gt;生成epub文件&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gitbook epub ./ mybook.epub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;mobikindle&quot;&gt;生成mobi文件，支持kindle&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gitbook mobi ./ mybook.mobi
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Wed, 30 Nov 2016 16:21:00 +0800</pubDate>
+        <link>http://ldehai.com/blog/2016/11/30/write-with-gitbook/</link>
+        <guid isPermaLink="true">http://ldehai.com/blog/2016/11/30/write-with-gitbook/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>mongodb简介</title>
+        <description>&lt;h3 id=&quot;section&quot;&gt;简介&lt;/h3&gt;
+&lt;p&gt;mongodb是久负盛名的非关系数据库。它以文档为存储单位，与严格的关系数据库形成泾渭分明的区别。&lt;/p&gt;
+
+&lt;h3 id=&quot;db-collection-document&quot;&gt;db-&amp;gt;collection-&amp;gt;document&lt;/h3&gt;
+
+&lt;p&gt;mongodb的存储结构是数状结构的，可以建多个数据库，数据库底下建多个collection,collection下
+是最终的document,存放实际的数据。这个结构类似于硬盘上文件的组织方式。有分区、目录、文件。&lt;/p&gt;
+
+&lt;p&gt;如果非要跟关系数据库做类比，那么这里的collection就相当于表，document相当于表中的一行数据。
+最大的区别在于，同一个collection下的文档不需要有一样的数据字段，是灵活的。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;安装&lt;/h3&gt;
+
+&lt;p&gt;理解一件新东西的最好方法自然是动手试试，现在就来安装吧。
+mongodb安装方法参照官网.我用的阿里云服务器，使用的是centos6.5，64位系统。参照以下地址完成安装。 &lt;a href=&quot;https://docs.mongodb.org/manual/tutorial/install-mongodb-enterprise-on-red-hat/&quot;&gt;https://docs.mongodb.org/manual/tutorial/install-mongodb-enterprise-on-red-hat/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;mongodmongo&quot;&gt;mongod与mongo&lt;/h3&gt;
+
+&lt;p&gt;跟其他数据库系统类似，&lt;a href=&quot;https://docs.mongodb.org/manual/&quot;&gt;mongodb&lt;/a&gt;也有自己的服务进程mongod,centos下以服务的形式开启的方式为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo service mongod start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!--more--&gt;
+&lt;p&gt;这样终端窗口关了之后，程序还能继续运行。当然，你也可以在命令行下输入mongod启动，只是窗口关了程序也停了。
+mongodb的交互程序是mongo（在mongod启动后，新开一个命令窗口输入mongo),输入的命令发送给mongod进程，然后返回处理结果。&lt;/p&gt;
+
+&lt;h3 id=&quot;use-databasename&quot;&gt;use database_name&lt;/h3&gt;
+
+&lt;p&gt;mongodb没有新增数据库的命令，可以使用use “数据库名” 新建数据库，但新建的数据库实际上没有写入
+存储，只有当在下面新增collection时才会实际创建。
+例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use aventlabs
+db.createCollection('member')
+show dbs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;插入记录&lt;/h3&gt;
+
+&lt;p&gt;使用show dbs命令可以查看当前已经建好的数据库。（注意命令中的大小写）
+先来插入一个记录看看：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;db.member.insert({
+   &quot;name&quot; : &quot;andy&quot;,
+   &quot;email&quot; : &quot;ldehai@gmail.com&quot;,
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在mongo命令行下输入以上命令，回车，就成功插入了一条记录，反馈如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;WriteResult({ &quot;nInserted&quot; : 1 })
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;member&quot;&gt;查询member中的记录：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;db.memer.find()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查询结果：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{ &quot;_id&quot; : ObjectId(&quot;5638735b01e6622e13ac34fb&quot;), &quot;name&quot; : &quot;andy&quot;, &quot;email&quot; : &quot;ldehai@gmail.com&quot; }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;nameandy&quot;&gt;条件查询,只查name为andy的一条记录：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;db.member.findone({'name':'andy'})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;排序&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;db.member.find().sort({name:1}})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;1和-1表示正序和倒序&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;限制返回的数据条数&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;db.member.find().sort({name:1}).limit(1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意这里，命令可以串起来使用。另外，如果使用pymongo做排序，sort参数的需要写成如下形式，不然会报错，详细讨论见
+这里&lt;a href=&quot;http://stackoverflow.com/questions/10242149/using-sort-with-pymongo&quot;&gt;Using .sort with PyMongo&lt;/a&gt;：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;db.member.find().sort([(&quot;createdate&quot;, -1), (&quot;name&quot;, 1)])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;更多查询命令，详见官网文档&lt;a href=&quot;https://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find&quot;&gt;db.collection.find&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;删除记录&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;db.member.remove({'name':'andy'})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;进一步的操作方法，参照官网教程&lt;a href=&quot;https://docs.mongodb.org/getting-started/shell/client/&quot;&gt;使用mongo命令行工具操作mongodb&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;使用python的同学，可以看&lt;a href=&quot;https://api.mongodb.org/python/3.1/tutorial.html&quot;&gt;使用pymongo操作mongodb&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;使用tornado的同学，可以看&lt;a href=&quot;https://blog.openshift.com/day-25-tornado-combining-tornado-mongodb-and-angularjs-to-build-an-app/&quot;&gt;tornado+pymongo+mongodb&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;motor是跟pymongo类似的一个mongodb驱动库，不过它支持异步操作，有兴趣的同学可以看这里&lt;a href=&quot;https://motor.readthedocs.org/en/latest/differences.html&quot;&gt;Motor and Pymongo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;关于更多mongodb的详细特性，请参见&lt;a href=&quot;https://docs.mongodb.org/manual/&quot;&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 03 Nov 2015 23:38:00 +0800</pubDate>
+        <link>http://ldehai.com/blog/2015/11/03/mongodb-introduction/</link>
+        <guid isPermaLink="true">http://ldehai.com/blog/2015/11/03/mongodb-introduction/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Android Support Library简介</title>
+        <description>&lt;p&gt;Android系统每年都会有版本更新，新版本必然带来新的特性。但是，要想使用这些新特性，手机的系统就要更新到最新的版本。&lt;/p&gt;
+
+&lt;p&gt;大家都知道，iPhone，是苹果生产的，iOS版本的升级只需要考虑自己发布的产品就好了。
+Android不一样,它是一个开放的生态系统，代码开源，只要是手机厂商都能生产搭载Android系统的手机，但用的硬件却是五花八门的。
+一个手机操作系统要想正常的运行，必须能够跟手机的硬件兼容，所以大部分手机厂商使用的系统都是在官方版本基础上修改得来的，想升级不能直接拿官方版本直接安装，存在兼容性问题，
+装了也用不了，说不准手机就变砖了。
+&lt;!--more--&gt;
+当然，为了让新系统有更多人使用，google在发布Android新版本之前，会优先跟一些大厂做好测试，让他们的手机能够使用上最新的系统。
+小厂的你就自己搞定吧。这些得不到官方支持的手机想要用到最新的系统，必须等手机厂商出升级包解决。&lt;/p&gt;
+
+&lt;p&gt;除了喜欢折腾系统的，绝大部分人是不会升级系统的。即使厂商推出了升级包也不会主动去升级。这样Android系统的版本在市场上就越来越分化，
+就是从1.6到6.0，什么版本的都有，也没有哪个版本比例特别高。
+当然随着时间的推移，最老的版本随着手机退役也会逐渐消失，比如最早的1.6、2.1版本的，现在已经很少了。&lt;/p&gt;
+
+&lt;p&gt;那只有新手机能用上最新的特性，Google岂不是很烦，好不容易开发的，没几个人用。开发应用的开发者也不乐意，新有什么用，老手机又用不了，我的用户怎么办呀。
+怎么办呢？&lt;/p&gt;
+
+&lt;p&gt;有办法，google想出了一个好办法。我在开发的SDK里加一个扩展包(官方叫法是Android Support Library)，把新特性单独拎出来，这个包可以支持在老版本的系统上跑，开发app的时候直接用就行。
+那这是怎么做到的呢？很简单，这个包里的代码是调用老系统的api来实现新版本的特性。相当于在老系统上重新实现了一遍。想想工作量还是蛮大的。&lt;/p&gt;
+
+&lt;p&gt;这下好了，你开发的app既使用最新的特性，又可以在老的系统上跑，用户一点都没少。&lt;/p&gt;
+
+&lt;p&gt;关于Android系统的扩展包说明，请参见官方文档&lt;a href=&quot;https://developer.android.com/tools/support-library/features.html&quot;&gt;Android Support Library Features&lt;/a&gt;。
+关于Android版本和API Level的对应关系，参见&lt;a href=&quot;http://developer.android.com/guide/topics/manifest/uses-sdk-element.html&quot;&gt;API Level&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 20 Oct 2015 17:21:38 +0800</pubDate>
+        <link>http://ldehai.com/blog/2015/10/20/android-support-library/</link>
+        <guid isPermaLink="true">http://ldehai.com/blog/2015/10/20/android-support-library/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>iOS开发初学者指南</title>
+        <description>&lt;p&gt;挖个坑，准备写一系列iOS开发的入门教程
+&lt;!--more--&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 18 Oct 2015 08:21:38 +0800</pubDate>
+        <link>http://ldehai.com/blog/2015/10/18/ios-beginner-guide/</link>
+        <guid isPermaLink="true">http://ldehai.com/blog/2015/10/18/ios-beginner-guide/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>用Base64嵌入图片</title>
+        <description>&lt;blockquote&gt;一天冷似一天，阴冷的空气无声无息的悬在城市的上空，纷飞的落叶也在述说着岁月更替的故事。&lt;/blockquote&gt;
+
+&lt;p&gt;在使用wxPython写程序时，如果用到了图标，而打包的时候又想嵌到程序里，就要使用base64对图片进行编码，然后把生成的字符串直接写到程序里就好了,废话不多说，上代码:
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;# -*- coding:utf-8 -*-
+#导入需要的库
+import wx
+from wx.lib.embeddedimage import PyEmbeddedImage #用于嵌入经过base64编码的图片
+
+#用经过Base64处理的字符串构造图片，用图片生成的base64字符串替换下面括号里的内容即可
+imgBase64 = PyEmbeddedImage(&amp;quot;iVBORw0KGgoAAAANSUhEUgAAWCAYAAAAinad/.......+KElFTkSuQmCC&amp;quot;)
+
+#生成空位图
+self.ESImage = imgBase64.GetImage()#.Scale(22,24)
+
+#把上一步生成的图片加到控件上去
+self.imageCtrl =    wx.StaticBitmap(self.RightPanel,wx.ID_ANY,wx.BitmapFromImage(self.ESImage))
+&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;那么怎么把一个图片用Base64编码呢，请看:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;# -*- coding:utf-8 -*-
+import base64
+
+file = open(&amp;#39;x1.png&amp;#39;, &amp;#39;rb&amp;#39;)
+pic = file.read()
+b64 = base64.b64encode(pic)
+print b64&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;在iOS中，如果我们发Html格式邮件的时候需要带上一个本地图片文件，应该怎么办呢，用附件不合适，这时候也要用Base64处理，注意html代码中base64的标记，
+这样浏览器才能正确的解码。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objectivec&quot; data-lang=&quot;objectivec&quot;&gt;MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+
+//构造发送的邮件内容，注意base64的标记
+NSString *strMessage = @&amp;quot;img src=&amp;#39;data:image/png;base64,%@&amp;#39;&amp;lt;a href=https://itunes.apple.com/us/app/shoebox-find-your-shoes-quickly/id640885172?ls=1&amp;amp;mt=8&amp;gt;View in App Store&amp;lt;/a&amp;gt;&amp;quot;;
+
+//把图片用base64编码，加到邮件的内容里
+UIImage *appicon = [UIImage imageNamed:@&amp;quot;Icon.png&amp;quot;];
+NSData *imageData = UIImagePNGRepresentation(appicon);
+strMessage = [NSString stringWithFormat:strMessage,[imageData base64EncodedString]];
+
+[mailViewController setMessageBody:strMessage isHTML:YES];&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+</description>
+        <pubDate>Tue, 12 Nov 2013 18:41:38 +0800</pubDate>
+        <link>http://ldehai.com/blog/2013/11/12/embedded-image-with-base64/</link>
+        <guid isPermaLink="true">http://ldehai.com/blog/2013/11/12/embedded-image-with-base64/</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>Framer简介</title>
+        <description>&lt;p&gt;Framer是一个开源项目，一个基于JavaScript的原型工具，专为设计师打造。现在的应用更注重交互设计，它可以让你效率更高。项目地址&lt;a href=&quot;http://www.framerjs.com&quot;&gt;http://www.framerjs.com&lt;/a&gt;，使用Framer包括4个步骤:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;用Photoshop设计原型图&lt;/li&gt;
+  &lt;li&gt;用Framer.app从Photoshop中导出设计图&lt;/li&gt;
+  &lt;li&gt;在app.js里写视图展示及交互代码，可以加各种特效&lt;/li&gt;
+  &lt;li&gt;用浏览器打开index.html文件就可以查看和调试了
+&lt;!--more--&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Framer项目的代码结构是这样的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;app.js          //【重要】用来写视图和交互代码
+framer/         //Framerjs的框架，app.js里用到的功能都是它提供的
+  framer.js     //framer核心文件
+  framerps.js   //根据views.app.js生成frame对象
+  views.app.js  //根据psd文件的结构导出的文件，用来记录图片属性和图层关系(用json格式表示)，app.js中要用到
+images/         //从photoshop导出的图片都在这里
+index.html      //预览时的首页
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;framer&quot;&gt;Framer可以说是由三部分组成：&lt;/h2&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;1. 图片导出工具&lt;/h3&gt;
+
+&lt;p&gt;支持从photoshop和sketch导出图片。
+这里从photoshop导出设计图。实际上是使用了Adobe ExtendScript脚本。Adobe ExtendScript脚本语言可以操纵photoshop执行一些自动化操作。
+Mac下作者用Framer.app包装了脚本代码，windows下则直接提供了&lt;a href=&quot;http://www.framerjs.com/static/downloads/FramerPS.jsx.zip&quot;&gt;脚本&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;导出工具不仅导出了图片，还生成了一个上面目录结构的完整工程，用浏览器打开index.html就可以了。&lt;/p&gt;
+
+&lt;p&gt;在原型设计的过程中，可能会需要多次导出图片，而导出工具不会覆盖app.js文件，所以不用担心你写的代码会被覆盖。它只会在没有文件的情况下才自动生成。&lt;/p&gt;
+
+&lt;h3 id=&quot;js&quot;&gt;2. JS类库&lt;/h3&gt;
+
+&lt;p&gt;这里提供了View(视图),animation(动态特效),event(事件绑定)等类，可供使用者调用。详见最后一部分介绍，或直接至官网查看。&lt;/p&gt;
+
+&lt;h3 id=&quot;appjs&quot;&gt;3. app.js&lt;/h3&gt;
+
+&lt;p&gt;Framer默认生成app.js文件。在使用Framer的过程中，除了用Photoshop设计原型图之外，这里也是花时间最多的地方。前面准备的素材就看你怎么组织了。视图的创建、切换、动态特效、手势、事件绑定，都可以在这个文件里完成。&amp;lt;/p&amp;gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;framejs&quot;&gt;Framejs框架介绍&lt;/h2&gt;
+
+&lt;p&gt;它包括View(视图),animation(动态特效),event(事件绑定)。下面的代码可以在线修改，马上就能看到效果。&lt;/p&gt;
+
+&lt;h3 id=&quot;view&quot;&gt;View:&lt;/h3&gt;
+
+&lt;h4 id=&quot;httpwwwframerjscomeditorindexhtmlpathlessonsviewsjshttpwwwframerjscomeditorindexhtmlpathlessonsviewsjs&quot;&gt;基本视图 &lt;a href=&quot;http://www.framerjs.com/editor/index.html?path=lessons/views.js&quot;&gt;http://www.framerjs.com/editor/index.html?path=lessons/views.js&lt;/a&gt;&lt;/h4&gt;
+
+&lt;h4 id=&quot;httpwwwframerjscomeditorindexhtmlpathlessonshierarchyjshttpwwwframerjscomeditorindexhtmlpathlessonshierarchyjs&quot;&gt;嵌套视图 &lt;a href=&quot;http://www.framerjs.com/editor/index.html?path=lessons/hierarchy.js&quot;&gt;http://www.framerjs.com/editor/index.html?path=lessons/hierarchy.js&lt;/a&gt;&lt;/h4&gt;
+
+&lt;h4 id=&quot;httpwwwframerjscomeditorindexhtmlpathlessonsviewtypesjshttpwwwframerjscomeditorindexhtmlpathlessonsviewtypesjs&quot;&gt;其他视图类型 &lt;a href=&quot;http://www.framerjs.com/editor/index.html?path=lessons/viewtypes.js&quot;&gt;http://www.framerjs.com/editor/index.html?path=lessons/viewtypes.js&lt;/a&gt;&lt;/h4&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;特效：&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.framerjs.com/editor/index.html?path=lessons/animation.js&quot;&gt;官方文档&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;httpsmediumcombuilding-potluck2e405d50b600httpsmediumcombuilding-potluck2e405d50b600&quot;&gt;支持的手势：&lt;a href=&quot;https://medium.com/building-potluck/2e405d50b600&quot;&gt;https://medium.com/building-potluck/2e405d50b600&lt;/a&gt;&lt;/h3&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;事件绑定：&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.framerjs.com/editor/index.html?path=lessons/events.js&quot;&gt;http://www.framerjs.com/editor/index.html?path=lessons/events.js&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;结语&lt;/h2&gt;
+
+&lt;p&gt;Framer拉近了设计师与开发者的距离，从另一个层面来讲，我觉得设计师也在逐渐侵入开发者的领地，要抢饭碗的节奏。
+Framer目前只侧重于前端展示，如果加上数据处理，那么一个完整的Html5的应用开发框架就成型了。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 08 Nov 2013 18:41:38 +0800</pubDate>
+        <link>http://ldehai.com/blog/2013/11/08/how-framer-works/</link>
+        <guid isPermaLink="true">http://ldehai.com/blog/2013/11/08/how-framer-works/</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>File Already Exists but Should Not Pyconfig</title>
+        <description>&lt;p&gt;接&lt;a href=&quot;http://ldehai.com/blog/2013/09/22/pyinstaller-matplotlib/&quot;&gt;上一篇&lt;/a&gt;，python项目用到了scipy计算模块，之后用pyinstaller打包后，每次运行就会报警告file already exists but should not:……./pyconfig.h。虽然不影响运行，还是觉得有必要解决这个问题，在搜索到stackoverflow&lt;a href=&quot;http://stackoverflow.com/questions/19055089/pyinstaller-onefile-warning-pyconfig-h-when-importing-scipy-or-scipy-signal&quot;&gt;这个帖子&lt;/a&gt;后，问题解决。
+&lt;!--more--&gt;
+问题的原因是pyinstaller打包时pyconfig.h多打了一次，所以会报已经存在了。这个解决方案就是把多余的pyconfig.h去掉。&lt;/p&gt;
+
+&lt;p&gt;下面开始详细说明如何修改：&lt;/p&gt;
+
+&lt;p&gt;上一篇讲到使用如下命令打包exe：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;c:/python27/python.exe c:/pyinstaller/pyinstaller.py --noconfirm --noconsole --onefile --icon=Icon.ico myapp.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;请仔细观察myapp.py所在目录，会自动生成myapp.spec文件，注意是每次都会重新生成，内容如下：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;a = Analysis([&amp;#39;myapp.py&amp;#39;],
+         pathex=[&amp;#39;c:\\src&amp;#39;],
+         hiddenimports=[],
+         hookspath=None,
+         runtime_hooks=None)
+pyz = PYZ(a.pure)
+exe = EXE(pyz,
+      a.scripts,
+      a.binaries,
+      a.zipfiles,
+      a.datas,
+      name=&amp;#39;myapp.exe&amp;#39;,
+      debug=False,
+      strip=None,
+      upx=True,
+      console=False , icon=&amp;#39;Icon.ico&amp;#39;)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;大概解释下文件的内容：&lt;/p&gt;
+
+&lt;p&gt;第一行a = Anaylysis(…)是用来分析程序用到的库，下面就是打包成exe的一些参数。所以我们在第一行代码之后加代码把多余的pyconfig.h去掉，新的spec文件如下：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;a = Analysis([&amp;#39;myapp.py&amp;#39;],
+         pathex=[&amp;#39;c:\\src&amp;#39;],
+         hiddenimports=[],
+         hookspath=None,
+         runtime_hooks=None)
+#add_begin
+for d in a.datas:
+    if &amp;#39;pyconfig&amp;#39; in d[0]:
+        a.datas.remove(d)
+        break
+#add_end
+pyz = PYZ(a.pure)
+exe = EXE(pyz,
+      a.scripts,
+      a.binaries,
+      a.zipfiles,
+      a.datas,
+      name=&amp;#39;myapp.exe&amp;#39;,
+      debug=False,
+      strip=None,
+      upx=True,
+      console=False , icon=&amp;#39;Icon.ico&amp;#39;)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;为了使用修改后的spec文件来打包，需要使用新的命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;c:/python27/python.exe c:/pyinstaller/pyinstaller.py myapp.spec
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;试试，warning没了吧&lt;/p&gt;
+</description>
+        <pubDate>Sat, 02 Nov 2013 18:41:38 +0800</pubDate>
+        <link>http://ldehai.com/blog/2013/11/02/file-already-exists-but-should-not-pyconfig/</link>
+        <guid isPermaLink="true">http://ldehai.com/blog/2013/11/02/file-already-exists-but-should-not-pyconfig/</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Python程序打包成EXE--使用pyinstaller打包matplotlib、scipy、wxpython</title>
+        <description>&lt;p&gt;用python帮朋友写了个科学计算的程序，用到了matplotlib和scipy，以及wxpython。代码写完，发现不能直接拿给朋友用，windows系统默认是没有运行环境的，得装python,matplotlib,scipy以及其他的运行库。这对于程序小白来说实在强人所难。好在有pyinstaller，可以用它打包成一个exe文件，所有的库都在一起了。妈妈再也不用担心没有环境跑程序了。
+&lt;!--more--&gt;
+到pyinstaller&lt;a href=&quot;http://www.pyinstaller.org/&quot;&gt;官网&lt;/a&gt;下载安装包。
+详细安装说明见&lt;a href=&quot;http://pythonhosted.org/PyInstaller/&quot;&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;这里简要说明一下步骤：
+直接下载压缩包，现在的版本是2.1.解压后打开命令行，执行如下命令：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;c:\python setup.py install&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;可以用如下命令检查是不是已经装好了&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;c:\pyintaller --version&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;ok，pyinstaller 装好了，开始打包&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;c:\c:/python27/python.exe c:/pyinstaller/pyinstaller.py --noconfirm --noconsole --onefile --icon=Icon.ico myapp.py&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;解释一下几个参数：&lt;/p&gt;
+
+&lt;p&gt;noconfirm:在打包过程中不需要人工确认。&lt;/p&gt;
+
+&lt;p&gt;noconsole:打包后的程序运行时没有命令行窗口(在测试打包的过程中，可以把这个参数去掉，这样运行的时候可以从命令行查看出错信息，所有错误排除后再加上)。&lt;/p&gt;
+
+&lt;p&gt;onefile:顾名思义就是打包成一个文件，如果不加就是一个exe加一个文件夹，文件夹里存放需要的各种库文件。&lt;/p&gt;
+
+&lt;p&gt;icon:指定打包后的exe文件的图标（运行时窗口的图标是在程序里设定的）&lt;/p&gt;
+
+&lt;p&gt;由于pyinstaller2.1正式版还不支持scipy库，直接运行会报找不到scipy module。而developer版本已经支持了，所以去下载开发版重新安装。pyinstaller的代码在[github上(https://github.com/pyinstaller/pyinstaller),选择develop分支下载。
+pyinstaller对第三方库的支持情况见这里：&lt;a href=&quot;https://github.com/pyinstaller/pyinstaller/wiki/Supported-Packages&quot;&gt;SupportedPackages&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;安装步骤同上，不再赘述。安装完运行打包脚本会发现还有错误&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;ImportError: No module named scipy.sparse.csgraph._validation&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;这是因为pyinstaller没能自动把_validation库加进来，我们就在代码里手动加上吧。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;from scipy.sparse.csgraph import _validation&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;再次运行，应该没问题了。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 22 Sep 2013 18:41:38 +0800</pubDate>
+        <link>http://ldehai.com/blog/2013/09/22/pyinstaller-matplotlib-scipy/</link>
+        <guid isPermaLink="true">http://ldehai.com/blog/2013/09/22/pyinstaller-matplotlib-scipy/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>热心的加拿大设计师Andrew</title>
+        <description>&lt;p&gt;今天收到Andrew的邮件：&lt;/p&gt;
+
+&lt;blockquote&gt;I'm a graphic designer and I really like your app. Would you be interested in letting me update the icon for you? I'll do it for free.&lt;/blockquote&gt;
+&lt;!--more--&gt;
+&lt;p&gt;真的挺喜欢这些人，愿意为了自己喜欢的东西付出，不要回报。对我来说也是一种莫大的鼓舞。&lt;/p&gt;
+
+&lt;p&gt;最新的设计图，还可以吧，比原来的提升不少。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://ldehai.com/assets/tripcost_redesign.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;loading page&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://ldehai.com/assets/tripcost_loadingpage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 15 Jul 2013 18:41:38 +0800</pubDate>
+        <link>http://ldehai.com/blog/2013/07/15/free-design/</link>
+        <guid isPermaLink="true">http://ldehai.com/blog/2013/07/15/free-design/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>iOS APP Database Version Control</title>
+        <description>&lt;p&gt;APP里一直使用SQLite数据库保存数据，不过有个问题觉得挺麻烦，当我要加新功能，而原来的表结构已经不能满足要求时，需要修改表，或者新增表。那么老版本升级到新版本时就需要升级数据库，之前我都是判断新表有没有存在，不存在则创建。这样很容易搞乱掉，如果涉及到多个表，判断起来逻辑不清晰，把自己都搞晕了。&amp;lt;/p&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;在经历过几次折腾后，我发现数据库也需要用版本来控制起来，就像代码有版本一样。这样我只需要判断当前的数据库版本是多少，就知道要不要升级数据库了。假设之前版本是1.0，现在版本是1.1,代码很简单：
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objectivec&quot; data-lang=&quot;objectivec&quot;&gt;NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+NSString* ver = [pref stringForKey:@&amp;quot;dbver&amp;quot;];
+if ([ver isEqualToString:@&amp;quot;1.0&amp;quot;])
+{
+    NSString *dbPath  = [NSHomeDirectory() stringByAppendingPathComponent:@&amp;quot;Documents/database.db&amp;quot;];
+
+    EGODatabase* database = [EGODatabase databaseWithPath:dbPath];
+
+    NSString *strSql = @&amp;quot;create table newtable(id integer primary key asc, main text);&amp;quot;;
+    [database executeQuery:strSql];
+
+    [database close];
+
+    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+    [pref setValue:@&amp;quot;1.1&amp;quot; forKey:@&amp;quot;dbver&amp;quot;];
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;当然自己还是要记录好每次升级的变动情况，备查。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 13 Jun 2013 18:41:38 +0800</pubDate>
+        <link>http://ldehai.com/blog/2013/06/13/ios-app-database-version-control/</link>
+        <guid isPermaLink="true">http://ldehai.com/blog/2013/06/13/ios-app-database-version-control/</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

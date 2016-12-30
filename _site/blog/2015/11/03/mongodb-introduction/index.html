@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>mongodb简介</title>
+  <meta name="description" content="简介mongodb是久负盛名的非关系数据库。它以文档为存储单位，与严格的关系数据库形成泾渭分明的区别。">
+  <meta name="author" content="Wei Wang">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="mongodb简介">
+  <meta name="twitter:description" content="简介mongodb是久负盛名的非关系数据库。它以文档为存储单位，与严格的关系数据库形成泾渭分明的区别。">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="mongodb简介">
+  <meta property="og:description" content="简介mongodb是久负盛名的非关系数据库。它以文档为存储单位，与严格的关系数据库形成泾渭分明的区别。">
+  
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+  <link href="/assets/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://ldehai.com/blog/2015/11/03/mongodb-introduction/">
+  <link rel="alternate" type="application/rss+xml" title="ldehai" href="http://ldehai.com/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+  
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/assets/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/#blog" title="前往 ldehai 的主页" class="blog-button"><img src="/assets/images/avatar.jpg" width="80" alt="ldehai logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for ldehai" class="blog-button">ldehai</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">让每个人都能接受平等的教育</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">嗨，我是刘德海 (@ldehai)，iOS / Mac 独立开发者，现居南京。我创建了AventLabs，一个在线学习编程和设计的平台，主要面向初学者。</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        <p class="panel-cover__description">我正在写一本书《每个人都会编程》</p>
+        
+        
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="访问我的博客" class="blog-button">博客</a></li>
+                
+                  <li class="navigation__item"><a href="https://itunes.apple.com/cn/developer/andy-liu/id521680917?l=en" target="_blank" title="我目前的iOS作品">作品</a></li>
+                
+                  <li class="navigation__item"><a href="https://www.aventlabs.com" target="_blank" title="一个面向初学者在线学习编程和设计的平台">AventLabs</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+          
+          <div><nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  
+  <!-- Weibo -->
+  <li class="navigation__item">
+    <a href="http://weibo.com/ldehai" title="@ldehai 的微博" target="_blank">
+      <i class='social fa fa-weibo'></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li>
+  
+
+  
+  <!-- Github -->
+  <li class="navigation__item">
+    <a href="https://github.com/ldehai" title="@ldehai 的 Github" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+  
+  
+  
+  <!-- Twitter -->
+  <li class="navigation__item">
+    <a href="http://twitter.com/ldehai" title="@ldehai" target="_blank">
+      <i class='social fa fa-twitter'></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+  
+
+  
+
+  <!-- RSS -->
+  <li class="navigation__item">
+    <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+  
+  <!-- Email -->
+  <li class="navigation__item">
+    <a href="mailto:ldehai@gmail.com" title="Contact me">
+      <i class='social fa fa-envelope'></i>
+      <span class="label">Email</span>
+    </a>
+  </li>
+  
+
+  </ul>
+</nav>
+</div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-slate"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2015-11-03 23:38:00 +0800" itemprop="datePublished" class="post-meta__date date">2015-11-03</time> &#8226; <span class="post-meta__tags tags"></span>
+    </div>
+    <h1 class="post-title">mongodb简介</h1>
+  </header>
+
+  <section class="post">
+    <h3 id="section">简介</h3>
+<p>mongodb是久负盛名的非关系数据库。它以文档为存储单位，与严格的关系数据库形成泾渭分明的区别。</p>
+
+<h3 id="db-collection-document">db-&gt;collection-&gt;document</h3>
+
+<p>mongodb的存储结构是数状结构的，可以建多个数据库，数据库底下建多个collection,collection下
+是最终的document,存放实际的数据。这个结构类似于硬盘上文件的组织方式。有分区、目录、文件。</p>
+
+<p>如果非要跟关系数据库做类比，那么这里的collection就相当于表，document相当于表中的一行数据。
+最大的区别在于，同一个collection下的文档不需要有一样的数据字段，是灵活的。</p>
+
+<h3 id="section-1">安装</h3>
+
+<p>理解一件新东西的最好方法自然是动手试试，现在就来安装吧。
+mongodb安装方法参照官网.我用的阿里云服务器，使用的是centos6.5，64位系统。参照以下地址完成安装。 <a href="https://docs.mongodb.org/manual/tutorial/install-mongodb-enterprise-on-red-hat/">https://docs.mongodb.org/manual/tutorial/install-mongodb-enterprise-on-red-hat/</a></p>
+
+<h3 id="mongodmongo">mongod与mongo</h3>
+
+<p>跟其他数据库系统类似，<a href="https://docs.mongodb.org/manual/">mongodb</a>也有自己的服务进程mongod,centos下以服务的形式开启的方式为：</p>
+
+<pre><code>sudo service mongod start
+</code></pre>
+
+<!--more-->
+<p>这样终端窗口关了之后，程序还能继续运行。当然，你也可以在命令行下输入mongod启动，只是窗口关了程序也停了。
+mongodb的交互程序是mongo（在mongod启动后，新开一个命令窗口输入mongo),输入的命令发送给mongod进程，然后返回处理结果。</p>
+
+<h3 id="use-databasename">use database_name</h3>
+
+<p>mongodb没有新增数据库的命令，可以使用use “数据库名” 新建数据库，但新建的数据库实际上没有写入
+存储，只有当在下面新增collection时才会实际创建。
+例如：</p>
+
+<pre><code>use aventlabs
+db.createCollection('member')
+show dbs
+</code></pre>
+
+<h3 id="section-2">插入记录</h3>
+
+<p>使用show dbs命令可以查看当前已经建好的数据库。（注意命令中的大小写）
+先来插入一个记录看看：</p>
+
+<pre><code>db.member.insert({
+   "name" : "andy",
+   "email" : "ldehai@gmail.com",
+})
+</code></pre>
+
+<p>在mongo命令行下输入以上命令，回车，就成功插入了一条记录，反馈如下：</p>
+
+<pre><code>WriteResult({ "nInserted" : 1 })
+</code></pre>
+
+<h3 id="member">查询member中的记录：</h3>
+
+<pre><code>db.memer.find()
+</code></pre>
+
+<p>查询结果：</p>
+
+<pre><code>{ "_id" : ObjectId("5638735b01e6622e13ac34fb"), "name" : "andy", "email" : "ldehai@gmail.com" }
+</code></pre>
+
+<h3 id="nameandy">条件查询,只查name为andy的一条记录：</h3>
+
+<pre><code>db.member.findone({'name':'andy'})
+</code></pre>
+
+<h3 id="section-3">排序</h3>
+
+<pre><code>db.member.find().sort({name:1}})
+</code></pre>
+
+<p>1和-1表示正序和倒序</p>
+
+<h3 id="section-4">限制返回的数据条数</h3>
+
+<pre><code>db.member.find().sort({name:1}).limit(1)
+</code></pre>
+
+<p>注意这里，命令可以串起来使用。另外，如果使用pymongo做排序，sort参数的需要写成如下形式，不然会报错，详细讨论见
+这里<a href="http://stackoverflow.com/questions/10242149/using-sort-with-pymongo">Using .sort with PyMongo</a>：</p>
+
+<pre><code>db.member.find().sort([("createdate", -1), ("name", 1)])
+</code></pre>
+
+<p>更多查询命令，详见官网文档<a href="https://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">db.collection.find</a></p>
+
+<h3 id="section-5">删除记录</h3>
+
+<pre><code>db.member.remove({'name':'andy'})
+</code></pre>
+
+<p>进一步的操作方法，参照官网教程<a href="https://docs.mongodb.org/getting-started/shell/client/">使用mongo命令行工具操作mongodb</a></p>
+
+<p>使用python的同学，可以看<a href="https://api.mongodb.org/python/3.1/tutorial.html">使用pymongo操作mongodb</a></p>
+
+<p>使用tornado的同学，可以看<a href="https://blog.openshift.com/day-25-tornado-combining-tornado-mongodb-and-angularjs-to-build-an-app/">tornado+pymongo+mongodb</a></p>
+
+<p>motor是跟pymongo类似的一个mongodb驱动库，不过它支持异步操作，有兴趣的同学可以看这里<a href="https://motor.readthedocs.org/en/latest/differences.html">Motor and Pymongo</a></p>
+
+<p>关于更多mongodb的详细特性，请参见<a href="https://docs.mongodb.org/manual/">官方文档</a>。</p>
+
+  </section>
+</article>
+
+<section class="read-more">
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">最近的文章</span>
+       <h2 class="post-list__post-title post-title"><a href="/blog/2016/11/30/write-with-gitbook/" title="link to 使用Gitbook搭建写作环境">使用Gitbook搭建写作环境</a></h2>
+       <p class="excerpt">gitbook简介Gitbook.com是一个写作和出版的平台，他们使用的系统是开源的。支持Markdown和AsciiDoc格式，最后输出的是静态网页。还可以通过calibre把书转成pdf、epub、mobi等常用格式，方便在各种设备上阅读。要达成的目标由于Gitbook和Markdown的开放性，可以在本地搭建写作环境，对我来说很有吸引力。我使用如下的组合来搭建我的写作环境：gitbook+atom+github+calibreGitbook：用来创建书，遵循它的文件组织形式，可以生...&hellip;</p>
+       <div class="post-list__meta"><time datetime="2016-11-30 16:21:00 +0800" class="post-list__meta--date date">2016-11-30</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/blog/2016/11/30/write-with-gitbook/>继续阅读</a></div>
+   </div>
+   
+   
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">更早的文章</span>
+       <h2 class="post-list__post-title post-title"><a href="/blog/2015/10/20/android-support-library/" title="link to Android Support Library简介">Android Support Library简介</a></h2>
+       <p class="excerpt">Android系统每年都会有版本更新，新版本必然带来新的特性。但是，要想使用这些新特性，手机的系统就要更新到最新的版本。大家都知道，iPhone，是苹果生产的，iOS版本的升级只需要考虑自己发布的产品就好了。Android不一样,它是一个开放的生态系统，代码开源，只要是手机厂商都能生产搭载Android系统的手机，但用的硬件却是五花八门的。一个手机操作系统要想正常的运行，必须能够跟手机的硬件兼容，所以大部分手机厂商使用的系统都是在官方版本基础上修改得来的，想升级不能直接拿官方版本直接安装，...&hellip;</p>
+       <div class="post-list__meta"><time datetime="2015-10-20 17:21:38 +0800" class="post-list__meta--date date">2015-10-20</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/blog/2015/10/20/android-support-library/>继续阅读</a></div>
+   </div>
+   
+</section>
+
+<section class="post-comments">
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "http://ldehai.com/blog/2015/11/03/mongodb-introduction/";
+        this.page.identifier = "/blog/2015/11/03/mongodb-introduction/";
+    };
+
+    var disqus_shortname = 'ldehai';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+  
+  
+  
+  
+</section>
+
+
+            <section class="footer">
+    <footer>
+    	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
+      <span class="footer__copyright">本站由 <a href="http://stackoverflow.com/story/ldehai">@ldehai</a> 创建，采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/ldehai/ldehai.github.io">本站源码</a> - &copy; 2016</span>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript" src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-44047356-1', 'ldehai.com');
+    ga('send', 'pageview');
+</script>
+
+
+    
+  </body>
+
+</html>

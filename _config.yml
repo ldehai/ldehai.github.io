@@ -7,7 +7,7 @@ creator: <a href="http://stackoverflow.com/story/ldehai">@ldehai</a>
 
 url: "http://ldehai.com"
 
-permalink: blog/:year/:month/:title/
+permalink: blog/:year/:month/:day/:title/
 
 # Format
 highlighter: plain
