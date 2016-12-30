@@ -2,7 +2,7 @@
 layout: post
 title:  "Python程序打包成EXE--使用pyinstaller打包matplotlib、scipy、wxpython"
 date:   2013-09-22 10:41:38
-categories:
+categories: pyinstaller
 ---
 用python帮朋友写了个科学计算的程序，用到了matplotlib和scipy，以及wxpython。代码写完，发现不能直接拿给朋友用，windows系统默认是没有运行环境的，得装python,matplotlib,scipy以及其他的运行库。这对于程序小白来说实在强人所难。好在有pyinstaller，可以用它打包成一个exe文件，所有的库都在一起了。妈妈再也不用担心没有环境跑程序了。
 <!--more-->

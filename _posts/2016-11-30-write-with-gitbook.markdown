@@ -2,7 +2,7 @@
 layout: post
 title:  "使用Gitbook搭建写作环境"
 date:   2016-11-30 08:21:00
-categories:
+categories:gitbook
 ---
 ### gitbook简介
 
