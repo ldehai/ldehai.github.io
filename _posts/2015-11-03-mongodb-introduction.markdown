@@ -40,6 +40,13 @@ mongodb没有新增数据库的命令，可以使用use "数据库名" 新建数
     db.createCollection('member')
     show dbs
 
+### help命令
+    如果想查看当前可用的所有命令，可以输入help然后回车
+
+### 查看当前数据库中的所有Collection
+
+    show collections
+
 ### 插入记录
 
 使用show dbs命令可以查看当前已经建好的数据库。（注意命令中的大小写）
