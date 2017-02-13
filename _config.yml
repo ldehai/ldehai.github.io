@@ -24,7 +24,7 @@ blog_button:
 nav:
     - {title: 作品, description: 我目前的iOS作品, url: 'https://itunes.apple.com/cn/developer/andy-liu/id521680917?l=en'}
     - {title: AventLabs, description: 一个面向初学者在线学习编程和设计的平台, url: 'https://www.aventlabs.com'}
-    - {title: LinkedIn, description: 我的LinkedIn页面, url: 'https://www.linkedin.com/in/ldehai/'}
+    # - {title: LinkedIn, description: 我的LinkedIn页面, url: 'https://www.linkedin.com/in/ldehai/'}
 
 # Pagination
 gems: [jekyll-paginate]
@@ -43,6 +43,7 @@ social:
     twitter: ldehai
     # gplus: 107108267983477358170
     mail: ldehai@gmail.com
+    linkedin: ldehai
 
 # Google Analytics
 ga:
