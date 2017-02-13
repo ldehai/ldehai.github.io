@@ -1,5 +1,14 @@
 <nav class="cover-navigation navigation--social">
   <ul class="navigation">
+  {% if site.social.github %}
+  <!-- Github -->
+  <li class="navigation__item">
+    <a href="https://github.com/{{site.social.github}}" title="@{{site.social.github}} 的 Github" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+  {% endif %}
 
   {% if site.social.weibo %}
   <!-- Weibo -->
@@ -7,16 +16,6 @@
     <a href="http://weibo.com/{{site.social.weibo}}" title="@{{site.social.weibo}} 的微博" target="_blank">
       <i class='social fa fa-weibo'></i>
       <span class="label">Weibo</span>
-    </a>
-  </li>
-  {% endif %}
-
-  {% if site.social.github %}
-  <!-- Github -->
-  <li class="navigation__item">
-    <a href="https://github.com/{{site.social.github}}" title="@{{site.social.github}} 的 Github" target="_blank">
-      <i class='social fa fa-github'></i>
-      <span class="label">Github</span>
     </a>
   </li>
   {% endif %}
@@ -41,13 +40,15 @@
   </li>
   {% endif %}
 
-  <!-- RSS -->
+  {% if site.social.linkedin %}
+  <!-- linkedin -->
   <li class="navigation__item">
-    <a href="/feed.xml" rel="author" title="RSS" target="_blank">
-      <i class='social fa fa-rss'></i>
-      <span class="label">RSS</span>
+    <a href="https://www.linkedin.com/in/{{site.social.linkedin}}" title="@{{site.social.linkedin}}" target="_blank">
+      <i class='social fa fa-linkedin'></i>
+      <span class="label">LinkedIn</span>
     </a>
   </li>
+  {% endif %}
 
   {% if site.social.mail %}
   <!-- Email -->
@@ -59,15 +60,13 @@
   </li>
   {% endif %}
 
-  {% if site.social.linkedin %}
-  <!-- linkedin -->
+  <!-- RSS -->
   <li class="navigation__item">
-    <a href="https://www.linkedin.com/in/{{site.social.linkedin}}" title="@{{site.social.linkedin}}" target="_blank">
-      <i class='social fa fa-linkedin'></i>
-      <span class="label">LinkedIn</span>
+    <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
     </a>
   </li>
-  {% endif %}
 
   </ul>
 </nav>
