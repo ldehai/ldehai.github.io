@@ -29,4 +29,8 @@ tags: mydocument
 
 [前往iTunes下载](https://itunes.apple.com/app/my-document-collect-all-files-to-one-place/id1188310599)
 
+或者扫二维码：
+
+![]({{ site.url }}/assets/filecenter.png)
+
 '我的文件夹'在不断的持续更新中，为了保持app简单易用，我也在克制自己的冲动，尽量少加功能。有任何疑问和建议，请给我发邮件：ldehai@gmail.com。
