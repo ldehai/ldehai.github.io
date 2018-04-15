@@ -20,6 +20,7 @@ tags: 七牛 imageInfo avinfo
 通过在图片地址后面附加imageInfo，可以查询该图片的基本信息，这里我们关心的是图片的宽和高。
 
 比如：图片上传后的地址为：[http://images.yipuyanyi.com/1523723760119](http://images.yipuyanyi.com/1523723760119)
+
 附加imageInfo后的地址： [http://images.yipuyanyi.com/1523723760119?imageInfo](http://images.yipuyanyi.com/1523723760119?imageInfo)
 
 返回JSON格式数据如下：
@@ -40,6 +41,7 @@ tags: 七牛 imageInfo avinfo
 
 比如：视频上传后的地址为：
 [http://images.yipuyanyi.com/tmp_c0e798ff2c5a3286ff2fcc1dd0e4d68d.mp4](http://images.yipuyanyi.com/tmp_c0e798ff2c5a3286ff2fcc1dd0e4d68d.mp4)
+
 附加avinfo后的地址：
 [http://images.yipuyanyi.com/tmp_c0e798ff2c5a3286ff2fcc1dd0e4d68d.mp4?avinfo](http://images.yipuyanyi.com/tmp_c0e798ff2c5a3286ff2fcc1dd0e4d68d.mp4?avinfo)
 
@@ -173,7 +175,9 @@ tags: 七牛 imageInfo avinfo
     vframe/<Format>/offset/<Second>/w<Width>/h/<Height>/rotate/<Degree>
 
 例如：
+
     vframe/png/offset/0/w/720/h/480 
+    
 表示以png格式提取0秒的视频帧，图片尺寸为宽720*高480像素。给定的高宽比例如果跟原视频比例不一致，生成的图片会变形。
 
 根据官方文档解释，这种方式产生的图片只有第一次访问时自动生成，后面再访问就直接访问缓存。该缓存不占用用户资源，访问流量免费。
