@@ -1,51 +1,85 @@
-# Basic
+# Site settings
 title: ldehai
-subtitle: 让每个人都能接受平等的教育
-welcome_message: 我正在写一本书《每个人都会编程》
-description: 嗨，我是@ldehai，iOS / Mac 独立开发者，现居南京。我创建了AventLabs，一个在线学习编程和设计的平台，主要面向初学者。
-creator: <a href="http://stackoverflow.com/story/ldehai">@ldehai</a>
+SEOTitle: ldehai的博客
+header-img: img/home-bg.jpg
+email: ldehai@gmail.com
+description: "关于编程、设计、英语 | 自由职业，软件工程师，设计师 | 这里是 @ldehai 的个人博客。"
+keyword: "@ldehai, 博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计，Mobile"
+url: "https://ldehai.com"              # your host, for absolute URL
+baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
-url: "http://ldehai.com"
+# Publish posts or collection documents with a future date.
+future: true
 
-permalink: blog/:year/:month/:day/:title/
+# SNS settings
+RSS: false
+weibo_username:     ldehai
+zhihu_username:     ldehai
+github_username:    ldehai
+twitter_username:   ldehai
+#facebook_username:  ldehai
+#linkedin_username:  ldehai
 
-# Format
+# Build settings
+# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 highlighter: rouge
-
-# supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
-cover_color: slate
-
-# The blog button should not be removed.
-blog_button:
-    title: 博客
-    description: 访问我的博客
-
-# Navigation buttons in the front page.
-nav:
-    - {title: 作品, description: 我目前的iOS作品, url: 'https://itunes.apple.com/cn/developer/andy-liu/id521680917?l=en'}
-    - {title: AventLabs, description: 一个面向初学者在线学习编程和设计的平台, url: 'https://www.aventlabs.com'}
-    # - {title: LinkedIn, description: 我的LinkedIn页面, url: 'https://www.linkedin.com/in/ldehai/'}
-
-# Pagination
-gems: [jekyll-paginate]
+permalink: pretty
 paginate: 10
-paginate_path: "page/:num/"
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
+anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+# If you have timezone issue (e.g. #68) in China, uncomment to use this:
+#timezone: CN  
 
-# Comment
-comment:
-    disqus: ldehai
-    # duoshuo:
 
-# Social
-social:
-    weibo: ldehai
-    github: ldehai
-    twitter: ldehai
-    # gplus: 107108267983477358170
-    mail: ldehai@gmail.com
-    linkedin: ldehai
+# Gems
+# from PR#40, to support local preview for Jekyll 3.0
+# make sure you have this gem installed
+# `$ gem install jekyll-paginate`
+plugins: [jekyll-paginate]
+
+
+# Markdown settings
+# replace redcarpet to kramdown,
+# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
+# document: http://jekyllrb.com/docs/configuration/#kramdown
+markdown: kramdown
+kramdown:
+  input: GFM                            # use Github Flavored Markdown !important
+  syntax_highlighter_opts:
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+
+# Disqus settings
+disqus_username: ldehai
+
+# Netease settings
+netease_comment: false
+
 
 # Google Analytics
-ga:
-    id: UA-44047356-1
-    host: ldehai.com
+ga_track_id: 'UA-44047356-1'            # Format: UA-xxxxxx-xx
+ga_domain: ldehai.com
+
+# Sidebar settings
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "嗨，我是@ldehai，独立开发者，现居南京。我创建了AventLabs，一个在线学习编程和设计的平台，主要面向初学者。"
+sidebar-avatar: /assets/avatar.png      # use absolute URL, seeing it's used in both `/` and `/about/`
+
+# Featured Tags
+featured-tags: false                     # whether or not using Feature-Tags
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+
+# Progressive Web Apps
+chrome-tab-theme-color: "#000000"
+service-worker: true
+
+# MathJax rendering for layout:page (e.g. post preview)
+page-mathjax: false
+
+# Friends
+# friends: [
+# ]

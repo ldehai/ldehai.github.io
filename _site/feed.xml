@@ -2,21 +2,396 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ldehai</title>
-    <description>嗨，我是刘德海 (@ldehai)，iOS / Mac 独立开发者，现居南京。我创建了AventLabs，一个在线学习编程和设计的平台，主要面向初学者。</description>
-    <link>http://ldehai.com/</link>
-    <atom:link href="http://ldehai.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 30 Dec 2016 10:29:39 +0800</pubDate>
-    <lastBuildDate>Fri, 30 Dec 2016 10:29:39 +0800</lastBuildDate>
-    <generator>Jekyll v3.2.1</generator>
+    <description>关于编程、设计、英语 | 自由职业，软件工程师，设计师 | 这里是 @ldehai 的个人博客。</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Thu, 06 Jun 2019 10:22:49 +0800</pubDate>
+    <lastBuildDate>Thu, 06 Jun 2019 10:22:49 +0800</lastBuildDate>
+    <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>七牛云图片和视频上传后的处理</title>
+        <description>&lt;h3 id=&quot;一背景介绍&quot;&gt;一、背景介绍&lt;/h3&gt;
+&lt;h4 id=&quot;1目前系统保存图片和视频的逻辑&quot;&gt;1、目前系统保存图片和视频的逻辑&lt;/h4&gt;
+&lt;p&gt;项目所有图片和视频都是保存在七牛云的。
+图片上传后，后台数据库保存的是图片链接地址。
+视频上传后，app端是本地截取的图片作为视频缩略图并上传到七牛云。数据库中保存的是此缩略图的链接地址。&lt;/p&gt;
+
+&lt;h4 id=&quot;2存在的问题&quot;&gt;2、存在的问题&lt;/h4&gt;
+&lt;p&gt;小程序因为不好处理视频截图，目前后台保存的是视频地址。为了能在app上正确的展示视频截图，需要做一些额外的处理工作。&lt;/p&gt;
+
+&lt;p&gt;下面先了解一下七牛云提供的获取图片和视频额外信息的接口。
+官方文档参考：&lt;a href=&quot;https://developer.qiniu.com/kodo/manual/1235/vars&quot;&gt;https://developer.qiniu.com/kodo/manual/1235/vars&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;二图片处理&quot;&gt;二、图片处理&lt;/h3&gt;
+&lt;p&gt;通过在图片地址后面附加imageInfo，可以查询该图片的基本信息，这里我们关心的是图片的宽和高。&lt;/p&gt;
+
+&lt;p&gt;比如：图片上传后的地址为：&lt;a href=&quot;http://images.yipuyanyi.com/1523723760119&quot;&gt;http://images.yipuyanyi.com/1523723760119&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;附加imageInfo后的地址： &lt;a href=&quot;http://images.yipuyanyi.com/1523723760119?imageInfo&quot;&gt;http://images.yipuyanyi.com/1523723760119?imageInfo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;返回JSON格式数据如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;{ 
+&quot;size&quot;:69400,
+&quot;format&quot;:&quot;jpeg&quot;,
+&quot;width&quot;:960,
+&quot;height&quot;:540,
+&quot;colorModel&quot;:&quot;ycbcr&quot;
+}
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在展示图片之前获取图片的高宽信息，正确展示占位图片的尺寸。可以避免出现横向的图片用了竖向的占位图片。&lt;/p&gt;
+
+&lt;h3 id=&quot;三视频信息获取&quot;&gt;三、视频信息获取&lt;/h3&gt;
+&lt;p&gt;通过在后面附加avinfo，可以查询该视频的基本信息，这里我们还是关心视频的宽和高。
+官方文档参考：&lt;a href=&quot;https://developer.qiniu.com/kodo/manual/1235/vars&quot;&gt;https://developer.qiniu.com/kodo/manual/1235/vars&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;比如：视频上传后的地址为：
+&lt;a href=&quot;http://images.yipuyanyi.com/tmp_c0e798ff2c5a3286ff2fcc1dd0e4d68d.mp4&quot;&gt;http://images.yipuyanyi.com/tmp_c0e798ff2c5a3286ff2fcc1dd0e4d68d.mp4&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;附加avinfo后的地址：
+&lt;a href=&quot;http://images.yipuyanyi.com/tmp_c0e798ff2c5a3286ff2fcc1dd0e4d68d.mp4?avinfo&quot;&gt;http://images.yipuyanyi.com/tmp_c0e798ff2c5a3286ff2fcc1dd0e4d68d.mp4?avinfo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;返回JSON格式数据如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;{
+    &quot;streams&quot;: [
+        {
+            &quot;index&quot;: 0,
+            &quot;codec_name&quot;: &quot;h264&quot;,
+            &quot;codec_long_name&quot;: &quot;H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10&quot;,
+            &quot;profile&quot;: &quot;High&quot;,
+            &quot;codec_type&quot;: &quot;video&quot;,
+            &quot;codec_time_base&quot;: &quot;1200139/55158784&quot;,
+            &quot;codec_tag_string&quot;: &quot;avc1&quot;,
+            &quot;codec_tag&quot;: &quot;0x31637661&quot;,
+            &quot;width&quot;: 640,
+            &quot;height&quot;: 368,
+            &quot;coded_width&quot;: 640,
+            &quot;coded_height&quot;: 368,
+            &quot;has_b_frames&quot;: 2,
+            &quot;sample_aspect_ratio&quot;: &quot;1:1&quot;,
+            &quot;display_aspect_ratio&quot;: &quot;40:23&quot;,
+            &quot;pix_fmt&quot;: &quot;yuv420p&quot;,
+            &quot;level&quot;: 30,
+            &quot;chroma_location&quot;: &quot;left&quot;,
+            &quot;refs&quot;: 1,
+            &quot;is_avc&quot;: &quot;true&quot;,
+            &quot;nal_length_size&quot;: &quot;4&quot;,
+            &quot;r_frame_rate&quot;: &quot;23/1&quot;,
+            &quot;avg_frame_rate&quot;: &quot;27579392/1200139&quot;,
+            &quot;time_base&quot;: &quot;1/11776&quot;,
+            &quot;start_pts&quot;: 0,
+            &quot;start_time&quot;: &quot;0.000000&quot;,
+            &quot;duration_ts&quot;: 1199115,
+            &quot;duration&quot;: &quot;101.827021&quot;,
+            &quot;bit_rate&quot;: &quot;489497&quot;,
+            &quot;bits_per_raw_sample&quot;: &quot;8&quot;,
+            &quot;nb_frames&quot;: &quot;2342&quot;,
+            &quot;disposition&quot;: {
+                &quot;default&quot;: 1,
+                &quot;dub&quot;: 0,
+                &quot;original&quot;: 0,
+                &quot;comment&quot;: 0,
+                &quot;lyrics&quot;: 0,
+                &quot;karaoke&quot;: 0,
+                &quot;forced&quot;: 0,
+                &quot;hearing_impaired&quot;: 0,
+                &quot;visual_impaired&quot;: 0,
+                &quot;clean_effects&quot;: 0,
+                &quot;attached_pic&quot;: 0,
+                &quot;timed_thumbnails&quot;: 0
+            },
+            &quot;tags&quot;: {
+                &quot;creation_time&quot;: &quot;2018-04-14T22:41:33.000000Z&quot;,
+                &quot;language&quot;: &quot;und&quot;,
+                &quot;handler_name&quot;: &quot;Core Media Video&quot;
+            }
+        },
+        {
+            &quot;index&quot;: 1,
+            &quot;codec_name&quot;: &quot;aac&quot;,
+            &quot;codec_long_name&quot;: &quot;AAC (Advanced Audio Coding)&quot;,
+            &quot;profile&quot;: &quot;LC&quot;,
+            &quot;codec_type&quot;: &quot;audio&quot;,
+            &quot;codec_time_base&quot;: &quot;1/48000&quot;,
+            &quot;codec_tag_string&quot;: &quot;mp4a&quot;,
+            &quot;codec_tag&quot;: &quot;0x6134706d&quot;,
+            &quot;sample_fmt&quot;: &quot;fltp&quot;,
+            &quot;sample_rate&quot;: &quot;48000&quot;,
+            &quot;channels&quot;: 2,
+            &quot;channel_layout&quot;: &quot;stereo&quot;,
+            &quot;bits_per_sample&quot;: 0,
+            &quot;r_frame_rate&quot;: &quot;0/0&quot;,
+            &quot;avg_frame_rate&quot;: &quot;0/0&quot;,
+            &quot;time_base&quot;: &quot;1/48000&quot;,
+            &quot;start_pts&quot;: 0,
+            &quot;start_time&quot;: &quot;0.000000&quot;,
+            &quot;duration_ts&quot;: 4898784,
+            &quot;duration&quot;: &quot;102.058000&quot;,
+            &quot;bit_rate&quot;: &quot;157406&quot;,
+            &quot;max_bit_rate&quot;: &quot;157406&quot;,
+            &quot;nb_frames&quot;: &quot;4787&quot;,
+            &quot;disposition&quot;: {
+                &quot;default&quot;: 1,
+                &quot;dub&quot;: 0,
+                &quot;original&quot;: 0,
+                &quot;comment&quot;: 0,
+                &quot;lyrics&quot;: 0,
+                &quot;karaoke&quot;: 0,
+                &quot;forced&quot;: 0,
+                &quot;hearing_impaired&quot;: 0,
+                &quot;visual_impaired&quot;: 0,
+                &quot;clean_effects&quot;: 0,
+                &quot;attached_pic&quot;: 0,
+                &quot;timed_thumbnails&quot;: 0
+            },
+            &quot;tags&quot;: {
+                &quot;creation_time&quot;: &quot;2018-04-14T22:41:33.000000Z&quot;,
+                &quot;language&quot;: &quot;und&quot;,
+                &quot;handler_name&quot;: &quot;Core Media Audio&quot;
+            }
+        }
+    ],
+    &quot;format&quot;: {
+        &quot;nb_streams&quot;: 2,
+        &quot;nb_programs&quot;: 0,
+        &quot;format_name&quot;: &quot;mov,mp4,m4a,3gp,3g2,mj2&quot;,
+        &quot;format_long_name&quot;: &quot;QuickTime / MOV&quot;,
+        &quot;start_time&quot;: &quot;0.000000&quot;,
+        &quot;duration&quot;: &quot;102.058000&quot;,
+        &quot;size&quot;: &quot;8299780&quot;,
+        &quot;bit_rate&quot;: &quot;650593&quot;,
+        &quot;probe_score&quot;: 100,
+        &quot;tags&quot;: {
+            &quot;major_brand&quot;: &quot;mp42&quot;,
+            &quot;minor_version&quot;: &quot;1&quot;,
+            &quot;compatible_brands&quot;: &quot;mp41mp42isom&quot;,
+            &quot;creation_time&quot;: &quot;2018-04-14T22:41:33.000000Z&quot;
+        }
+    }
+}
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在展示缩略图片之前获取图片的高宽信息，正确展示占位图片的尺寸。可以避免出现横向的图片用了竖向的占位图片。&lt;/p&gt;
+
+&lt;h3 id=&quot;四视频的缩略图获取&quot;&gt;四、视频的缩略图获取&lt;/h3&gt;
+
+&lt;p&gt;参考官方文档: &lt;a href=&quot;https://developer.qiniu.com/dora/manual/1313/video-frame-thumbnails-vframe&quot;&gt;https://developer.qiniu.com/dora/manual/1313/video-frame-thumbnails-vframe&lt;/a&gt;
+七牛提供视频帧访问的能力，格式如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;vframe/&amp;lt;Format&amp;gt;/offset/&amp;lt;Second&amp;gt;/w&amp;lt;Width&amp;gt;/h/&amp;lt;Height&amp;gt;/rotate/&amp;lt;Degree&amp;gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;例如：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;vframe/png/offset/0/w/720/h/480 
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;表示以png格式提取0秒的视频帧，图片尺寸为宽720*高480像素。给定的高宽比例如果跟原视频比例不一致，生成的图片会变形。&lt;/p&gt;
+
+&lt;p&gt;根据官方文档解释，这种方式产生的图片只有第一次访问时自动生成，后面再访问就直接访问缓存。该缓存不占用用户资源，访问流量免费。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://images.yipuyanyi.com/tmp_c0e798ff2c5a3286ff2fcc1dd0e4d68d.mp4?vframe/png/offset/0/w/720/h/480&quot;&gt;http://images.yipuyanyi.com/tmp_c0e798ff2c5a3286ff2fcc1dd0e4d68d.mp4?vframe/png/offset/0/w/720/h/480&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;此处指定的高、宽尺寸根据之前获取的视频基本信息来定。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 15 Apr 2018 23:50:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/04/15/qiniu-imageinfo-avinfo/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/04/15/qiniu-imageinfo-avinfo/</guid>
+        
+        <category>七牛</category>
+        
+        <category>imageInfo</category>
+        
+        <category>avinfo</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>我的文件夹使用方法</title>
+        <description>&lt;h3 id=&quot;为什么开发我的文件夹&quot;&gt;为什么开发我的文件夹&lt;/h3&gt;
+
+&lt;p&gt;用iOS系统的同学都知道，跟Windows、Mac以及Android系统不同，它没有一个统一存放文件的地方，自然也没有文件夹的功能。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;我们的文件是散落在各个app之中的，要找起来没那么容易。&lt;/li&gt;
+  &lt;li&gt;而且有的app中文件的有效期只有几天。比如微信聊天中发送的文件，过了有效期就不能访问了。&lt;/li&gt;
+  &lt;li&gt;想把手机当优盘用，拷贝点东西带着，也没那么容易。&lt;/li&gt;
+  &lt;li&gt;别人发来的压缩文件打不开，还得传到电脑上打开。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;基于以上原因，我开发了’我的文件夹’‘，它可以：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;把各个app中分散的文件归集到一起；&lt;/li&gt;
+  &lt;li&gt;预览文件，支持很多文件格式；&lt;/li&gt;
+  &lt;li&gt;自动解压压缩文件，支持zip/rar/7z格式；&lt;/li&gt;
+  &lt;li&gt;集成了文件服务器，用电脑来轻松管理手机上的文件，能添加、能下载、也能删除；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;除了这几个最常用的功能，’我的文件夹’还支持以下有意思的功能：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;写邮件时从’我的文件夹’选择文件作为附件；浏览网站时，要提交文件，也可以从FileCenter里选；
+这样经常要用的文件先保存到’我的文件夹’里，想要的时候随时来取。&lt;/li&gt;
+  &lt;li&gt;通过系统搜索来查找你的文件，不用进入app搜索了，方便吧；&lt;/li&gt;
+  &lt;li&gt;指纹解锁
+为了让你的文件更安全，’我的文件夹’支持指纹解锁，这样其他人就看不到你的文件了。这个功能默认不开启，可以到设置里开启。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://itunes.apple.com/app/my-document-collect-all-files-to-one-place/id1188310599&quot;&gt;前往iTunes下载&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;或者扫二维码：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/filecenter.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;‘我的文件夹’在不断的持续更新中，为了保持app简单易用，我也在克制自己的冲动，尽量少加功能。有任何疑问和建议，请给我发邮件：ldehai@gmail.com。&lt;/p&gt;
+</description>
+        <pubDate>Sat, 13 May 2017 16:21:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/05/13/how-to-use-mydocument/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/05/13/how-to-use-mydocument/</guid>
+        
+        <category>mydocument</category>
+        
+        
+      </item>
     
       <item>
         <title>使用Gitbook搭建写作环境</title>
-        <description>&lt;h3 id=&quot;gitbook&quot;&gt;gitbook简介&lt;/h3&gt;
+        <description>&lt;h3 id=&quot;gitbook简介&quot;&gt;gitbook简介&lt;/h3&gt;
 
 &lt;p&gt;Gitbook.com是一个写作和出版的平台，他们使用的系统是开源的。支持Markdown和AsciiDoc格式，最后输出的是静态网页。还可以通过&lt;a href=&quot;https://calibre-ebook.com/download_osx&quot;&gt;calibre&lt;/a&gt;把书&lt;a href=&quot;http://toolchain.gitbook.com/ebook.html&quot;&gt;转成&lt;/a&gt;pdf、epub、mobi等常用格式，方便在各种设备上阅读。
-&lt;img src=&quot;http://ldehai.com/assets/gitbooksample.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://localhost:4000/assets/gitbooksample.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;要达成的目标&lt;/h3&gt;
+&lt;h3 id=&quot;要达成的目标&quot;&gt;要达成的目标&lt;/h3&gt;
 &lt;p&gt;由于Gitbook和Markdown的开放性，可以在本地搭建写作环境，对我来说很有吸引力。我使用如下的组合来搭建我的写作环境：gitbook+atom+github+calibre
 &lt;!--more--&gt;&lt;/p&gt;
 
@@ -28,100 +403,108 @@
 
 &lt;p&gt;&lt;a href=&quot;https://github.com&quot;&gt;Github&lt;/a&gt;：把书稿放到Github，方便版本管理，多人协作。如果你开通了私有库，存放自己不想公开的书也很方便。&lt;/p&gt;
 
-&lt;h3 id=&quot;gitbook-1&quot;&gt;Gitbook安装&lt;/h3&gt;
+&lt;h3 id=&quot;gitbook安装&quot;&gt;Gitbook安装&lt;/h3&gt;
 &lt;p&gt;参照&lt;a href=&quot;https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md&quot;&gt;Gitbook官方安装说明&lt;/a&gt;。
 以macOS为例，安装步骤如下：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ npm install gitbook-cli -g
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ npm install gitbook-cli -g
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;npm是nodejs的包管理器，gitbook使用的nodejs，所以如果你还没有安装npm，请移步到&lt;a href=&quot;https://nodejs.org/en/download/&quot;&gt;nodejs安装&lt;/a&gt;。这里会安装nodejs，npm是包含在里面一起安装的。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;新建一本书&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;http://ldehai.com/assets/gitbook-cli.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;新建一本书&quot;&gt;新建一本书&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/gitbook-cli.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;新建一本书的目录，在ternimal里面进入这个目录，执行以下命令初始化一本书：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$gitbook init
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$gitbook init
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;github&quot;&gt;「可选」放到github&lt;/h3&gt;
+&lt;h3 id=&quot;可选放到github&quot;&gt;「可选」放到github&lt;/h3&gt;
 &lt;p&gt;首先登录到github，新建repo，然后把本地的代码push到github就可以了。放到github上还有一个好处是，github是支持编辑markdown文件的。只要有网络，你随时可以登上去写。当然，这一步并不是必须的。只保存在本地也是没问题的。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;echo &quot;# mybook&quot; &amp;gt;&amp;gt; README.md
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;echo &quot;# mybook&quot; &amp;gt;&amp;gt; README.md
 git init
 git add README.md
 git commit -m &quot;first commit&quot;
 git remote add origin &quot;你的repo路径&quot;
 git push -u origin master
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;接下来你可以选择自己喜欢的编辑器去写文章了，写完想看最终的排版效果，或者转成其他格式的电子书，就接着往下看。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;在本地预览书&lt;/h3&gt;
+&lt;h3 id=&quot;在本地预览书&quot;&gt;在本地预览书&lt;/h3&gt;
 &lt;p&gt;gitbook会启动一个本地的web服务器&lt;a href=&quot;http://localhost:4000&quot;&gt;http://localhost:4000&lt;/a&gt;, 在浏览器里访问这个地址就可以查看了。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gitbook serve
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ gitbook serve
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;md&quot;&gt;把md文件编译成静态页面，注意查看当前目录底下生成的文件&lt;/h3&gt;
+&lt;h3 id=&quot;把md文件编译成静态页面注意查看当前目录底下生成的文件&quot;&gt;把md文件编译成静态页面，注意查看当前目录底下生成的文件&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$gitbook build
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$gitbook build
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;section-3&quot;&gt;生成其他格式文件&lt;/h3&gt;
+&lt;h3 id=&quot;生成其他格式文件&quot;&gt;生成其他格式文件&lt;/h3&gt;
 &lt;p&gt;gitbook生成其他格式的书是借助calibre的转换功能实现的(ebook-convert)，安装完calibre后，修改系统$PATH定义，把转换程序的路径加到系统PATH里，要不然会找不到转换程序。打开Terminal（终端），按照下面的操作步骤修改PATH。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vi ~/.bash_profile
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;vi ~/.bash_profile
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;把下面这句附加到.bash_profile文件里，然后保存退出。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export PATH=$PATH:/Applications/calibre.app/Contents/MacOS/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;export PATH=$PATH:/Applications/calibre.app/Contents/MacOS/
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;使用source命令使文件立即生效&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;source ~/.bash_profile
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;source ~/.bash_profile
 echo $PATH
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;pdf&quot;&gt;生成pdf文件&lt;/h4&gt;
+&lt;h4 id=&quot;生成pdf文件&quot;&gt;生成pdf文件&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gitbook pdf ./ mybook.pdf
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ gitbook pdf ./ mybook.pdf
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;epub&quot;&gt;生成epub文件&lt;/h4&gt;
+&lt;h4 id=&quot;生成epub文件&quot;&gt;生成epub文件&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gitbook epub ./ mybook.epub
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ gitbook epub ./ mybook.epub
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;mobikindle&quot;&gt;生成mobi文件，支持kindle&lt;/h4&gt;
+&lt;h4 id=&quot;生成mobi文件支持kindle&quot;&gt;生成mobi文件，支持kindle&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gitbook mobi ./ mybook.mobi
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ gitbook mobi ./ mybook.mobi
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Wed, 30 Nov 2016 16:21:00 +0800</pubDate>
-        <link>http://ldehai.com/blog/2016/11/30/write-with-gitbook/</link>
-        <guid isPermaLink="true">http://ldehai.com/blog/2016/11/30/write-with-gitbook/</guid>
+        <link>http://localhost:4000/2016/11/30/write-with-gitbook/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/30/write-with-gitbook/</guid>
+        
+        <category>gitbook</category>
         
         
       </item>
     
       <item>
         <title>mongodb简介</title>
-        <description>&lt;h3 id=&quot;section&quot;&gt;简介&lt;/h3&gt;
+        <description>&lt;h3 id=&quot;简介&quot;&gt;简介&lt;/h3&gt;
 &lt;p&gt;mongodb是久负盛名的非关系数据库。它以文档为存储单位，与严格的关系数据库形成泾渭分明的区别。&lt;/p&gt;
 
 &lt;h3 id=&quot;db-collection-document&quot;&gt;db-&amp;gt;collection-&amp;gt;document&lt;/h3&gt;
@@ -132,99 +515,113 @@ echo $PATH
 &lt;p&gt;如果非要跟关系数据库做类比，那么这里的collection就相当于表，document相当于表中的一行数据。
 最大的区别在于，同一个collection下的文档不需要有一样的数据字段，是灵活的。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;安装&lt;/h3&gt;
+&lt;h3 id=&quot;安装&quot;&gt;安装&lt;/h3&gt;
 
 &lt;p&gt;理解一件新东西的最好方法自然是动手试试，现在就来安装吧。
 mongodb安装方法参照官网.我用的阿里云服务器，使用的是centos6.5，64位系统。参照以下地址完成安装。 &lt;a href=&quot;https://docs.mongodb.org/manual/tutorial/install-mongodb-enterprise-on-red-hat/&quot;&gt;https://docs.mongodb.org/manual/tutorial/install-mongodb-enterprise-on-red-hat/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;mongodmongo&quot;&gt;mongod与mongo&lt;/h3&gt;
+&lt;h3 id=&quot;mongod与mongo&quot;&gt;mongod与mongo&lt;/h3&gt;
 
 &lt;p&gt;跟其他数据库系统类似，&lt;a href=&quot;https://docs.mongodb.org/manual/&quot;&gt;mongodb&lt;/a&gt;也有自己的服务进程mongod,centos下以服务的形式开启的方式为：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo service mongod start
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;sudo service mongod start
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;!--more--&gt;
 &lt;p&gt;这样终端窗口关了之后，程序还能继续运行。当然，你也可以在命令行下输入mongod启动，只是窗口关了程序也停了。
 mongodb的交互程序是mongo（在mongod启动后，新开一个命令窗口输入mongo),输入的命令发送给mongod进程，然后返回处理结果。&lt;/p&gt;
 
-&lt;h3 id=&quot;use-databasename&quot;&gt;use database_name&lt;/h3&gt;
+&lt;h3 id=&quot;use-database_name&quot;&gt;use database_name&lt;/h3&gt;
 
 &lt;p&gt;mongodb没有新增数据库的命令，可以使用use “数据库名” 新建数据库，但新建的数据库实际上没有写入
 存储，只有当在下面新增collection时才会实际创建。
 例如：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;use aventlabs
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;use aventlabs
 db.createCollection('member')
 show dbs
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;插入记录&lt;/h3&gt;
+&lt;h3 id=&quot;使用help查看当前可用的所有命令&quot;&gt;使用help查看当前可用的所有命令&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/mongodbhelp.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;查看当前数据库中的所有collection&quot;&gt;查看当前数据库中的所有Collection&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;show collections
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;插入记录&quot;&gt;插入记录&lt;/h3&gt;
 
 &lt;p&gt;使用show dbs命令可以查看当前已经建好的数据库。（注意命令中的大小写）
 先来插入一个记录看看：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.member.insert({
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;db.member.insert({
    &quot;name&quot; : &quot;andy&quot;,
    &quot;email&quot; : &quot;ldehai@gmail.com&quot;,
 })
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;在mongo命令行下输入以上命令，回车，就成功插入了一条记录，反馈如下：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;WriteResult({ &quot;nInserted&quot; : 1 })
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;WriteResult({ &quot;nInserted&quot; : 1 })
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;member&quot;&gt;查询member中的记录：&lt;/h3&gt;
+&lt;h3 id=&quot;查询member中的记录&quot;&gt;查询member中的记录：&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.memer.find()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;db.memer.find()
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;查询结果：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;_id&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ObjectId(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;5638735b01e6622e13ac34fb&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;andy&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;email&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ldehai@gmail.com&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;{ &quot;_id&quot; : ObjectId(&quot;5638735b01e6622e13ac34fb&quot;), &quot;name&quot; : &quot;andy&quot;, &quot;email&quot; : &quot;ldehai@gmail.com&quot; }
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;nameandy&quot;&gt;条件查询,只查name为andy的一条记录：&lt;/h3&gt;
+&lt;h3 id=&quot;条件查询只查name为andy的一条记录&quot;&gt;条件查询,只查name为andy的一条记录：&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.member.findone({'name':'andy'})
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;db.member.findone({'name':'andy'})
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;section-3&quot;&gt;排序&lt;/h3&gt;
+&lt;h3 id=&quot;排序&quot;&gt;排序&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.member.find().sort({name:1}})
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;db.member.find().sort({name:1}})
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;1和-1表示正序和倒序&lt;/p&gt;
 
-&lt;h3 id=&quot;section-4&quot;&gt;限制返回的数据条数&lt;/h3&gt;
+&lt;h3 id=&quot;限制返回的数据条数&quot;&gt;限制返回的数据条数&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.member.find().sort({name:1}).limit(1)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;db.member.find().sort({name:1}).limit(1)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;注意这里，命令可以串起来使用。另外，如果使用pymongo做排序，sort参数的需要写成如下形式，不然会报错，详细讨论见
 这里&lt;a href=&quot;http://stackoverflow.com/questions/10242149/using-sort-with-pymongo&quot;&gt;Using .sort with PyMongo&lt;/a&gt;：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.member.find().sort([(&quot;createdate&quot;, -1), (&quot;name&quot;, 1)])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;db.member.find().sort([(&quot;createdate&quot;, -1), (&quot;name&quot;, 1)])
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;更多查询命令，详见官网文档&lt;a href=&quot;https://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find&quot;&gt;db.collection.find&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;section-5&quot;&gt;删除记录&lt;/h3&gt;
+&lt;h3 id=&quot;删除记录&quot;&gt;删除记录&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;db.member.remove({'name':'andy'})
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;db.member.remove({'name':'andy'})
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;进一步的操作方法，参照官网教程&lt;a href=&quot;https://docs.mongodb.org/getting-started/shell/client/&quot;&gt;使用mongo命令行工具操作mongodb&lt;/a&gt;&lt;/p&gt;
 
@@ -237,8 +634,10 @@ show dbs
 &lt;p&gt;关于更多mongodb的详细特性，请参见&lt;a href=&quot;https://docs.mongodb.org/manual/&quot;&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
 </description>
         <pubDate>Tue, 03 Nov 2015 23:38:00 +0800</pubDate>
-        <link>http://ldehai.com/blog/2015/11/03/mongodb-introduction/</link>
-        <guid isPermaLink="true">http://ldehai.com/blog/2015/11/03/mongodb-introduction/</guid>
+        <link>http://localhost:4000/2015/11/03/mongodb-introduction/</link>
+        <guid isPermaLink="true">http://localhost:4000/2015/11/03/mongodb-introduction/</guid>
+        
+        <category>mongodb</category>
         
         
       </item>
@@ -271,20 +670,10 @@ Android不一样,它是一个开放的生态系统，代码开源，只要是手
 关于Android版本和API Level的对应关系，参见&lt;a href=&quot;http://developer.android.com/guide/topics/manifest/uses-sdk-element.html&quot;&gt;API Level&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 20 Oct 2015 17:21:38 +0800</pubDate>
-        <link>http://ldehai.com/blog/2015/10/20/android-support-library/</link>
-        <guid isPermaLink="true">http://ldehai.com/blog/2015/10/20/android-support-library/</guid>
+        <link>http://localhost:4000/2015/10/20/android-support-library/</link>
+        <guid isPermaLink="true">http://localhost:4000/2015/10/20/android-support-library/</guid>
         
-        
-      </item>
-    
-      <item>
-        <title>iOS开发初学者指南</title>
-        <description>&lt;p&gt;挖个坑，准备写一系列iOS开发的入门教程
-&lt;!--more--&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 18 Oct 2015 08:21:38 +0800</pubDate>
-        <link>http://ldehai.com/blog/2015/10/18/ios-beginner-guide/</link>
-        <guid isPermaLink="true">http://ldehai.com/blog/2015/10/18/ios-beginner-guide/</guid>
+        <category>Android</category>
         
         
       </item>
@@ -296,25 +685,25 @@ Android不一样,它是一个开放的生态系统，代码开源，只要是手
 &lt;p&gt;在使用wxPython写程序时，如果用到了图标，而打包的时候又想嵌到程序里，就要使用base64对图片进行编码，然后把生成的字符串直接写到程序里就好了,废话不多说，上代码:
 &lt;!--more--&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;# -*- coding:utf-8 -*-&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#导入需要的库&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;wx&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;wx.lib.embeddedimage&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PyEmbeddedImage&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#用于嵌入经过base64编码的图片&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# -*- coding:utf-8 -*-
+#导入需要的库
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;wx&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;wx.lib.embeddedimage&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PyEmbeddedImage&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#用于嵌入经过base64编码的图片
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#用经过Base64处理的字符串构造图片，用图片生成的base64字符串替换下面括号里的内容即可
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imgBase64&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PyEmbeddedImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;iVBORw0KGgoAAAANSUhEUgAAWCAYAAAAinad/.......+KElFTkSuQmCC&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;#用经过Base64处理的字符串构造图片，用图片生成的base64字符串替换下面括号里的内容即可&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;imgBase64&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PyEmbeddedImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;iVBORw0KGgoAAAANSUhEUgAAWCAYAAAAinad/.......+KElFTkSuQmCC&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;#生成空位图&lt;/span&gt;
-&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ESImage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imgBase64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#.Scale(22,24)&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;#把上一步生成的图片加到控件上去&lt;/span&gt;
-&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imageCtrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;wx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StaticBitmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RightPanel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_ANY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BitmapFromImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ESImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#生成空位图
+&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ESImage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imgBase64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#.Scale(22,24)
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#把上一步生成的图片加到控件上去
+&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imageCtrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;wx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StaticBitmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RightPanel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_ANY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BitmapFromImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ESImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;那么怎么把一个图片用Base64编码呢，请看:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;# -*- coding:utf-8 -*-&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;base64&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# -*- coding:utf-8 -*-
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;base64&lt;/span&gt;
 
 &lt;span class=&quot;nb&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'x1.png'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'rb'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;pic&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
@@ -324,25 +713,25 @@ Android不一样,它是一个开放的生态系统，代码开源，只要是手
 &lt;p&gt;在iOS中，如果我们发Html格式邮件的时候需要带上一个本地图片文件，应该怎么办呢，用附件不合适，这时候也要用Base64处理，注意html代码中base64的标记，
 这样浏览器才能正确的解码。&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objectivec&quot; data-lang=&quot;objectivec&quot;&gt;MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objectivec&quot; data-lang=&quot;objectivec&quot;&gt;&lt;span class=&quot;n&quot;&gt;MFMailComposeViewController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mailViewController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MFMailComposeViewController&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
 
-//构造发送的邮件内容，注意base64的标记
-NSString *strMessage = @&quot;img src='data:image/png;base64,%@'&amp;lt;a href=https://itunes.apple.com/us/app/shoebox-find-your-shoes-quickly/id640885172?ls=1&amp;amp;mt=8&amp;gt;View in App Store&amp;lt;/a&amp;gt;&quot;;
+&lt;span class=&quot;c1&quot;&gt;//构造发送的邮件内容，注意base64的标记&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&quot;img src='data:image/png;base64,%@'&amp;lt;a href=https://itunes.apple.com/us/app/shoebox-find-your-shoes-quickly/id640885172?ls=1&amp;amp;mt=8&amp;gt;View in App Store&amp;lt;/a&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-//把图片用base64编码，加到邮件的内容里
-UIImage *appicon = [UIImage imageNamed:@&quot;Icon.png&quot;];
-NSData *imageData = UIImagePNGRepresentation(appicon);
-strMessage = [NSString stringWithFormat:strMessage,[imageData base64EncodedString]];
+&lt;span class=&quot;c1&quot;&gt;//把图片用base64编码，加到邮件的内容里&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;UIImage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;appicon&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIImage&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imageNamed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&quot;Icon.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSData&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imageData&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UIImagePNGRepresentation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;appicon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;strMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stringWithFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imageData&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;base64EncodedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
 
-[mailViewController setMessageBody:strMessage isHTML:YES];&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mailViewController&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setMessageBody&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strMessage&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isHTML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;YES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </description>
         <pubDate>Tue, 12 Nov 2013 18:41:38 +0800</pubDate>
-        <link>http://ldehai.com/blog/2013/11/12/embedded-image-with-base64/</link>
-        <guid isPermaLink="true">http://ldehai.com/blog/2013/11/12/embedded-image-with-base64/</guid>
+        <link>http://localhost:4000/2013/11/12/embedded-image-with-base64/</link>
+        <guid isPermaLink="true">http://localhost:4000/2013/11/12/embedded-image-with-base64/</guid>
         
+        <category>wxPython</category>
         
-        <category>blog</category>
         
       </item>
     
@@ -360,19 +749,25 @@ strMessage = [NSString stringWithFormat:strMessage,[imageData base64EncodedStrin
 
 &lt;p&gt;Framer项目的代码结构是这样的：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;app.js          //【重要】用来写视图和交互代码
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;app.js          //【重要】用来写视图和交互代码
 framer/         //Framerjs的框架，app.js里用到的功能都是它提供的
   framer.js     //framer核心文件
   framerps.js   //根据views.app.js生成frame对象
   views.app.js  //根据psd文件的结构导出的文件，用来记录图片属性和图层关系(用json格式表示)，app.js中要用到
 images/         //从photoshop导出的图片都在这里
 index.html      //预览时的首页
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;framer&quot;&gt;Framer可以说是由三部分组成：&lt;/h2&gt;
+&lt;h2 id=&quot;framer可以说是由三部分组成&quot;&gt;Framer可以说是由三部分组成：&lt;/h2&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;1. 图片导出工具&lt;/h3&gt;
+&lt;h3 id=&quot;1-图片导出工具&quot;&gt;1. 图片导出工具&lt;/h3&gt;
 
 &lt;p&gt;支持从photoshop和sketch导出图片。
 这里从photoshop导出设计图。实际上是使用了Adobe ExtendScript脚本。Adobe ExtendScript脚本语言可以操纵photoshop执行一些自动化操作。
@@ -382,47 +777,47 @@ Mac下作者用Framer.app包装了脚本代码，windows下则直接提供了&lt
 
 &lt;p&gt;在原型设计的过程中，可能会需要多次导出图片，而导出工具不会覆盖app.js文件，所以不用担心你写的代码会被覆盖。它只会在没有文件的情况下才自动生成。&lt;/p&gt;
 
-&lt;h3 id=&quot;js&quot;&gt;2. JS类库&lt;/h3&gt;
+&lt;h3 id=&quot;2-js类库&quot;&gt;2. JS类库&lt;/h3&gt;
 
 &lt;p&gt;这里提供了View(视图),animation(动态特效),event(事件绑定)等类，可供使用者调用。详见最后一部分介绍，或直接至官网查看。&lt;/p&gt;
 
-&lt;h3 id=&quot;appjs&quot;&gt;3. app.js&lt;/h3&gt;
+&lt;h3 id=&quot;3-appjs&quot;&gt;3. app.js&lt;/h3&gt;
 
 &lt;p&gt;Framer默认生成app.js文件。在使用Framer的过程中，除了用Photoshop设计原型图之外，这里也是花时间最多的地方。前面准备的素材就看你怎么组织了。视图的创建、切换、动态特效、手势、事件绑定，都可以在这个文件里完成。&amp;lt;/p&amp;gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;framejs&quot;&gt;Framejs框架介绍&lt;/h2&gt;
+&lt;h2 id=&quot;framejs框架介绍&quot;&gt;Framejs框架介绍&lt;/h2&gt;
 
 &lt;p&gt;它包括View(视图),animation(动态特效),event(事件绑定)。下面的代码可以在线修改，马上就能看到效果。&lt;/p&gt;
 
 &lt;h3 id=&quot;view&quot;&gt;View:&lt;/h3&gt;
 
-&lt;h4 id=&quot;httpwwwframerjscomeditorindexhtmlpathlessonsviewsjshttpwwwframerjscomeditorindexhtmlpathlessonsviewsjs&quot;&gt;基本视图 &lt;a href=&quot;http://www.framerjs.com/editor/index.html?path=lessons/views.js&quot;&gt;http://www.framerjs.com/editor/index.html?path=lessons/views.js&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;基本视图-httpwwwframerjscomeditorindexhtmlpathlessonsviewsjs&quot;&gt;基本视图 &lt;a href=&quot;http://www.framerjs.com/editor/index.html?path=lessons/views.js&quot;&gt;http://www.framerjs.com/editor/index.html?path=lessons/views.js&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;httpwwwframerjscomeditorindexhtmlpathlessonshierarchyjshttpwwwframerjscomeditorindexhtmlpathlessonshierarchyjs&quot;&gt;嵌套视图 &lt;a href=&quot;http://www.framerjs.com/editor/index.html?path=lessons/hierarchy.js&quot;&gt;http://www.framerjs.com/editor/index.html?path=lessons/hierarchy.js&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;嵌套视图-httpwwwframerjscomeditorindexhtmlpathlessonshierarchyjs&quot;&gt;嵌套视图 &lt;a href=&quot;http://www.framerjs.com/editor/index.html?path=lessons/hierarchy.js&quot;&gt;http://www.framerjs.com/editor/index.html?path=lessons/hierarchy.js&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;httpwwwframerjscomeditorindexhtmlpathlessonsviewtypesjshttpwwwframerjscomeditorindexhtmlpathlessonsviewtypesjs&quot;&gt;其他视图类型 &lt;a href=&quot;http://www.framerjs.com/editor/index.html?path=lessons/viewtypes.js&quot;&gt;http://www.framerjs.com/editor/index.html?path=lessons/viewtypes.js&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;其他视图类型-httpwwwframerjscomeditorindexhtmlpathlessonsviewtypesjs&quot;&gt;其他视图类型 &lt;a href=&quot;http://www.framerjs.com/editor/index.html?path=lessons/viewtypes.js&quot;&gt;http://www.framerjs.com/editor/index.html?path=lessons/viewtypes.js&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;特效：&lt;/h3&gt;
+&lt;h3 id=&quot;特效&quot;&gt;特效：&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://www.framerjs.com/editor/index.html?path=lessons/animation.js&quot;&gt;官方文档&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;httpsmediumcombuilding-potluck2e405d50b600httpsmediumcombuilding-potluck2e405d50b600&quot;&gt;支持的手势：&lt;a href=&quot;https://medium.com/building-potluck/2e405d50b600&quot;&gt;https://medium.com/building-potluck/2e405d50b600&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&quot;支持的手势httpsmediumcombuilding-potluck2e405d50b600&quot;&gt;支持的手势：&lt;a href=&quot;https://medium.com/building-potluck/2e405d50b600&quot;&gt;https://medium.com/building-potluck/2e405d50b600&lt;/a&gt;&lt;/h3&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;事件绑定：&lt;/h3&gt;
+&lt;h3 id=&quot;事件绑定&quot;&gt;事件绑定：&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://www.framerjs.com/editor/index.html?path=lessons/events.js&quot;&gt;http://www.framerjs.com/editor/index.html?path=lessons/events.js&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;section-3&quot;&gt;结语&lt;/h2&gt;
+&lt;h2 id=&quot;结语&quot;&gt;结语&lt;/h2&gt;
 
 &lt;p&gt;Framer拉近了设计师与开发者的距离，从另一个层面来讲，我觉得设计师也在逐渐侵入开发者的领地，要抢饭碗的节奏。
 Framer目前只侧重于前端展示，如果加上数据处理，那么一个完整的Html5的应用开发框架就成型了。&lt;/p&gt;
 </description>
         <pubDate>Fri, 08 Nov 2013 18:41:38 +0800</pubDate>
-        <link>http://ldehai.com/blog/2013/11/08/how-framer-works/</link>
-        <guid isPermaLink="true">http://ldehai.com/blog/2013/11/08/how-framer-works/</guid>
+        <link>http://localhost:4000/2013/11/08/how-framer-works/</link>
+        <guid isPermaLink="true">http://localhost:4000/2013/11/08/how-framer-works/</guid>
         
+        <category>framer</category>
         
-        <category>blog</category>
         
       </item>
     
@@ -436,9 +831,9 @@ Framer目前只侧重于前端展示，如果加上数据处理，那么一个�
 
 &lt;p&gt;上一篇讲到使用如下命令打包exe：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;c:/python27/python.exe c:/pyinstaller/pyinstaller.py --noconfirm --noconsole --onefile --icon=Icon.ico myapp.py
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;c:/python27/python.exe c:/pyinstaller/pyinstaller.py --noconfirm --noconsole --onefile --icon=Icon.ico myapp.py
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;请仔细观察myapp.py所在目录，会自动生成myapp.spec文件，注意是每次都会重新生成，内容如下：&lt;/p&gt;
 
@@ -468,13 +863,13 @@ Framer目前只侧重于前端展示，如果加上数据处理，那么一个�
          &lt;span class=&quot;n&quot;&gt;hiddenimports&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
          &lt;span class=&quot;n&quot;&gt;hookspath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
          &lt;span class=&quot;n&quot;&gt;runtime_hooks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#add_begin&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#add_begin
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'pyconfig'&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#add_end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;pyz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PYZ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#add_end
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pyz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PYZ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;exe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EXE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pyz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
       &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scripts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
       &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binaries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -488,20 +883,18 @@ Framer目前只侧重于前端展示，如果加上数据处理，那么一个�
 
 &lt;p&gt;为了使用修改后的spec文件来打包，需要使用新的命令：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;c:/python27/python.exe c:/pyinstaller/pyinstaller.py myapp.spec
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;c:/python27/python.exe c:/pyinstaller/pyinstaller.py myapp.spec
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;试试，warning没了吧&lt;/p&gt;
 </description>
         <pubDate>Sat, 02 Nov 2013 18:41:38 +0800</pubDate>
-        <link>http://ldehai.com/blog/2013/11/02/file-already-exists-but-should-not-pyconfig/</link>
-        <guid isPermaLink="true">http://ldehai.com/blog/2013/11/02/file-already-exists-but-should-not-pyconfig/</guid>
+        <link>http://localhost:4000/2013/11/02/file-already-exists-but-should-not-pyconfig/</link>
+        <guid isPermaLink="true">http://localhost:4000/2013/11/02/file-already-exists-but-should-not-pyconfig/</guid>
         
+        <category>pyinstaller</category>
         
-        <category>jekyll</category>
-        
-        <category>update</category>
         
       </item>
     
@@ -549,8 +942,10 @@ pyinstaller对第三方库的支持情况见这里：&lt;a href=&quot;https://gi
 &lt;p&gt;再次运行，应该没问题了。&lt;/p&gt;
 </description>
         <pubDate>Sun, 22 Sep 2013 18:41:38 +0800</pubDate>
-        <link>http://ldehai.com/blog/2013/09/22/pyinstaller-matplotlib-scipy/</link>
-        <guid isPermaLink="true">http://ldehai.com/blog/2013/09/22/pyinstaller-matplotlib-scipy/</guid>
+        <link>http://localhost:4000/2013/09/22/pyinstaller-matplotlib-scipy/</link>
+        <guid isPermaLink="true">http://localhost:4000/2013/09/22/pyinstaller-matplotlib-scipy/</guid>
+        
+        <category>pyinstaller</category>
         
         
       </item>
@@ -565,48 +960,17 @@ pyinstaller对第三方库的支持情况见这里：&lt;a href=&quot;https://gi
 
 &lt;p&gt;最新的设计图，还可以吧，比原来的提升不少。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://ldehai.com/assets/tripcost_redesign.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/tripcost_redesign.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;loading page&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://ldehai.com/assets/tripcost_loadingpage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/tripcost_loadingpage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 15 Jul 2013 18:41:38 +0800</pubDate>
-        <link>http://ldehai.com/blog/2013/07/15/free-design/</link>
-        <guid isPermaLink="true">http://ldehai.com/blog/2013/07/15/free-design/</guid>
+        <link>http://localhost:4000/2013/07/15/free-design/</link>
+        <guid isPermaLink="true">http://localhost:4000/2013/07/15/free-design/</guid>
         
-        
-      </item>
-    
-      <item>
-        <title>iOS APP Database Version Control</title>
-        <description>&lt;p&gt;APP里一直使用SQLite数据库保存数据，不过有个问题觉得挺麻烦，当我要加新功能，而原来的表结构已经不能满足要求时，需要修改表，或者新增表。那么老版本升级到新版本时就需要升级数据库，之前我都是判断新表有没有存在，不存在则创建。这样很容易搞乱掉，如果涉及到多个表，判断起来逻辑不清晰，把自己都搞晕了。&amp;lt;/p&amp;gt;&lt;/p&gt;
-
-&lt;p&gt;在经历过几次折腾后，我发现数据库也需要用版本来控制起来，就像代码有版本一样。这样我只需要判断当前的数据库版本是多少，就知道要不要升级数据库了。假设之前版本是1.0，现在版本是1.1,代码很简单：
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objectivec&quot; data-lang=&quot;objectivec&quot;&gt;NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-NSString* ver = [pref stringForKey:@&quot;dbver&quot;];
-if ([ver isEqualToString:@&quot;1.0&quot;])
-{
-    NSString *dbPath  = [NSHomeDirectory() stringByAppendingPathComponent:@&quot;Documents/database.db&quot;];
-
-    EGODatabase* database = [EGODatabase databaseWithPath:dbPath];
-
-    NSString *strSql = @&quot;create table newtable(id integer primary key asc, main text);&quot;;
-    [database executeQuery:strSql];
-
-    [database close];
-
-    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-    [pref setValue:@&quot;1.1&quot; forKey:@&quot;dbver&quot;];
-}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;当然自己还是要记录好每次升级的变动情况，备查。&lt;/p&gt;
-</description>
-        <pubDate>Thu, 13 Jun 2013 18:41:38 +0800</pubDate>
-        <link>http://ldehai.com/blog/2013/06/13/ios-app-database-version-control/</link>
-        <guid isPermaLink="true">http://ldehai.com/blog/2013/06/13/ios-app-database-version-control/</guid>
+        <category>杂谈</category>
         
         
       </item>

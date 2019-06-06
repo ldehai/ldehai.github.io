@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="关于编程、设计、英语 | 自由职业，软件工程师，设计师 | 这里是 @ldehai 的个人博客。">
+    <meta name="keywords"  content="@ldehai, 博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计，Mobile">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Framer简介 - ldehai的博客">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Framer是一个开源项目，一个基于JavaScript的原型工具，专为设计师打造。现在的应用更注重交互设计，它可以让你效率更高。项目地址http://www.framerjs.com，使用Framer包括4个步骤:
+
+">
+    
+    <meta property="article:published_time" content="2013-11-08T18:41:38Z">
+    
+    
+    
+    <meta property="article:tag" content="framer">
+    
+    
+    <meta property="og:image" content="http://localhost:4000/assets/avatar.png">
+    <meta property="og:url" content="http://localhost:4000/2013/11/08/how-framer-works/">
+    <meta property="og:site_name" content="ldehai的博客">
+    
+    <title>Framer简介 - ldehai的博客</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2013/11/08/how-framer-works/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">ldehai</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=framer" title="framer">framer</a>
+                        
+                    </div>
+                    <h1>Framer简介</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by ldehai on November 8, 2013</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>Framer是一个开源项目，一个基于JavaScript的原型工具，专为设计师打造。现在的应用更注重交互设计，它可以让你效率更高。项目地址<a href="http://www.framerjs.com">http://www.framerjs.com</a>，使用Framer包括4个步骤:</p>
+
+<ol>
+  <li>用Photoshop设计原型图</li>
+  <li>用Framer.app从Photoshop中导出设计图</li>
+  <li>在app.js里写视图展示及交互代码，可以加各种特效</li>
+  <li>用浏览器打开index.html文件就可以查看和调试了
+<!--more--></li>
+</ol>
+
+<p>Framer项目的代码结构是这样的：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>app.js          //【重要】用来写视图和交互代码
+framer/         //Framerjs的框架，app.js里用到的功能都是它提供的
+  framer.js     //framer核心文件
+  framerps.js   //根据views.app.js生成frame对象
+  views.app.js  //根据psd文件的结构导出的文件，用来记录图片属性和图层关系(用json格式表示)，app.js中要用到
+images/         //从photoshop导出的图片都在这里
+index.html      //预览时的首页
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="framer可以说是由三部分组成">Framer可以说是由三部分组成：</h2>
+
+<h3 id="1-图片导出工具">1. 图片导出工具</h3>
+
+<p>支持从photoshop和sketch导出图片。
+这里从photoshop导出设计图。实际上是使用了Adobe ExtendScript脚本。Adobe ExtendScript脚本语言可以操纵photoshop执行一些自动化操作。
+Mac下作者用Framer.app包装了脚本代码，windows下则直接提供了<a href="http://www.framerjs.com/static/downloads/FramerPS.jsx.zip">脚本</a></p>
+
+<p>导出工具不仅导出了图片，还生成了一个上面目录结构的完整工程，用浏览器打开index.html就可以了。</p>
+
+<p>在原型设计的过程中，可能会需要多次导出图片，而导出工具不会覆盖app.js文件，所以不用担心你写的代码会被覆盖。它只会在没有文件的情况下才自动生成。</p>
+
+<h3 id="2-js类库">2. JS类库</h3>
+
+<p>这里提供了View(视图),animation(动态特效),event(事件绑定)等类，可供使用者调用。详见最后一部分介绍，或直接至官网查看。</p>
+
+<h3 id="3-appjs">3. app.js</h3>
+
+<p>Framer默认生成app.js文件。在使用Framer的过程中，除了用Photoshop设计原型图之外，这里也是花时间最多的地方。前面准备的素材就看你怎么组织了。视图的创建、切换、动态特效、手势、事件绑定，都可以在这个文件里完成。&lt;/p&gt;</p>
+
+<h2 id="framejs框架介绍">Framejs框架介绍</h2>
+
+<p>它包括View(视图),animation(动态特效),event(事件绑定)。下面的代码可以在线修改，马上就能看到效果。</p>
+
+<h3 id="view">View:</h3>
+
+<h4 id="基本视图-httpwwwframerjscomeditorindexhtmlpathlessonsviewsjs">基本视图 <a href="http://www.framerjs.com/editor/index.html?path=lessons/views.js">http://www.framerjs.com/editor/index.html?path=lessons/views.js</a></h4>
+
+<h4 id="嵌套视图-httpwwwframerjscomeditorindexhtmlpathlessonshierarchyjs">嵌套视图 <a href="http://www.framerjs.com/editor/index.html?path=lessons/hierarchy.js">http://www.framerjs.com/editor/index.html?path=lessons/hierarchy.js</a></h4>
+
+<h4 id="其他视图类型-httpwwwframerjscomeditorindexhtmlpathlessonsviewtypesjs">其他视图类型 <a href="http://www.framerjs.com/editor/index.html?path=lessons/viewtypes.js">http://www.framerjs.com/editor/index.html?path=lessons/viewtypes.js</a></h4>
+
+<h3 id="特效">特效：</h3>
+
+<p><a href="http://www.framerjs.com/editor/index.html?path=lessons/animation.js">官方文档</a></p>
+
+<h3 id="支持的手势httpsmediumcombuilding-potluck2e405d50b600">支持的手势：<a href="https://medium.com/building-potluck/2e405d50b600">https://medium.com/building-potluck/2e405d50b600</a></h3>
+
+<h3 id="事件绑定">事件绑定：</h3>
+
+<p><a href="http://www.framerjs.com/editor/index.html?path=lessons/events.js">http://www.framerjs.com/editor/index.html?path=lessons/events.js</a></p>
+
+<h2 id="结语">结语</h2>
+
+<p>Framer拉近了设计师与开发者的距离，从另一个层面来讲，我觉得设计师也在逐渐侵入开发者的领地，要抢饭碗的节奏。
+Framer目前只侧重于前端展示，如果加上数据处理，那么一个完整的Html5的应用开发框架就成型了。</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2013/11/02/file-already-exists-but-should-not-pyconfig/" data-toggle="tooltip" data-placement="top" title="File Already Exists but Should Not Pyconfig">
+                        Previous<br>
+                        <span>File Already Exists but Should Not Pyconfig</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2013/11/12/embedded-image-with-base64/" data-toggle="tooltip" data-placement="top" title="用Base64嵌入图片">
+                        Next<br>
+                        <span>用Base64嵌入图片</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "ldehai";
+    var disqus_identifier = "/2013/11/08/how-framer-works";
+    var disqus_url = "http://localhost:4000/2013/11/08/how-framer-works/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    // async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+    //     anchors.options = {
+    //       visible: 'false',
+    //       placement: 'right',
+    //       icon: '#'
+    //     };
+    //     anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    // })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  <li>
+    <a href="https://twitter.com/ldehai">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://www.zhihu.com/people/ldehai">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa  fa-stack-1x fa-inverse">知</i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="http://weibo.com/ldehai">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/ldehai">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; ldehai 2019
+                    <br>
+                    Powered by <a href="http://huangxuan.me">Hux Blog</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-44047356-1';
+    var _gaDomain = 'ldehai.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
