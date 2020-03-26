@@ -4,8 +4,6 @@ author:
   email: ldehai@gmail.com
 description: "享受编程的乐趣"
 keyword: "编程 前端 全栈"
-baseurl: ""
-url: "https://ldehai.com"
 show_excerpts: false # set to true to show excerpts on the homepage
 
 # Minima date format
