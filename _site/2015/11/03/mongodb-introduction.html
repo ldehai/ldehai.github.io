@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>mongodb简介 | ldehai’s blog</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="mongodb简介" />
+<meta name="author" content="ldehai" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="简介 mongodb是久负盛名的非关系数据库。它以文档为存储单位，与严格的关系数据库形成泾渭分明的区别。" />
+<meta property="og:description" content="简介 mongodb是久负盛名的非关系数据库。它以文档为存储单位，与严格的关系数据库形成泾渭分明的区别。" />
+<link rel="canonical" href="http://localhost:4000/2015/11/03/mongodb-introduction.html" />
+<meta property="og:url" content="http://localhost:4000/2015/11/03/mongodb-introduction.html" />
+<meta property="og:site_name" content="ldehai’s blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-11-03T23:38:00+08:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"mongodb简介","dateModified":"2015-11-03T23:38:00+08:00","datePublished":"2015-11-03T23:38:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2015/11/03/mongodb-introduction.html"},"url":"http://localhost:4000/2015/11/03/mongodb-introduction.html","author":{"@type":"Person","name":"ldehai"},"description":"简介 mongodb是久负盛名的非关系数据库。它以文档为存储单位，与严格的关系数据库形成泾渭分明的区别。","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="ldehai’s blog" /><script async src="https://www.googletagmanager.com/gtag/js?id=UA-44047356-1"></script>
+<script>
+  window['ga-disable-UA-44047356-1'] = window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1";
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44047356-1');
+</script>
+
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">ldehai’s blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">mongodb简介</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2015-11-03T23:38:00+08:00" itemprop="datePublished">
+        Nov 3, 2015
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="简介">简介</h3>
+<p>mongodb是久负盛名的非关系数据库。它以文档为存储单位，与严格的关系数据库形成泾渭分明的区别。</p>
+
+<h3 id="db-collection-document">db-&gt;collection-&gt;document</h3>
+
+<p>mongodb的存储结构是数状结构的，可以建多个数据库，数据库底下建多个collection,collection下
+是最终的document,存放实际的数据。这个结构类似于硬盘上文件的组织方式。有分区、目录、文件。</p>
+
+<p>如果非要跟关系数据库做类比，那么这里的collection就相当于表，document相当于表中的一行数据。
+最大的区别在于，同一个collection下的文档不需要有一样的数据字段，是灵活的。</p>
+
+<h3 id="安装">安装</h3>
+
+<p>理解一件新东西的最好方法自然是动手试试，现在就来安装吧。
+mongodb安装方法参照官网.我用的阿里云服务器，使用的是centos6.5，64位系统。参照以下地址完成安装。 <a href="https://docs.mongodb.org/manual/tutorial/install-mongodb-enterprise-on-red-hat/">https://docs.mongodb.org/manual/tutorial/install-mongodb-enterprise-on-red-hat/</a></p>
+
+<h3 id="mongod与mongo">mongod与mongo</h3>
+
+<p>跟其他数据库系统类似，<a href="https://docs.mongodb.org/manual/">mongodb</a>也有自己的服务进程mongod,centos下以服务的形式开启的方式为：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo service mongod start
+</code></pre></div></div>
+
+<!--more-->
+<p>这样终端窗口关了之后，程序还能继续运行。当然，你也可以在命令行下输入mongod启动，只是窗口关了程序也停了。
+mongodb的交互程序是mongo（在mongod启动后，新开一个命令窗口输入mongo),输入的命令发送给mongod进程，然后返回处理结果。</p>
+
+<h3 id="use-database_name">use database_name</h3>
+
+<p>mongodb没有新增数据库的命令，可以使用use “数据库名” 新建数据库，但新建的数据库实际上没有写入
+存储，只有当在下面新增collection时才会实际创建。
+例如：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use aventlabs
+db.createCollection('member')
+show dbs
+</code></pre></div></div>
+
+<h3 id="使用help查看当前可用的所有命令">使用help查看当前可用的所有命令</h3>
+<p><img src="http://localhost:4000/assets/mongodbhelp.png" alt="" /></p>
+
+<h3 id="查看当前数据库中的所有collection">查看当前数据库中的所有Collection</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show collections
+</code></pre></div></div>
+
+<h3 id="插入记录">插入记录</h3>
+
+<p>使用show dbs命令可以查看当前已经建好的数据库。（注意命令中的大小写）
+先来插入一个记录看看：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.member.insert({
+   "name" : "andy",
+   "email" : "ldehai@gmail.com",
+})
+</code></pre></div></div>
+
+<p>在mongo命令行下输入以上命令，回车，就成功插入了一条记录，反馈如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WriteResult({ "nInserted" : 1 })
+</code></pre></div></div>
+
+<h3 id="查询member中的记录">查询member中的记录：</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.memer.find()
+</code></pre></div></div>
+
+<p>查询结果：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ "_id" : ObjectId("5638735b01e6622e13ac34fb"), "name" : "andy", "email" : "ldehai@gmail.com" }
+</code></pre></div></div>
+
+<h3 id="条件查询只查name为andy的一条记录">条件查询,只查name为andy的一条记录：</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.member.findone({'name':'andy'})
+</code></pre></div></div>
+
+<h3 id="排序">排序</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.member.find().sort({name:1}})
+</code></pre></div></div>
+
+<p>1和-1表示正序和倒序</p>
+
+<h3 id="限制返回的数据条数">限制返回的数据条数</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.member.find().sort({name:1}).limit(1)
+</code></pre></div></div>
+
+<p>注意这里，命令可以串起来使用。另外，如果使用pymongo做排序，sort参数的需要写成如下形式，不然会报错，详细讨论见
+这里<a href="http://stackoverflow.com/questions/10242149/using-sort-with-pymongo">Using .sort with PyMongo</a>：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.member.find().sort([("createdate", -1), ("name", 1)])
+</code></pre></div></div>
+
+<p>更多查询命令，详见官网文档<a href="https://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">db.collection.find</a></p>
+
+<h3 id="删除记录">删除记录</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db.member.remove({'name':'andy'})
+</code></pre></div></div>
+
+<p>进一步的操作方法，参照官网教程<a href="https://docs.mongodb.org/getting-started/shell/client/">使用mongo命令行工具操作mongodb</a></p>
+
+<p>使用python的同学，可以看<a href="https://api.mongodb.org/python/3.1/tutorial.html">使用pymongo操作mongodb</a></p>
+
+<p>使用tornado的同学，可以看<a href="https://blog.openshift.com/day-25-tornado-combining-tornado-mongodb-and-angularjs-to-build-an-app/">tornado+pymongo+mongodb</a></p>
+
+<p>motor是跟pymongo类似的一个mongodb驱动库，不过它支持异步操作，有兴趣的同学可以看这里<a href="https://motor.readthedocs.org/en/latest/differences.html">Motor and Pymongo</a></p>
+
+<p>关于更多mongodb的详细特性，请参见<a href="https://docs.mongodb.org/manual/">官方文档</a>。</p>
+
+  </div><div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'http://localhost:4000/2015/11/03/mongodb-introduction.html';
+      this.page.identifier = 'http://localhost:4000/2015/11/03/mongodb-introduction.html';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://ldehai.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/2015/11/03/mongodb-introduction.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li><a class="u-email" href="mailto:ldehai@gmail.com">ldehai@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/ldehai" title="ldehai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/ldehai" title="ldehai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+  </div>
+</footer>
+</body>
+
+</html>

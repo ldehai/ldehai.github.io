@@ -1,85 +1,63 @@
-# Site settings
-title: ldehai
-SEOTitle: ldehai的博客
-header-img: img/home-bg.jpg
-email: ldehai@gmail.com
-description: "关于编程、设计、英语 | 自由职业，软件工程师，设计师 | 这里是 @ldehai 的个人博客。"
-keyword: "@ldehai, 博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计，Mobile"
-url: "https://ldehai.com"              # your host, for absolute URL
-baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
+title: ldehai’s blog
+author:
+  name: ldehai
+  email: ldehai@gmail.com
+description: "享受编程的乐趣"
+keyword: "编程 前端 全栈"
 
-# Publish posts or collection documents with a future date.
-future: true
+show_excerpts: false # set to true to show excerpts on the homepage
 
-# SNS settings
-RSS: false
-weibo_username:     ldehai
-zhihu_username:     ldehai
-github_username:    ldehai
-twitter_username:   ldehai
-#facebook_username:  ldehai
-#linkedin_username:  ldehai
+# Minima date format
+# refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this
+minima:
+  date_format: "%b %-d, %Y"
+
+  # generate social links in footer
+  social_links:
+    twitter: ldehai
+    github:  ldehai
+    # devto: jekyll
+    # dribbble: jekyll
+    # facebook: jekyll
+    # flickr:   jekyll
+    # instagram: jekyll
+    # linkedin: jekyll
+    # pinterest: jekyll
+    # youtube: jekyll
+    # youtube_channel: UC8CXR0-3I70i1tfPg1PAE1g
+    # youtube_channel_name: CloudCannon
+    # telegram: jekyll
+    # googleplus: +jekyll
+    # microdotblog: jekyll
+    # keybase: jekyll
+
+    # Mastodon instances
+    # mastodon:
+    # - username: jekyll
+    #   instance: example.com
+    # - username: jekyll2
+    #   instance: example.com
+
+    # GitLab instances
+    # gitlab:
+    # - username: jekyll
+    #   instance: example.com
+    # - username: jekyll2
+    #   instance: example.com
+
+disqus:
+  shortname: ldehai
+
+google_analytics: UA-44047356-1
+
+# If you want to link only specific pages in your header, uncomment
+# this and add the path to the pages in order as they should show up
+#header_pages:
+# - about.md
 
 # Build settings
-# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
-highlighter: rouge
-permalink: pretty
-paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
-# If you have timezone issue (e.g. #68) in China, uncomment to use this:
-#timezone: CN  
+theme: minima
 
-
-# Gems
-# from PR#40, to support local preview for Jekyll 3.0
-# make sure you have this gem installed
-# `$ gem install jekyll-paginate`
-plugins: [jekyll-paginate]
-
-
-# Markdown settings
-# replace redcarpet to kramdown,
-# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
-# document: http://jekyllrb.com/docs/configuration/#kramdown
-markdown: kramdown
-kramdown:
-  input: GFM                            # use Github Flavored Markdown !important
-  syntax_highlighter_opts:
-    span:
-      line_numbers: false
-    block:
-      line_numbers: true
-      start_line: 1
-
-
-# Disqus settings
-disqus_username: ldehai
-
-# Netease settings
-netease_comment: false
-
-
-# Google Analytics
-ga_track_id: 'UA-44047356-1'            # Format: UA-xxxxxx-xx
-ga_domain: ldehai.com
-
-# Sidebar settings
-sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "嗨，我是@ldehai，独立开发者，现居南京。我创建了AventLabs，一个在线学习编程和设计的平台，主要面向初学者。"
-sidebar-avatar: /assets/avatar.png      # use absolute URL, seeing it's used in both `/` and `/about/`
-
-# Featured Tags
-featured-tags: false                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
-
-# Progressive Web Apps
-chrome-tab-theme-color: "#000000"
-service-worker: true
-
-# MathJax rendering for layout:page (e.g. post preview)
-page-mathjax: false
-
-# Friends
-# friends: [
-# ]
+plugins:
+ - jekyll-feed
+ - jekyll-seo-tag

@@ -1,0 +1,41 @@
+I"<p>用python帮朋友写了个科学计算的程序，用到了matplotlib和scipy，以及wxpython。代码写完，发现不能直接拿给朋友用，windows系统默认是没有运行环境的，得装python,matplotlib,scipy以及其他的运行库。这对于程序小白来说实在强人所难。好在有pyinstaller，可以用它打包成一个exe文件，所有的库都在一起了。妈妈再也不用担心没有环境跑程序了。
+<!--more-->
+到pyinstaller<a href="http://www.pyinstaller.org/">官网</a>下载安装包。
+详细安装说明见<a href="http://pythonhosted.org/PyInstaller/">官方文档</a>。</p>
+
+<p>这里简要说明一下步骤：
+直接下载压缩包，现在的版本是2.1.解压后打开命令行，执行如下命令：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">    <span class="n">c</span><span class="p">:</span>\<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span></code></pre></figure>
+
+<p>可以用如下命令检查是不是已经装好了</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">    <span class="n">c</span><span class="p">:</span>\<span class="n">pyintaller</span> <span class="o">--</span><span class="n">version</span></code></pre></figure>
+
+<p>ok，pyinstaller 装好了，开始打包</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">    <span class="n">c</span><span class="p">:</span>\<span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">python27</span><span class="o">/</span><span class="n">python</span><span class="o">.</span><span class="n">exe</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">pyinstaller</span><span class="o">/</span><span class="n">pyinstaller</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">noconfirm</span> <span class="o">--</span><span class="n">noconsole</span> <span class="o">--</span><span class="n">onefile</span> <span class="o">--</span><span class="n">icon</span><span class="o">=</span><span class="n">Icon</span><span class="o">.</span><span class="n">ico</span> <span class="n">myapp</span><span class="o">.</span><span class="n">py</span></code></pre></figure>
+
+<p>解释一下几个参数：</p>
+
+<p>noconfirm:在打包过程中不需要人工确认。</p>
+
+<p>noconsole:打包后的程序运行时没有命令行窗口(在测试打包的过程中，可以把这个参数去掉，这样运行的时候可以从命令行查看出错信息，所有错误排除后再加上)。</p>
+
+<p>onefile:顾名思义就是打包成一个文件，如果不加就是一个exe加一个文件夹，文件夹里存放需要的各种库文件。</p>
+
+<p>icon:指定打包后的exe文件的图标（运行时窗口的图标是在程序里设定的）</p>
+
+<p>由于pyinstaller2.1正式版还不支持scipy库，直接运行会报找不到scipy module。而developer版本已经支持了，所以去下载开发版重新安装。pyinstaller的代码在[github上(https://github.com/pyinstaller/pyinstaller),选择develop分支下载。
+pyinstaller对第三方库的支持情况见这里：<a href="https://github.com/pyinstaller/pyinstaller/wiki/Supported-Packages">SupportedPackages</a>。</p>
+
+<p>安装步骤同上，不再赘述。安装完运行打包脚本会发现还有错误</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">    <span class="nb">ImportError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csgraph</span><span class="o">.</span><span class="n">_validation</span></code></pre></figure>
+
+<p>这是因为pyinstaller没能自动把_validation库加进来，我们就在代码里手动加上吧。</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">    <span class="kn">from</span> <span class="nn">scipy.sparse.csgraph</span> <span class="kn">import</span> <span class="n">_validation</span></code></pre></figure>
+
+<p>再次运行，应该没问题了。</p>
+:ET

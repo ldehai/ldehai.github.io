@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "我的文件夹使用方法"
-lang: 'en'
 date:   2017-05-13 08:21:00
 tags: mydocument
 ---
